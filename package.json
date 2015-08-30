@@ -1,0 +1,20 @@
+{
+  "name": "sassinate-your-css",
+  "version": "0.0.0",
+  "description": "",
+  "main": "",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server -d --devtool eval --inline --progress --colors --hide-modules",
+    "build": "webpack --progress --colors"
+  },
+  "author": "Tyler Benton <tjbenton21@gmail.com> (https://github.com/tjbenton)",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "main-bower-files": "^2.9.0"
+  }
+}
