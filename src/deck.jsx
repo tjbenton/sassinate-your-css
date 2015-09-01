@@ -309,7 +309,7 @@ class Deck extends React.Component {
 
     return (
       <div
-        className="spectacle-deck"
+        className="c-deck"
         style={[styles.deck]}
         onClick={this._handleClick}
         {...this._getTouchEvents()}>

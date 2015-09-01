@@ -6,7 +6,7 @@ import Radium from "radium";
 class Quote extends Base {
   render() {
     return (
-      <span style={[this.context.styles.components.quote, this.getStyles(), this.props.style]}>
+      <span className="c-quote" style={[this.context.styles.components.quote, this.getStyles(), this.props.style]}>
         {this.props.children}
       </span>
     );

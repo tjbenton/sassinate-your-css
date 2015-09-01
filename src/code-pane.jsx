@@ -13,9 +13,9 @@ class CodePane extends Base {
   }
   render() {
     return (
-      <pre style={[this.context.styles.components.codePane.pre, this.getStyles(), this.props.style]}>
+      <pre clasName="c-code-pane" style={[this.context.styles.components.codePane.pre, this.getStyles(), this.props.style]}>
         <code
-          className="hljs"
+          className="hljs c-code-pane__code"
           style={this.context.styles.components.codePane.code}
           dangerouslySetInnerHTML={this.createMarkup()}/>
       </pre>

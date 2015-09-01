@@ -8,7 +8,7 @@ class Fit extends React.Component {
       flex: 0
     };
     return (
-      <div style={[styles, this.props.style]}>
+      <div className="u-fit" style={[styles, this.props.style]}>
         {this.props.children}
       </div>
     );

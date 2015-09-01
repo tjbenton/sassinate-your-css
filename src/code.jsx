@@ -6,7 +6,7 @@ import Radium from "radium";
 class Code extends Base {
   render() {
     return (
-      <code style={[this.context.styles.components.code, this.getStyles(), this.props.style]}>
+      <code className="c-code" style={[this.context.styles.components.code, this.getStyles(), this.props.style]}>
         {this.props.children}
       </code>
     );

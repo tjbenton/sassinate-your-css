@@ -39,20 +39,28 @@ const Appear = React.createClass({
         if (this.context.export || this.context.overview) {
           endVal = 1;
         }
-        this.tweenState("opacity", {
-          easing: tweenState.easingTypes.easeInOutQuad,
-          duration: 300,
-          endValue: endVal
-        });
+        // this.tweenState("opacity", {
+        //   easing: tweenState.easingTypes.easeInOutQuad,
+        //   duration: 300,
+        //   endValue: endVal
+        // });
       });
     }
   },
   render() {
-    const styles = {
-      opacity: this.getTweeningValue("opacity")
-    };
+    // const styles = {
+    //   opacity: this.getTweeningValue("opacity")
+    // };
+    let className = ["c-appear"];
+
+    this.props.className && className.push(this.props.className);
+
+    if(this.state.active){
+     className.push("is-active");
+    }
+
     return (
-      <div style={styles} className="fragment" ref="fragment">
+      <div className={className.join(" ")} ref="fragment">
         {this.props.children}
       </div>
     );

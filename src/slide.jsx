@@ -102,7 +102,7 @@ const Slide = React.createClass({
       }
     };
     return (
-      <div className="spectacle-slide"
+      <div className="c-slide"
         ref="slide"
         style={[
           styles.outer,
@@ -110,9 +110,9 @@ const Slide = React.createClass({
           this.getTransitionStyles(),
           printStyles,
           this.props.presenterStyle]}>
-        <div style={[styles.inner]}>
+        <div className="c-slide__wrapper" style={[styles.inner]}>
           <div ref="content"
-            className="spectacle-content"
+            className="c-slide__content"
             style={[styles.content, this.context.styles.components.content]}>
             {this.props.children}
           </div>
