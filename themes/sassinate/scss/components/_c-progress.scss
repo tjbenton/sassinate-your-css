@@ -1,0 +1,79 @@
+.c-progress{
+  .bar{
+    .container{
+      position: absolute;
+      height: 10px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      transition: all 1s ease-in-out 0.2s;
+      z-index: 1000
+    }
+    .bar{
+      height: 100%;
+      background: colors.tertiary;
+      transition: all 0.3s ease-out
+    }
+  }
+  .number{
+    .container{
+      position: absolute;
+      bottom: 10;
+      right: 10;
+      z-index: 1000;
+      color: colors.tertiary
+    }
+  }
+}
+
+
+
+
+
+.pacman{
+  .container{
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transition: all 1s ease-in-out 0.2s;
+    z-index: 1000
+  }
+  .pacman{
+    position: absolute;
+    transition: left 0.3s ease-in-out 0.2s;
+    width: 20px;
+    height: 20px;
+    transform: translate(-5px; -5px)
+  }
+  .pacman-top{
+    position: absolute;
+    content:  ;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: colors.tertiary
+  }
+  .pacman-bottom{
+    position: absolute;
+    content:  ;
+    width: 20px;
+    height: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: colors.tertiary;
+    top: 10px
+  }
+  .point{
+    position: absolute;
+    float: left;
+    background: transparent;
+    width: 10px;
+    height: 10px;
+    border-width: 2;
+    border-style: solid;
+    border-color: colors.tertiary;
+    border-radius: 50%;
+    transition: all 0.01s ease-out 0.4s
+  }
+}
