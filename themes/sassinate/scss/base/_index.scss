@@ -1,4 +1,4 @@
-$legacy_browser_support: false;
+$legacy_browser_support: false; // removes support for IE6 and IE7(from normalize)
 @import "../../../../bower_components/normalize-scss/normalize",
         "general",
         "elements",
