@@ -12,6 +12,7 @@ import Flux from "./src/flux/alt";
 import Deck from "./presentation/deck";
 import config from "./presentation/config";
 
+// compiles the scss for the page inserts it on change
 require("!style!css!sass!./themes/sassinate/scss/index.scss");
 require("!style!css!highlight.js/styles/monokai_sublime.css");
 
@@ -20,7 +21,7 @@ Alt.debug("flux", flux);
 
 class Presentation extends React.Component {
   render() {
-    return <Deck/>;
+    return (<Deck/>);
   }
 }
 
@@ -34,9 +35,11 @@ Presentation = context(Presentation, {
                 flux
                });
 
-React.render(
+const routes = (
   <Router history={new HashHistory()}>
     <Route path="/" component={Presentation} />
     <Route path="/:slide" component={Presentation} />
   </Router>
-, document.body);
+);
+
+React.render(routes, document.body);

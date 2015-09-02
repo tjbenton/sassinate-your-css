@@ -259,12 +259,8 @@ class Deck extends React.Component {
       key: slide,
       slideIndex: slide,
       lastSlide: this.state.lastSlide,
-      transition: child.props.transition.length ?
-        child.props.transition :
-        this.props.transition,
-      transitionDuration: child.props.transition.transitionDuration ?
-        child.props.transitionDuration :
-        this.props.transitionDuration
+      transition: child.props.transition.length ? child.props.transition : this.props.transition,
+      transitionDuration: child.props.transition.transitionDuration ? child.props.transitionDuration : this.props.transitionDuration
     });
   }
   render() {
@@ -276,49 +272,43 @@ class Deck extends React.Component {
       })
     } : {};
 
-    const styles = {
-      deck: {
-        backgroundColor: this.context.presenter || this.context.overview ? "black" : "",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%"
-      },
-      transition: {
-        height: "100%",
-        width: "100%",
-        perspective: 1000,
-        transformStyle: "flat"
-      }
-    };
-
     let componentToRender;
     if (this.context.presenter) {
-      componentToRender = (<Presenter slides={this.props.children}
-        slide={this.context.slide} lastSlide={this.state.lastSlide} />);
+      componentToRender = (
+        <Presenter slides={this.props.children}
+                   slide={this.context.slide}
+                   lastSlide={this.state.lastSlide} />
+      );
     } else if (this.context.export) {
       componentToRender = <Export slides={this.props.children} />;
     } else if (this.context.overview) {
       componentToRender = <Overview slides={this.props.children} slide={this.context.slide} />;
     } else {
-      componentToRender = (<TransitionGroup component="div" style={[styles.transition]}>
-                            {this._renderSlide()}
-                          </TransitionGroup>);
+      componentToRender = (
+        <TransitionGroup component="div" className="u-transition-group">
+          {this._renderSlide()}
+        </TransitionGroup>
+      );
+    }
+
+    let progress;
+
+    if(!this.context.export){
+      progress = (
+        <Progress items={this.props.children} currentSlide={this.context.slide} type={this.props.progress}/>
+      );
+    }
+
+    let className = ["c-deck"];
+
+    if(this.context.presenter){
+      className.push("c-deck--presenter");
     }
 
     return (
-      <div
-        className="c-deck"
-        style={[styles.deck]}
-        onClick={this._handleClick}
-        {...this._getTouchEvents()}>
+      <div className={className.join(" ")} onClick={this._handleClick} {...this._getTouchEvents()}>
         {componentToRender}
-        {!this.context.export ? <Progress
-          items={this.props.children}
-          currentSlide={this.context.slide}
-          type={this.props.progress}/> : ""}
-        <Style rules={assign(this.context.styles.global, globals)} />
+        {progress}
       </div>
     );
   }
