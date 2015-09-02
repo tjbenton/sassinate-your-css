@@ -294,9 +294,10 @@ class Deck extends React.Component {
     let progress;
 
     if(!this.context.export){
-      progress = (
-        <Progress items={this.props.children} currentSlide={this.context.slide} type={this.props.progress}/>
-      );
+      // progress = (
+      //   // @todo Add this later on
+      //   // <Progress items={this.props.children} currentSlide={this.context.slide} type={this.props.progress}/>
+      // );
     }
 
     let className = ["c-deck"];
