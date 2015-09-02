@@ -1,0 +1,31 @@
+@import "functions/index";
+
+@include define-color-set("default", (
+  colors: (
+    a: (0: #c6538c, name: "pink"),
+    b: (0: #178399, name: "blue"),
+    c: (0: #894082, name: "purple"),
+    d: (0: #2a7137, name: "green"),
+    e: (0: #d44029, name: "red"),
+    f: (0: #ec6c21, name: "orange")
+  )
+));
+
+$config: (
+ border-radius: 6px,
+ border-color: color(a, -6),
+ color: color(a, 2),
+ font-family: unquote("Lato, Helvetica, Arial, sans-serif"),
+ font-size: 14px,
+ line-height: 1.4em,
+ spacing: 1.4em,
+ padding: 10px
+);
+
+
+// @author Tyler Benton
+// @page helpers/variables
+// @type {string}
+// @description
+// This is used to select all elements that aren't hidden.
+$not-hidden: ":not(style):not(link):not(meta):not(script)";

@@ -1,0 +1,222 @@
+// @author Tyler Benton
+// @description
+// pow() - Raise number to the nth power
+//
+// @arg {number} - The base number
+// @arg {number} - The exponent to which to raise $base
+// @returns {number}
+@function pow($base, $exponents){
+ $raised: 1;
+
+ @for $i from 1 through $exponents{
+  $raised: $raised * $base;
+ }
+
+ @return $raised;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description
+// Restricts a number between min and max values
+// If the value is greater than the max then the max number will be returned.
+// If the value is less than the min then the min number will be returned.
+// If the number is the same as the min or max or is between min and max then that number will be returned.
+//
+// @arg {number} - value to clamp
+// @arg {number} - minimal value
+// @arg {number} - maximum value
+//
+// @returns {number} - clamped number
+// @markup {scss} (example="false")
+// clamp(2000) /\/ 100
+// clamp(2000, 0, 100); /\/ -> 100
+// clamp(-2000, 0, 100); /\/ -> 0
+// clamp(-2000, -1000, 1000); /\/ -> -1000
+// clamp(50, -1000, 1000); /\/ -> 50
+@function clamp($value, $min: 0, $max: 100){
+ @if type-of($value) !="number" or type-of($min) !="number" or type-of($max) !="number"{
+  @warn "All arguments must be numbers for `clamp`.";
+  @return null;
+ }
+ @return if($value > $max, $max, if($value < $min, $min, $value));
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description Strip the unit of `$num`
+//
+// @arg {number} - Number to strip the unit from
+//
+// @returns {number}
+//
+// @note {!!!} - All arguments must be numbers for `strip-unit`
+//
+// @markup {scss} (example="false") **Example:**
+// strip-unit(10px) /\/ -> 10
+// strip-unit(1em) /\/ -> 1
+// strip-unit(1.23512341em) /\/ -> 1.23512341
+@function strip-unit($num){
+ @return $num / ($num * 0 + 1);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description All arguments must be numbers for `neg`
+//
+// @arg {number} - Number that returns a negative value
+//
+// @returns {number} - Returns a the same number as a negative
+ @function neg($num){
+  @return abs($num) * -1;
+ }
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @alias rd
+//
+// @arg {number} - Number to round
+// @arg {number} - Number of decimal places you are wanting to round to
+//
+// @returns {number} Returns a number with less decimal places
+//
+// @markup {scss} (example="false")
+// round-decimal(1.5714285714em, 3) /\/ -> 1.571em
+//
+// @note {!!!} - All arguments must be numbers for `round-decimal`
+@function round-decimal($num: 100, $decimal: 4){
+ $y: pow(10, $decimal);
+ @return round(($num + 0.00001) * $y) / $y;
+}
+// ---
+@function rd($x: 100, $d: 4){ @return round-decimal($x, $d); }
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description gets the value of the number with a unit
+//
+// @arg {number} - Number to add a unit too
+// @arg {String} - can be any valid unit type
+//
+// @markup {scss} (example="false")
+// add-unit(10, "px") // -> 10px
+@function add-unit($number, $unit){
+ $unit-types: ("px": 1px, "cm": 1cm, "mm": 1mm, "%": 1%,  "ch": 1ch, "pica": 1pica, "in": 1in, "em": 1em, "rem": 1rem, "pt": 1pt, "pc": 1pc, "ex": 1ex, "vw": 1vw, "vh": 1vh, "vmin": 1vmin, "vmax": 1vmax);
+ $result: map-get($unit-types, $unit);
+ @if not $result{
+  @warn "Unknown unit `#{$unit}`.";
+  @return false;
+ }
+ @return $number * $result;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// Converts a string into a number
+//
+// @arg {string} - The string you want to convert to a number
+//
+// @markup {scss} (example="false")
+// to-number("10px") // -> 10px
+@function to-number($string) {
+ // Matrices
+ $strings: ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+ $numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+ // Result
+ $result: 0;
+ $divider: 0;
+ $minus: false;
+
+ // Looping through all characters
+ @for $i from 1 through str-length($string){
+  $character: str-slice($string, $i, $i);
+  $index: index($strings, $character);
+
+  @if $character == "-"{
+   $minus: true;
+  }@else if $character == "."{
+   $divider: 1;
+  }@else{
+   @if not $index{
+    $result: if($minus, $result * -1, $result);
+    @return add-unit($result, str-slice($string, $i));
+   }
+
+   $number: nth($numbers, $index);
+
+   @if $divider == 0{
+    $result: $result * 10;
+   }@else{
+    // Move the decimal dot to the left
+    $divider: $divider * 10;
+    $number: $number / $divider;
+   }
+
+   $result: $result + $number;
+  }
+ }
+
+ @return if($minus, $result * -1, $result);
+}
+
+
+$numbers-as-words: (zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, twenty one, twenty two, twenty three, twenty four, twenty five, twenty six, twenty seven, twenty eight, twenty nine, thirty, thirty one, thirty two, thirty three, thirty four, thirty five, thirty six, thirty seven, thirty eight, thirty nine, forty, forty one, forty two, forty three, forty four, forty five, forty six, forty seven, forty eight, forty nine, fifty , fifty one, fifty two, fifty three, fifty four, fifty five, fifty six, fifty seven, fifty eight, fifty nine, sixty, sixty one, sixty two, sixty three, sixty four, sixty five, sixty six, sixty seven, sixty eight, sixty nine, seventy , seventy one, seventy two, seventy three, seventy four, seventy five, seventy six, seventy seven, seventy eight, seventy nine, eighty, eighty one, eighty two, eighty three, eighty four, eighty five, eighty six, eighty  seven, eighty eight, eighty nine, ninety, ninety one, ninety two, ninety three, ninety four, ninety five, ninety six, ninety seven, ninety eight, ninety nine, hundred);
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Converts a word to a number
+//
+// @arg {string, number} - The number(word) you want to be a number
+//
+// @returns {number} - The number(word) passed as a number
+//
+// @markup {scss} (example="false")
+// str-to-number(one) /\/ -> 1
+// str-to-number(negative fifty) /\/ -> -50
+// str-to-number(twenty) /\/ -> 20
+@function str-to-number($word){
+ @if type-of($word) == number{
+  @return $word;
+ }
+
+ $word: inspect($word);
+ $is-negative: false;
+ @if str-slice($word, 1, 8) == "negative"{
+  $word: str-slice($word, 10);
+  $is-negative: true;
+ }
+ $index: index($numbers-as-words, $word);
+ @if $index == null{
+  @error "'#{$word}' is not a number, or is greater than hundred";
+  @return false;
+ }
+ @return ($index - 1) * if($is-negative, -1, 1);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Converts a number into a word
+//
+// @arg {number} - The number you want to be word
+//
+// @returns {string} - The number passed as a word
+//
+// @markup {scss} (example="false")
+// number-to-str(1) /\/ -> one
+// number-to-str(-50) /\/ -> negative fifty
+// number-to-str(20) /\/ -> twenty
+@function number-to-str($number){
+ $result: nth($numbers-as-words, abs($number) + 1);
+ @if $number < 0{
+  $result: unquote("negative #{$result}");
+ }
+ @return $result;
+}

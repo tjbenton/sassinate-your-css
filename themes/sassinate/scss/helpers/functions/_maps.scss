@@ -1,0 +1,123 @@
+// @author Tyler Benton
+// @page helpers/functions
+// @description
+// jQuery-style extend function
+// Reason for this function map-merge
+//  - only takes 2 arguments
+//  - is not recursive
+//
+// @arg {Map} - First map to extend appon.
+// @arg {Map} - Comma delimited list of maps.
+// @arg {bool} nth($obj-list, -1) - recursive mode
+//
+// @returns {Map}
+//
+// @markup {scss} (example="false") **Example: **
+// $map-a: (a: "lorem ipsum",b: true,c: 100000);
+// $map-b: (b: false, c: 40);
+// $test-c: extend($map-a, $map-b); /\/ (a: "lorem ipsum", b: false, c: 40)
+@function extend($obj, $obj-list...){
+ $last: nth($obj-list, -1);
+ $deep: $last == true;
+ $max: if(type-of($last) != "map", length($obj-list) - 1, length($obj-list));
+
+ // Loop through all maps in $obj-list...
+ @for $i from 1 through $max{
+  $current: nth($obj-list, $i); // Store current map
+  @if not $deep{
+   $obj: map-merge($obj, $current); // If not in deep mode, simply merge current map with object
+  }@else{ // If in deep mode
+   @each $key, $value in $current{ // Loop through all tuples in current map
+    // If value is a nested map and same key from object is a nested map as well
+    @if type-of($value) == "map" and type-of(map-get($obj, $key)) == "map"{
+     $value: extend(map-get($obj, $key), $value, $deep); // Recursive extend
+    }
+    $obj: map-merge($obj, ($key: $value)); // Merge current tuple with object
+   }
+  }
+ }
+ @return $obj;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This makes maps **10,000%** easier to use. Think about it like dot notation in JS.
+//
+// @arg {Map} - This is the main map
+// @arg {List} - This is a comma delemited list of keys. The last value is the one you are wanting to get.
+//
+// @returns {*} - Returns the last value in the list of keys. Which can be anything.
+//
+// @markup {scss} (example="false") **Example:**
+// $test-map: (
+//  foo: (
+//   baz: (
+//    qux: (
+//     quux: (
+//      garply: (
+//       waldo: "Found him"
+//      )
+//     )
+//    )
+//   )
+//  )
+// );
+//
+// .test:before{
+//  content: get($test-map, foo, baz, qux, quux, garply, waldo); /\/ -> "Found him"
+// }
+@function get($map, $keys...){
+ @each $key in $keys{
+  $map: map-get($map, $key);
+ }
+ @return $map;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// This allows you to set values of nested maps.
+//
+// @arg {Map} - Map to update
+// @arg {List} - This is a comma delemited list of keys. The last value is the one you are wanting to get.
+// @arg {*} nth($keys, -1) - The last value can be anything you want to set.
+//
+// @returns {map} - Updated map
+//
+// @markup {scss} (example="false") **Example:**
+// $test-map: (
+//  foo: (
+//   baz: (
+//    qux: (
+//     quux: (
+//      garply: (
+//       waldo: "Found him"
+//      )
+//     )
+//    )
+//   )
+//  )
+// );
+//
+// $test-map: set($test-map, foo, baz, qux, quux, garply, waldo, "No idea where he is");
+@function set($map, $keys.../*, $value */){
+ $map-list: ($map,);
+ $result: null;
+ $value: nth($keys, -1);
+ $key-length: length($keys) - 1;
+
+ @if $key-length == 1{
+  @return map-merge($map, (nth($keys, 1): $value));
+ }
+
+ @for $i from 1 through $key-length - 1{
+  $map-list: append($map-list, map-get(nth($map-list, -1), nth($keys, $i)));
+ }
+ $map-length: length($map-list);
+ @for $i from $map-length through 1{
+  $result: map-merge(nth($map-list, $i), (nth($keys, $i): if($i == $map-length, $value, $result)));
+ }
+
+ @return $result;
+}

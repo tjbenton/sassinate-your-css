@@ -1,0 +1,257 @@
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Gets the first item in the list
+//
+// @arg {List | Map}
+//
+// @returns {*} What ever is the **first** item in a list
+//
+// @markup {scss} (example="false") **Example: **
+// $list: ("a", "b", "c", "d");
+// first($list) /\/ -> "a"
+@function first($list){
+ @return nth($list, 1);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description Gets the last item in a list
+//
+// @arg {List | Map}
+//
+// @returns {*} What ever is the **last** item in a list
+//
+// @markup {scss} (example="false") **Example: **
+// $list: ("a", "b", "c", "d");
+// last($list) /\/ -> "d"
+@function last($list){
+ @return nth($list, length($list));
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// Removes a value from a list. It also allows you to remove that same value from a nested list.
+//
+// @arg {List | Map} - List to update
+// @arg {Key} - The value you want to remove
+// @arg {Boolean} - Allows for recursion
+//
+// @returns {Value}
+// @markup {scss} (example="false") **Example: **
+// $test: ("one", "two", "three", "four", ("one", "two", "three", "four"));
+// remove($test, "two") /\/ -> "one", "three", "four", ("one", "two", "three", "four")
+// remove($test, "two", true) /\/ -> "one", "three", "four", ("one", "three", "four")
+@function remove($list, $value, $recursive: false){
+ $result: ();
+ $separator: list-separator($list);
+ @for $i from 1 through length($list){
+  @if type-of(nth($list, $i)) == list and $recursive{
+   $result: append($result, remove(nth($list, $i), $value, $recursive), $separator);
+  }@else if nth($list, $i) != $value{
+   $result: append($result, nth($list, $i), $separator);
+  }
+ }
+ @return $result;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description removes the nth item in the list that you specify
+//
+// @arg {List | Map} - The list to remove index from
+// @arg {Number}
+//
+// @returns {Value}
+//
+// @markup {scss} (example="false") **Example: **
+// $list: ("a", "b", "c", "d");
+// remove-nth($list, 3); /\/ -> ("a", "b", "d")
+@function remove-nth($list, $index){
+ $result: null;
+ $separator: list-separator($list);
+ @if type-of($index) != number{
+  @warn "$index: #{quote($index)} is not a number for `remove-nth`.";
+ }@else if $index == 0{
+  @warn "List index 0 must be a non-zero integer for `remove-nth`.";
+ }@else if abs($index) > length($list){
+  @warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
+ }@else{
+  $result: ();
+  $index: if($index < 0, length($list) + $index + 1, $index);
+  @for $i from 1 through length($list){
+   @if $i != $index{
+    $result: append($result, nth($list, $i), $separator);
+   }
+  }
+ }
+ @return $result;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description allows you to slice a list just like you would in js
+//
+// @arg {List}
+// @arg {Number}
+// @arg {Number}
+//
+// @returns {List} - A new list based off of the args.
+//
+// @markup {scss} (example="false") **Example: ** Removes the **last** item in the list
+// $list: one, two, three, four, five;
+// $list: list-slice($list, 1, -1); /\/ -> (one, two, three, four)
+//
+// @markup {scss} (example="false") **Example: ** Removes the **first** item in the list
+// $list: one, two, three, four, five;
+// $list: list-slice($list, 2); /\/ -> (two, three, four, five)
+@function list-slice($list, $start, $end: length($list)){
+ $new-list: ();
+ @if $end < 0{
+  $end: length($list) + $end;
+ }
+ @if $start <= $end{
+  @for $i from $start through $end{
+   $new-list: append($new-list, nth($list, $i), list-separator($list));
+  }
+ }
+ @return $new-list;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This allows you to insert a list item at a specific point
+//
+// @arg {list} - List to be modified
+// @arg {number} - The index at which you want the item instered
+// @arg {*} - What ever you want to be inserted
+//
+// @markup {scss} (example="false") **Example: **
+// $example: (1, 2, 3, 4, 5);
+// insert-nth($example, 1, 100) /\/ -> (100, 1, 2, 3, 4, 5)
+// insert-nth($example, 3, 300) /\/ -> (1, 2, 300, 3, 4, 5)
+// insert-nth($example, 10, 1000) /\/ -> (1, 2, 3, 4, 5, 1000)
+@function insert-nth($list, $index, $to-insert){
+ $length: length($list);
+ $index: clamp($index, 1, $length + 1);
+ $before: list-slice($list, 1, $index - 1);
+ $after: list-slice($list, $index, $length);
+ @return join(join($before, $to-insert), $after, list-separator($list));
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description Converts a list to a string
+//
+// @arg {list} - List to be modified
+// @arg {string} - How you want to combine the list items together
+// @arg {boolean} - Enables recursion
+//
+// @markup {scss} (example="false") **Example: **
+// $list: (one, two, three, four, five);
+// to-string($list, "-") /\/ -> one-two-three-four-five
+@function to-string($list, $glue: "", $is-nested: false) {
+ $result: null;
+
+ @for $i from 1 through length($list){
+  $e: nth($list, $i);
+  @if type-of($e) == list{
+   $result: $result#{to-string($e, $glue, true)};
+  }@else{
+   $result: if($i != length($list) or $is-nested, $result#{$e}#{$glue}, $result#{$e});
+  }
+ }
+
+ @return $result;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This gets first index of each item in the string
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {list | null}
+//
+// @markup {scss} (example="false") **Example: **
+// index-list("div#foo.bar[class='qux']#", ".", "%", "[", "#") /\/ -> (8, null, 12, 4)
+//
+// index-list(("foo", "bar", "baz"), "bar", "foo", "baz") /\/ -> (2, 1, 3)
+@function index-list($arg, $sub...){
+ $indexes: ();
+ @for $i from 1 through length($sub){
+  $indexes: append($indexes, index($arg, nth($sub, $i)), "comma");
+ }
+ @return if(length($indexes) == 0, null, $indexes);
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This will get the first index
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {string} - Returns the first `$sub` that matches.
+//
+// @markup {scss} (example="false") **Example: **
+// first-of("div#foo.bar[class='qux']", ".", "%", "[", "#") /\/ -> "#"
+// first-of("div.bar[class='qux']", ".", "%", "[", "#") /\/ -> "."
+// first-of("div[class='qux']", ".", "%", "[", "#") /\/ -> "["
+@function first-of($arg, $sub...){
+ $indexes: index-list($arg, $sub...);
+ @if $indexes{
+  $indexes: replace-null($indexes);
+  $min: min($indexes...);
+  @return if($min != 9999999, nth($sub, index($indexes, $min)), null);
+ }
+ @return null;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This will get the first index
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {string} - Returns the first `$sub` that matches.
+//
+// @markup {scss} (example="false") **Example: **
+// first-index("div#foo.bar[class='qux']", ".", "%", "[", "#") /\/ -> 4
+// first-index("div#foo.bar[class='qux']", ".") /\/ -> 8
+// first-index("div#foo.bar[class='qux']", "%", "[") /\/ -> 12
+@function first-index($arg, $sub...){
+ $indexes: index-list($arg, $sub...);
+ @if $indexes{
+  $indexes: replace-null($indexes);
+  $min: min($indexes...);
+  @return if($min != 9999999, $min, null);
+ }
+ @return null;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description Replaces `null` values in lists.
+//
+// @arg {list} $list - The list you want to remove null values from
+// @arg {*} $replace-with - What you want to replace null with
+//
+// @returns {list} - without `null` values
+//
+// @markup {scss} (example="false") **Example: **
+// replace-null(("1", null)) /\/ -> ("1", 9999999)
+@function replace-null($list, $replace-with: 9999999){
+ $null-index: index($list, null);
+ @return if($null-index, replace-null(set-nth($list, $null-index, $replace-with)), $list);
+}

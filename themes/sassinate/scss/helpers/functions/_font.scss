@@ -1,0 +1,41 @@
+// @author Tyler Benton
+// @page helpers/functions
+// @requires map-get($config, font-size)
+//
+// @arg {measurement} - Pixel value to be converted
+// @arg {measurement} - Base `font-size` to start from
+// @arg {number} - How many decimal places you want it to have
+//
+// @returns {measurement} - Returns a `em`
+//
+// @markup {scss} (example="false") - Example
+// em(32px, 16px); /\/ 2em
+// em(24px, 16px); /\/ 1.5em
+@function em($px, $base: map-get($config, font-size), $round: 4){
+ $px: strip-unit($px);
+ $base: strip-unit(if($base != null, if(unit($base) == "em", px($base), if(unit($base) == "rem", map-get($config, font-size), $base)), map-get($config, font-size)));
+ @return if($px != 0, rd($px / $base, $round) * 1em, 0);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @requires map-get($config, font-size)
+//
+// @arg {measurement} - Em value to be converted
+// @arg {measurement} - Base `font-size` to start from
+//
+// @returns {measurement} - Returns a `px`
+//
+// @markup {scss} (example="false") - Example
+// .foo{
+//   font-size: px(1.5em, 14px)
+// }
+// @markup {css} (example="false") - Compiles to
+// .foo{
+//   font-size: 21px;
+// }
+@function px($em, $base: map-get($config, font-size)){
+ $em: strip-unit($em);
+ $base: strip-unit(if($base != null, if(unit($em) == "rem", map-get($config, font-size), $base), map-get($config, font-size)));
+ @return if($em != 0, rd($em * $base * 1px), 0);
+}

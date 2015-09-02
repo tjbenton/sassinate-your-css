@@ -1,0 +1,243 @@
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @arg {string | arg list} - The codes to be converted into unicodes
+//
+// @description converts 1 or more characters into a unicode
+//
+// @returns {string}
+//
+// @markup {scss} (example="false")
+// unicode("e655"); /\/ -> "\e655"
+// unicode("e655", "e655", "e655"); /\/ -> "\e655\e655\e655"
+// unicode("e655", "e655", "e655", "space"); /\/ -> "\e655 \e655 \e655"
+@function unicode($args...){
+ $quote: unquote("\"");
+ $result: "";
+ $space: if(nth($args, -1) == "space", " ", "");
+ @each $str in $args{
+  $result: $result+$space+unquote(str-insert($str, "\\", 1));
+ }
+
+ @return $quote+$result+$quote;
+}
+
+
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Splits string at the specified point
+//
+// @arg {string}
+// @arg {string}
+// @arg {list} - This is a temp list to make this function recursive and shouldn't be used.
+//
+// @returns {list}
+//
+// @markup {scss} (example="false") **Example:**
+// $string: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+// split-at-space: str-split($string); /\/ -> "Lorem", "ipsum", "dolor", "sit", "amet,", "consectetur", "adipisicing", "elit."
+// split-at-comma: str-split($string, ","); /\/ -> "Lorem ipsum dolor sit amet", " consectetur adipisicing elit."
+// --------------------------------------------------
+@function str-split($str, $key: "", $temp: ()){
+ $index: str-index($str, $key);
+ @return if($index != null,
+          str-split(str-slice($str, $index + 1), $key, append($temp, str-slice($str, 0, $index - 1), "comma")),
+          append($temp, $str)
+         );
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description - This will trim the white space at the beginning and end of the line.
+//
+// @arg {string} - The string to trim
+//
+// @return {string} - Returns the same string without spaces at the begining and end of the string.
+//
+// @markup {scss} (example="false") **Example:**
+// str-trim("   Lorem ipsum dolor sit amet.   sdas   ") /\/ -> "Lorem ipsum dolor sit amet.   sdas"
+@function str-trim($str){
+ @while str-slice($str, 1, 1) == " "{
+  $str: str-slice($str, 2);
+ }
+ @while str-slice($str, -1) == " "{
+  $str: str-slice($str, 1, -2);
+ }
+ @return $str;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @arg {string} - String to search in
+// @arg {string | list} - Items to search
+//
+// @returns {list} Returns list of matched items
+//
+// @markup {scss} (example="false") **Example:**
+// $string: "What, so the guy we are meeting with can't even grow his own hair? COME ON!";
+// str-has($string, ("come on!")) /\/ -> COME ON!
+// str-has($str, ("COME ON!"), false) /\/ -> COME ON!
+// str-has($str, ("come on!"), false) /\/ -> false
+// --------------------------------------------------
+ @function str-has($str, $list, $case-sensitive: false){
+  $separator: list-separator($list);
+  $result: ();
+
+  @each $item in $list{
+   $index: str-index(if(not $case-sensitive, to-lower-case($str), $str), if(not $case-sensitive, to-lower-case(inspect(unquote($item))), inspect(unquote($item))));
+   @if $index{
+    $result: append($result, str-slice($str, $index, ($index - 1) + str-length($item)), $separator);
+   }
+  }
+
+  @return if(length($result) != 0, nth($result, 1), false);
+ }
+
+
+@function str-indexes($string, $substring, $start: 0, $list: ()){
+ // error handling
+ @if $substring == "" or type-of($substring) != string{
+  @error "#{$substring} is not a valid string";
+  @return false;
+ }
+ $index: str-index(str-slice($string, if($start != 0, $start + 1, 0)), $substring);
+
+ @if $index != null{
+   $list: append($list, $index + $start, "comma");
+   @return str-indexes($string, $substring, $index + $start, $list);
+ }
+
+ @return if(length($list) != 0, inspect($list), false);
+}
+
+// @author Tyler Benton
+// @description Return last index of `$needle` in `$string`.
+//
+// @arg {String} $string - string to search in
+// @arg {String} $needle - substring to search for
+//
+// @return {Number}
+@function str-last-index($string, $needle){
+ $index: str-index($string, $needle);
+ $result: $index;
+ @if $index{
+  @for $i from $index + str-length($needle) through str-length($string){
+   @if str-slice($string, $i, $i + str-length($needle) - 1) == $needle{
+    $result: $i;
+   }
+  }
+ }
+
+ @return $result;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Replace `$search` with `$replace` in `$string`
+//
+// @arg {String} $string - Initial string
+// @arg {String} $search - Substring to replace
+// @arg {String} $replace - New value
+//
+// @return {String} - Updated string
+//
+// @markup {scss} (example="false")
+// $string: "The answer to life the universe and everything is 42.";
+// str-replace($string, "e", "xoxo"); /\/ -> "Thxoxo answxoxor to lifxoxo thxoxo univxoxorsxoxo and xoxovxoxorything is 42."
+@function str-replace($string, $search, $replace: ""){
+ $index: str-index($string, $search);
+ @return if($index, str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace), $string);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description This gets first index of each item in the string
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {list | null}
+//
+// @markup {scss} (example="false") **Example: **
+// str-index-list("div#foo.bar[class='qux']#", ".", "%", "[", "#") /\/ -> (8, null, 12, 4)
+@function str-index-list($arg, $sub...){
+ $indexes: ();
+ @for $i from 1 through length($sub){
+  $indexes: append($indexes, str-index($arg, nth($sub, $i)), "comma");
+ }
+ @return if(length($indexes) == 0 and $indexes != null, null, $indexes);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description This will get the first index
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {string} - Returns the first `$sub` that matches.
+//
+// @markup {scss} (example="false") **Example: **
+// str-first-of("div#foo.bar[class='qux']", ".", "%", "[", "#") /\/ -> "#"
+// str-first-of("div.bar[class='qux']", ".", "%", "[", "#") /\/ -> "."
+// str-first-of("div[class='qux']", ".", "%", "[", "#") /\/ -> "["
+@function str-first-of($arg, $sub...){
+ $indexes: str-index-list($arg, $sub...);
+ @if $indexes{
+  $indexes: replace-null($indexes);
+  $min: min($indexes...);
+  @return if($min != 9999999, nth($sub, index($indexes, $min)), null);
+ }
+ @return null;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description This will get the first index
+//
+// @arg {string} $arg - String to match against
+// @arg {string} $sub... - list of strings to match.
+//
+// @returns {string} - Returns the first `$sub` that matches.
+//
+// @markup {scss} (example="false") **Example: **
+// $str: "div#foo.bar[class='qux']";
+// str-first-index($str, ".", "%", "[", "#") /\/ -> 4
+// str-first-index($str, ".") /\/ -> 8
+// str-first-index($str, "%", "[") /\/ -> 12
+@function str-first-index($str, $sub...){
+ $indexes: str-index-list($str, $sub...);
+ @if $indexes{
+  $indexes: replace-null($indexes);
+  $min: min($indexes...);
+  @return if($min != 999999, $min, null);
+ }
+ @return null;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description Gets the letter at the index that you specify
+//
+// @arg {string} - The string to use
+// @arg {number} - Index of the string you want
+//
+// @returns {string | null} - If the str-length is less than or greater than index then it will return null
+//
+// @markup {scss} (example="false") **Example:**
+// str-nth("ermahgerd", 3) /\/ -> m
+@function str-nth($str, $i){
+ $length: str-length($str);
+ @return if($i >= 0 and $i <= $length, str-slice($str, $i, $i), null);
+}

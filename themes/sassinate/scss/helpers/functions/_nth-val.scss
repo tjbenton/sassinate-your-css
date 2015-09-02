@@ -1,0 +1,47 @@
+// @author Tyler Benton
+// @page helpers/functions
+// @description This will get the value based off of box model rules if `$box-model` is set to `true`
+//
+// @arg {Number} - A value or a set of values
+// @arg {Number} - The item postion that you want to get
+// @arg {Bool} - Set to `false` if you don't want to use the box model rules
+//
+// @returns {Number} - Returns the `$b` value if it's avaiable, or a value that is 2 positions earlier, or the fisrt value
+//
+// @markup {scss} (example="false")
+// $example-one: 100px 200px 300px 400px;
+// .foo{
+//  margin-bottom: nth-val($example-one, 3); /\/ -> 300px
+// }
+//
+// @markup {scss} (example="false")
+// $example-two: 21px 7px;
+// .foo{
+//  margin-left: nth-val($example-two, 4); /\/ Since there aren't 4 values in the set this will return the second value (7px)
+// }
+//
+// @markup {scss} (example="false")
+// $example-three: 50px;
+// .foo{
+//  margin-bottom: nth-val($example-one, 3); /\/ Since there is only 1 value in the list this will return the first value (50px)
+// }
+// --------------------------------------------------
+@function nth-val($a, $b, $box-model: true){
+ @if length($a) < $b and $box-model != true{
+  @warn "The #{$b} value in #{$a} doesn't exist. Try specifiying a lower $b value in #{$a}";
+ }@else if length($a) > 4{
+  @warn "specifiy a number <= 4 (aka: box-model values) || nth-val(#{$a}, #{$b}, false)";
+ }
+ $c: $b - 2;
+ $nth: if($b > 1 and $box-model == true,
+        if(length($a) == 2,
+         if($b > 2, $c, $b),
+         if(length($a) == 3,
+          if($b > 3, $c, $b),
+          if($b != 4, $c, $b)
+         )
+        ),
+        if(type-of($a) != "list", 1, $b)
+       );
+ @return nth($a, clamp($nth, 1, 4));
+}

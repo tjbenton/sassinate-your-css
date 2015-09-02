@@ -1,0 +1,194 @@
+// @author Tyler Benton
+// @page helpers/functions
+// @access private
+// @alias opposite
+//
+// @description
+// The name says it all, this gets the opposite direction that is passed.
+// It does accept a list of values. It will keep the same list separator that was used.
+// Unless the last argument is `auto`, `comma`, or `space`.
+//
+// @arg {string | list}
+// @arg {auto | comma | space} nth($directions, -1) - Optionally you can pass this as the last argument to specify the spereator you want to use
+//
+// @returns {string}
+//
+// @markup {scss} (example="false") **Example:**
+// $direction: opposite-direction(top); /\/ bottom
+// $list-of-directions: opposite-direction(bottom left); /\/ top right
+// $comma-delimited-list-of-directions: opposite-direction(top, right); /\/ bottom, left
+//
+// @note {!} This is only a private function because it can be called with the `opposite` function
+// --------------------------------------------------
+ @function opposite-direction($directions...) {
+  $separator: if(index(auto comma space, nth($directions, -1)), nth($directions, -1), if(length($directions) > 1, list-separator($directions), space));
+  $opposite-directions: ();
+  $direction-map: (
+   "top": "bottom",
+   "right": "left",
+   "bottom": "top",
+   "left": "right",
+   "ltr": "rtl",
+   "rtl": "ltr"
+  );
+  @each $direction in $directions{
+   @if not index(auto comma space, $direction){
+    $opposite-direction: map-get($direction-map, $direction);
+    @if $opposite-direction != null{
+     $opposite-directions: append($opposite-directions, #{$opposite-direction}, $separator);
+    }@else{
+     @error "No opposite direction can be found for `#{$direction}`.";
+    }
+   }
+  }
+  @return $opposite-directions;
+ }
+
+
+// @author Tyler Benton
+// @page helpers/functions
+// @access private
+// @alias opposite
+//
+// @description
+// If you have a positive number it will turn it to a negative, and vice versa.
+// It does accept a list of values. It will keep the same list separator that was used.
+// Unless the last argument is `auto`, `comma`, or `space`.
+//
+// @arg {string | list}
+// @arg {auto | comma | space} nth($directions, -1) - Optionally you can pass this as the last argument to specify the spereator you want to use
+//
+// @returns {string}
+//
+// @markup {scss} (example="false") **Example:**
+// $unitless-test: opposite-number(10); /\/ -10
+// $unit-test: opposite-number(10px); /\/ -10px
+// $decimal-test: opposite-number(.00005); /\/ -0.00005
+// $list-test: opposite-number(10, 50px, .00005); /\/ -10, -50px, -0.00005
+//
+// @note {!} This is only a private function because it can be called with the `opposite` function
+// --------------------------------------------------
+@function opposite-number($numbers...){
+ $separator: if(index(auto comma space, nth($numbers, -1)), nth($numbers, -1), if(length($numbers) > 1, list-separator($numbers), space));
+ $opposite-numbers: ();
+ @each $number in $numbers{
+  @if not index(auto comma space, $number){
+   @if type-of($number) == number{
+    $opposite-numbers: append($opposite-numbers, if($number == 0, 0, $number * -1), $separator);
+   }@else{
+    @error "#{$number} isn't a number";
+   }
+  }
+ }
+ @return $opposite-numbers;
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// Accepts any number and top, right, bottom, left, ltr, and rtl
+// It does accept a list of values. It will keep the same list separator that was used.
+// Unless the last argument is `auto`, `comma`, or `space`.
+//
+// @arg {string | list}
+// @arg {auto | comma | space} nth($directions, -1) - Optionally you can pass this as the last argument to specify the spereator you want to use
+//
+// @returns {string}
+//
+// @markup {scss} (example="false") **Example:**
+// $unitless-number-test: opposite(10); /\/ -10
+// $px-number-test: opposite(10px); /\/ -10px
+// $decimal-number-test: opposite(.00005);  /\/ -0.00005
+// $direction-test: opposite(left); /\/ right
+// $multiple-directions-test: opposite(top, right); /\/ bottom, left
+// $mixed-test: opposite(10px, right, space);  /\/ -10px left
+// --------------------------------------------------
+@function opposite($args...){
+ $separator: if(index(auto comma space, nth($args, -1)), nth($args, -1), if(length($args) > 1, list-separator($args), space));
+ $opposite-list: ();
+
+ @each $arg in $args{
+  @if not index(auto comma space, $arg){
+   $opposite: if(index(top right left bottom ltr rtl, $arg), opposite-direction($arg), if(type-of($arg) == number, opposite-number($arg), null));
+   @if #{$opposite} != null{
+   $opposite-list: append($opposite-list, $opposite, $separator);
+   }@else{
+    @error "#{$arg} is not a direction or a number";
+   }
+  }
+ }
+
+ @return $opposite-list;
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// Gets the first color in a list.
+// **This might be removed because its more of helper for old things like gradient mixins**
+//
+// @returns {color | null}
+@function get-first-color($args...){
+ $color: false;
+ @each $item in $args{
+  @if type-of($item) == color and $color == false{
+   $color: $item;
+  }
+ }
+ @return if($color, $color, null);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description
+// This gets the color settings of what ever namespace that you pass.
+//
+// @arg {string} - The namespace that you want to get
+// @arg {string} - The setting you want to get in the map
+//
+// @returns {map} - The color settings map for the namespace you passed
+//
+// @markup {scss} (example="false") **Basic example:**
+// get-color-set("messaging"); /\/ returns the settings that were defined in the "messaging" namespace
+//
+// @markup {scss} (example="false") **Common use case:**
+//  /\/ _variables.scss
+//  \@include define-color-set("messaging", (
+//   colors: (
+//    success: (
+//     0: #3c763d,
+//     -5: #dff0D8,
+//     name: "green"
+//    ),
+//    info: (
+//     0: #31708f,
+//     -5: #d9edf7,
+//     name: "blue"
+//    ),
+//    warning: (
+//     0: #8a6d3b,
+//     -5: #fcf8e3,
+//     name: "tan"
+//    ),
+//    danger: (
+//     0: #a94442,
+//     -5: #f2dede,
+//     name: "red"
+//    )
+//   )
+//  ));
+//
+//  /\/ _messaging.scss
+//  \@each $theme in map-keys(get-color-set("messaging", colors)){
+//   /\/ `$theme` is success, info, warning, and danger
+//   &--#{$theme}{
+//    background: color($theme, 0, $namespace: "messaging");
+//    border-right-color: color($theme, 1, $namespace: "messaging");
+//   }
+//  }
+@function get-color-set($namespace, $args...){
+ @return get($___defined-colors, $namespace, settings, $args...);
+}

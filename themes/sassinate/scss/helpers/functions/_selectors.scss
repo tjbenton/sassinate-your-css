@@ -1,0 +1,164 @@
+// @author Tyler Benton
+// @page helpers/functions
+// @description This gets the outer most selector in a nested selector.
+// @page helpers/functions
+//
+// @arg {list} - list of selectors
+//
+// @returns {string}
+//
+// @markup {scss} (example="false") **Example:**
+// .foo{
+//  .bar{
+//   .baz{
+//    $example: inital-selector(&); /\/ .foo
+//   }
+//  }
+// }
+@function initial-selector($selector){
+ @return nth(nth($selector, 1), 1);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @description This gets the current selector inside of a nested selector
+// @page helpers/functions
+//
+// @arg {list} - list of selectors
+// @arg {boolean} - Change to false if you don't want the pseudo selectors
+//
+// @returns {string}
+//
+// @markup {scss} (example="false") **Example:**
+// .foo{
+//  .bar{
+//   &:after{
+//    $example: current-selector(&); /\/ .bar:after
+//    $pseudo-less: current-selector(&, false) /\/ .bar
+//   }
+//  }
+// }
+@function current-selector($selector, $pseudos: true){
+ $last-selector: nth(nth($selector, 1), -1);
+ @return if($pseudos == true, $last-selector, nth(str-split($last-selector, ":"), 1));
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+// @page helpers/functions
+//
+// @description Gets the current selectors pseudo selectors. Usefull in mixins.
+//
+// @arg {string} - Should always be the `&` selector
+//
+// @returns {list | false}
+//
+// @markup {scss} (example="false") **Example:**
+// .foo{
+//  .bar{
+//   &:after, &:has(.baz){
+//    $pseudos: pseudo-selectors(&); /\/ after, has(.baz)
+//   }
+//  }
+// }
+// @markup {scss} (example="false") **Example:** In a mixin
+// \@mixin foo(){
+//  \@if pseudo-selectors(&){
+//   content: "has pseudo selectors";
+//  }\@else{
+//   &:after{
+//    content: "doesn't have pseudo selectors";
+//   }
+//  }
+// }
+@function pseudo-selectors($selectors){
+ $pseudos: str-split(str-replace(current-selector($selectors), "::", ":"), ":");
+ @return if(length($pseudos) > 1, list-slice($pseudos, 2), false);
+}
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description Checks to see if the selector is a sass silent selector.
+//
+// @arg {string} - Should always be `&`
+//
+// @returns {bool}
+//
+// @markup {scss} (example="false") This is how it is used in the clear mixin
+// \@mixin clear($extend: true){
+//  \@at-root #{if(pseudo-selectors(&) or is-silent-selector(&), &, selector-append(&, ":after"))}{
+//   ...
+//  }
+// }
+//
+@function is-silent-selector($selector){
+ @return if(str-index(inspect(nth($selector, 1)), "%") != null, true, false)
+}
+
+
+// @author Tyler Benton
+// @page helpers/functions
+//
+// @description
+// This checks for pseduo element selectors and if one **doesn't** exist then it will add one for your. If one or more pseduo element selector(s) exists then it will use the selector(s) defined.
+// It will also return a list of selectors with the pseudo element selectors striped from it. It will remove any duplicate selectors.
+//
+// @returns {Map} - Map of selectors, one item in the map is a list of selectors without pseudo elements. The other is a list of selectors with pseudos elements.
+//
+// @markup {scss} (example="false") **Example: **
+// /\/ inside of some mixin
+// $selectors: pseudo-selector-fix(&);
+// \@at-root #{get($selectors, selector)}{
+//  /\/ add styles to the selector **without** pseduo element selectors
+// }
+// /\/ ...
+// \@at-root #{get($selectors, selector-with-pseudos)}{
+//  /\/ add styles to the selector **with** pseudo element selectors
+// }
+@function pseudo-selector-fix($list, $default-pseudo: "before"){
+ $selector-list: (
+  selector: (),
+  selector-with-pseudos: (),
+ );
+ @for $i from 1 through length($list){
+  $this: (nth($list, $i),);
+  // checks for pseudos
+  $pseudos: index(pseudo-selectors($this), "before") or index(pseudo-selectors($this), "after");
+  // removes pseudos
+  $selector: if(not $pseudos, $this, selector-replace($this, current-selector($this), str-replace(str-replace(current-selector($this), ":after", ""), ":before", "")));
+
+  // adds #{$default-pseudo} if there isn't already a :before or :after present
+  $selector-with-pseudos: if($pseudos, $this, selector-append($this, ":#{$default-pseudo}"));
+
+
+  // Checks to make sure that selector doesn't already exist
+  @if not index(map-get($selector-list, selector), $selector){
+   $selector-list: map-merge($selector-list, (selector: append(map-get($selector-list, selector), $selector, "comma")));
+  }
+
+  // Checks to make sure that selector-with-pseudos doesn't already exist
+  @if not  index(map-get($selector-list, selector-with-pseudos), $selector-with-pseudos){
+   $selector-list: map-merge($selector-list, (selector-with-pseudos: append(map-get($selector-list, selector-with-pseudos), $selector-with-pseudos, "comma")));
+  }
+
+  // $debug: debug(
+  //  "---------#{$i}--------------------------------------",
+  //  "$this", $this,
+  //  "type-of($this)", type-of($this),
+  //  "$pseudos", $pseudos,
+  //  "$selector", $selector,
+  //  "$selector-with-pseudos", $selector-with-pseudos
+  // );
+ }
+
+ // $debug: debug(
+ //  "------------ -----------------------------------------------------------------",
+ //  "$selector-list", $selector-list,
+ //  // "$pseudos = ", $pseudos,
+ //  // "$selector = ", $selector,
+ //  // "$selector-with-pseudos = ", $selector-with-pseudos,
+ //  ""
+ // );
+ @return $selector-list;
+}

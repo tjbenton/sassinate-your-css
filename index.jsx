@@ -12,9 +12,8 @@ import Flux from "./src/flux/alt";
 import Deck from "./presentation/deck";
 import config from "./presentation/config";
 
-require("normalize.css");
-require("./themes/default/index.css");
-require("highlight.js/styles/monokai_sublime.css");
+require("!style!css!sass!./themes/sassinate/scss/index.scss");
+require("!style!css!highlight.js/styles/monokai_sublime.css");
 
 const flux = new Flux();
 Alt.debug("flux", flux);
@@ -29,7 +28,11 @@ Presentation.contextTypes = {
   router: React.PropTypes.object
 };
 
-Presentation = context(Presentation, {styles: config.theme, print: config.print, flux});
+Presentation = context(Presentation, {
+                styles: config.theme,
+                print: config.print,
+                flux
+               });
 
 React.render(
   <Router history={new HashHistory()}>

@@ -1,0 +1,19 @@
+{
+  "name": "sassinate-your-css-2",
+  "version": "0.0.0",
+  "authors": [
+    "Tyler Benton <tylerb@marketamerica.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "normalize-scss": "~3.0.3",
+    "scss-color": "~1.0.2"
+  }
+}

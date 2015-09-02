@@ -1,0 +1,30 @@
+//
+@function debug($args...){
+ $i: 1;
+ @while $i <= length($args){
+  $a: nth($args, $i);
+  $next-index: if($a == "" or index("---" "===" "+++" "___" "***" "!!!", str-slice($a, 0, 3)), 1, 2);
+  @debug if($next-index == 1, unquote($a), unquote($a + " = ") nth($args, $i + 1));
+  $i: $i + $next-index;
+ }
+ @return false;
+}
+
+//
+@function assert($statement, $assertion, $expectation){
+ @if variable-exists(assert) and $assert != true{
+  @return false;
+ }
+ @if $assertion != $expectation{
+  $result: "FAIL";
+  @return "__#__ #{$result} __#__ " + $statement + " __=__ Expected #{$assertion} to equal EXPECTATION: #{$expectation}";
+ }
+ @if $assertion == $expectation {
+  $result: "PASS" ;
+  @return "__#__ #{$result} __#__ " + $statement;
+ }
+}
+
+@mixin assert($statement, $assertion, $expectation){
+
+}
