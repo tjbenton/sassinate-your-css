@@ -2,21 +2,15 @@ import React from "react/addons";
 import Radium from "radium";
 
 @Radium
-class Layout extends React.Component {
+export default class Layout extends React.Component {
+  static propTypes: {
+    children: React.PropTypes.node
+  };
   render() {
-    const styles = {
-      display: "flex"
-    };
     return (
-      <div className="l-layout" style={[styles, this.props.style]}>
+      <div className={this.classNames("l-layout")} style={[this.props.style]}>
         {this.props.children}
       </div>
     );
   }
 }
-
-Layout.propTypes = {
-  children: React.PropTypes.node
-};
-
-export default Layout;
