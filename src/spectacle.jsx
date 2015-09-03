@@ -1,6 +1,5 @@
 import Appear from "./appear";
-import BlockQuote, {Quote} from "./block-quote";
-import Cite from "./cite";
+import BlockQuote, {Quote, Cite} from "./block-quote";
 import CodePane from "./code-pane";
 import Code from "./code";
 import Deck from "./deck";

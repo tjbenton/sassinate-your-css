@@ -15,27 +15,6 @@ module.exports = {
   colors: colors,
   fonts: fonts,
   components: {
-    blockquote: {
-      textAlign: "left",
-      position: "relative",
-      display: "inline-block"
-    },
-    quote: {
-      borderLeft: "1px solid " + colors.primary,
-      paddingLeft: 40,
-      display: "block",
-      color: colors.primary,
-      fontSize: "4.9em",
-      lineHeight: 1,
-      fontWeight: "bold"
-    },
-    cite: {
-      color: colors.tertiary,
-      display: "block",
-      clear: "left",
-      fontSize: "2em",
-      marginTop: "1em"
-    },
     content: {
       margin: "auto",
       textAlign: "center"

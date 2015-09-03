@@ -31,4 +31,19 @@ export class Quote extends Base {
       </span>
     );
   }
-}
+};
+
+export class Cite extends Base {
+  static propTypes: {
+    children: React.PropTypes.node,
+    styles: React.PropTypes.object,
+    className: React.PropTypes.string
+  };
+  render() {
+    return (
+      <cite className={this.classNames("c-blockquote__cite")} style={[this.getStyles(), this.props.style]}>
+        - {this.props.children}
+      </cite>
+    );
+  }
+};
