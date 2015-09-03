@@ -70,8 +70,16 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.getStyles = getStyles;
+    // this.classNames = classNames;
   }
-
+  classNames(...rest){
+    let classNames = [];
+    classNames.push(...rest)
+    if(this.props.className){
+      classNames.push(this.props.className.split(" "));
+    }
+    return classNames.filter(Boolean).join(" ");
+  }
   render() {
     return null;
   }
@@ -82,7 +90,8 @@ Base.propTypes = {
   textFont: React.PropTypes.string,
   bgColor: React.PropTypes.string,
   bgImage: React.PropTypes.string,
-  bgDarken: React.PropTypes.number
+  bgDarken: React.PropTypes.number,
+  className: React.PropTypes.string
 };
 
 Base.defaultProps = {
