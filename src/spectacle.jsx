@@ -1,5 +1,5 @@
 import Appear from "./appear";
-import BlockQuote from "./block-quote";
+import BlockQuote, {Quote} from "./block-quote";
 import Cite from "./cite";
 import CodePane from "./code-pane";
 import Code from "./code";
@@ -12,7 +12,6 @@ import Layout from "./layout";
 import Link from "./link";
 import ListItem from "./list-item";
 import List from "./list";
-import Quote from "./quote";
 import S from "./s";
 import Slide from "./slide";
 import Text from "./text";
