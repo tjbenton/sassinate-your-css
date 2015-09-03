@@ -1,0 +1,9 @@
+.c-code{
+  background-color: rgba(black, .15);
+  border-radius: map-get($config, border-radius);
+  color: black;
+  font-family: map-get($fonts, tertiary);
+  font-size: 2.66em;
+  margin: .25em auto;
+  padding: 0 10px;
+}

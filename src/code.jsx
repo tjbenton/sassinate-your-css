@@ -3,22 +3,16 @@ import Base from "./base";
 import Radium from "radium";
 
 @Radium
-class Code extends Base {
+export default class Code extends Base {
+  static propTypes: {
+    children: React.PropTypes.node,
+    styles: React.PropTypes.object
+  };
   render() {
     return (
-      <code className="c-code" style={[this.context.styles.components.code, this.getStyles(), this.props.style]}>
+      <code className={this.classNames("c-code")} style={[this.getStyles(), this.props.style]}>
         {this.props.children}
       </code>
     );
   }
 }
-
-Code.propTypes = {
-  children: React.PropTypes.node
-};
-
-Code.contextTypes = {
-  styles: React.PropTypes.object
-};
-
-export default Code;
