@@ -70,7 +70,6 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.getStyles = getStyles;
-    // this.classNames = classNames;
   }
   classNames(...rest){
     let classNames = [];

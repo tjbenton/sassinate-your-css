@@ -19,21 +19,6 @@ module.exports = {
       margin: "auto",
       textAlign: "center"
     },
-    codePane: {
-      pre: {
-        margin: "auto",
-        fontSize: "1em",
-        fontWeight: "normal",
-        fontFamily: fonts.tertiary,
-        minWidth: "100%",
-        maxWidth: 800
-      },
-      code: {
-        textAlign: "left",
-        padding: 20,
-        fontWeight: "normal"
-      }
-    },
     code: {
       color: "black",
       fontSize: "2.66em",

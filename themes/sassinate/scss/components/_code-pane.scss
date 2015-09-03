@@ -1,0 +1,15 @@
+.c-code-pane{
+  font: {
+    family: map-get($fonts, tertiary);
+    size: 1em;
+    weight: 400;
+  }
+  margin: auto;
+  max-width: 800;
+  min-width: 100%;
+  &__code{
+    font-weight: 400;
+    padding: 20;
+    text-align: left;
+  }
+}

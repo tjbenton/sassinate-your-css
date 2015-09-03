@@ -5,6 +5,20 @@ import Radium from "radium";
 
 @Radium
 class CodePane extends Base {
+  static contextTypes: {
+    styles: React.PropTypes.object
+  };
+  static defaultProps: {
+    lang: "html",
+    source: ""
+  };
+  static propTypes: {
+    children: React.PropTypes.node,
+    styles: React.PropTypes.object,
+    className: React.PropTypes.string,
+    lang: React.PropTypes.string,
+    source: React.PropTypes.string
+  };
   createMarkup() {
     const markup = highlight.highlight(this.props.lang, this.props.source);
     return {
@@ -13,28 +27,11 @@ class CodePane extends Base {
   }
   render() {
     return (
-      <pre clasName="c-code-pane" style={[this.context.styles.components.codePane.pre, this.getStyles(), this.props.style]}>
-        <code
-          className="hljs c-code-pane__code"
-          style={this.context.styles.components.codePane.code}
-          dangerouslySetInnerHTML={this.createMarkup()}/>
+      <pre clasName={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
+        <code className="hljs c-code-pane__code" dangerouslySetInnerHTML={this.createMarkup()} />
       </pre>
     );
   }
 }
-
-CodePane.contextTypes = {
-  styles: React.PropTypes.object
-};
-
-CodePane.propTypes = {
-  lang: React.PropTypes.string,
-  source: React.PropTypes.string
-};
-
-CodePane.defaultProps = {
-  lang: "html",
-  source: ""
-};
 
 export default CodePane;

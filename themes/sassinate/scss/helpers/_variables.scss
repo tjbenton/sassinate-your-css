@@ -14,11 +14,17 @@
   )
 ));
 
+$fonts: (
+  primary: unquote("Open Sans Condensed, Lato, Helvetica, sans-serif"),
+  secondary: unquote("Lobster Two"),
+  tertiary: unquote("monospace")
+);
+
 $config: (
  border-radius: 6px,
  border-color: color(a, -6),
  color: color(a, 2),
- font-family: unquote("Lato, Helvetica, Arial, sans-serif"),
+ font-family: map-get($fonts, primary),
  font-size: 14px,
  line-height: 1.4em,
  spacing: 1.4em,
