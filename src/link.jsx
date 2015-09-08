@@ -3,23 +3,21 @@ import Base from "./base";
 import Radium from "radium";
 
 @Radium
-class Link extends Base {
+export default class Link extends Base {
+  static propTypes: {
+    children: React.PropTypes.node,
+    href: React.PropTypes.string
+  };
+
+  static contextTypes: {
+    styles: React.PropTypes.object
+  };
+
   render() {
     return (
-      <a href={this.props.href} style={[this.context.styles.components.link, this.getStyles(), this.props.style]}>
+      <a href={this.props.href} style={[this.getStyles(), this.props.style]}>
         {this.props.children}
       </a>
     );
   }
 }
-
-Link.propTypes = {
-  children: React.PropTypes.node,
-  href: React.PropTypes.string
-};
-
-Link.contextTypes = {
-  styles: React.PropTypes.object
-};
-
-export default Link;

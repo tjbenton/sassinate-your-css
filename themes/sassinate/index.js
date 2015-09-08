@@ -19,15 +19,6 @@ module.exports = {
       margin: "auto",
       textAlign: "center"
     },
-    code: {
-      color: "black",
-      fontSize: "2.66em",
-      fontFamily: fonts.tertiary,
-      margin: "0.25em auto",
-      backgroundColor: "rgba(0,0,0,0.15)",
-      padding: "0 10px",
-      borderRadius: 3
-    },
     heading: {
       h1: {
         color: colors.tertiary,
@@ -82,17 +73,6 @@ module.exports = {
     image: {
       display: "block",
       margin: "0.5em auto"
-    },
-    link: {
-      textDecoration: "none"
-    },
-    listItem: {
-      fontSize: "2.66em"
-    },
-    list: {
-      textAlign: "left",
-      listStylePosition: "inside",
-      padding: 0
     },
     s: {
       strikethrough: {}
