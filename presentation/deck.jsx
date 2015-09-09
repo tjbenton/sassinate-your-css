@@ -10,17 +10,23 @@ import preloader from "../src/utils/preloader";
 import Interactive from "./interactive";
 
 const images = {
-  city: require("./city.jpg"),
-  kat: require("./kat.png"),
-  logo: require("./formidable-logo.svg")
-};
+        sass: require("./images/logo_sass.svg"),
+        abstract: require("./images/abstract-bg.jpg")
+      };
 
-preloader([images.city, images.kat]);
+let preloader_images = [];
+for(let item in images){
+  preloader_images.push(images[item]);
+}
+preloader(preloader_images);
 
 export default class extends React.Component {
   render() {
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={800}>
+        <Slide transition={["zoom"]} bgImage={images.abstract}>
+          <Image src={images.sass} margin="0px auto 40px" />
+        </Slide>
         <Slide transition={["zoom"]} bgColor="primary">
           <Heading size={1} fit caps textColor="black">
             Spectacle
@@ -36,8 +42,28 @@ export default class extends React.Component {
           </Link>
           <Text textSize="1.5em" margin="20px 0px 0px" bold>Hit Your Right Arrow To Begin!</Text>
         </Slide>
+
+        <Slide transition={["zoom", "slide"]}>
+          <Heading caps size={1}>What's wrong with css?</Heading>
+          <BlockQuote>
+            <Quote>
+              It's <span>old</span>. It's really old.
+              It <span>can't be changed</span>.
+              It operates in a <span>global namespace</span>.
+              It's based on <span>inheritance</span>.
+              It's very, very <span>loose</span>.
+              <span>Source order</span> is critical.
+              The <span>cascade</span> needs managing.
+              <span>Specificity</span> negates all the above.
+            </Quote>
+            <Cite>Harry Roberts</Cite>
+          </BlockQuote>
+        </Slide>
+
         <Slide transition={['slide']} bgColor="black" notes="You can even put notes on your slide. How awesome is that?">
-          <Image src={images.kat.replace('/','')} margin="0px auto 40px" height="293px"/>
+          {
+            // <Image src={images.kat.replace("/", "")} margin="0px auto 40px" height="293px" />
+          }
           <Heading size={1} fit textColor="primary" textFont="secondary">
             Wait what?
           </Heading>
@@ -48,23 +74,25 @@ export default class extends React.Component {
             source={require("raw!./deck.example")}
             margin="20px auto"/>
         </Slide>
-        <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
-          <Appear fid="1">
-            <Heading size={1} caps fit textColor="primary">
-              Full Width
-            </Heading>
-          </Appear>
-          <Appear fid="2">
-            <Heading size={1} caps fit textColor="tertiary">
-              Adjustable Darkness
-            </Heading>
-          </Appear>
-          <Appear fid="3">
-            <Heading size={1} caps fit textColor="primary">
-              Background Imagery
-            </Heading>
-          </Appear>
-        </Slide>
+        {
+        // <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
+        //   <Appear fid="1">
+        //     <Heading size={1} caps fit textColor="primary">
+        //       Full Width
+        //     </Heading>
+        //   </Appear>
+        //   <Appear fid="2">
+        //     <Heading size={1} caps fit textColor="tertiary">
+        //       Adjustable Darkness
+        //     </Heading>
+        //   </Appear>
+        //   <Appear fid="3">
+        //     <Heading size={1} caps fit textColor="primary">
+        //       Background Imagery
+        //     </Heading>
+        //   </Appear>
+        // </Slide>
+        }
         <Slide transition={["zoom", "fade"]} bgColor="primary">
           <Heading caps fit>Flexible Layouts</Heading>
           <Layout>
