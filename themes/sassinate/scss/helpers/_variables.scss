@@ -2,9 +2,12 @@
 
 @include define-color-set("default", (
   colors: (
-    primary: (0: #c6538c, name: "pink"),
-    secondary: (0: #894082, name: "purple"),
-    tertiary: (0: white, name: "white"),
+    primary: (
+      -1: #808c99, name: "light gray",
+      0: #6b717f, name: "gray"
+    ),
+    secondary: (0: #c69, name: "pink"),
+    tertiary: (0: #699, name: "turqiose"),
     a: (0: #c6538c, name: "pink"),
     b: (0: #178399, name: "blue"),
     c: (0: #894082, name: "purple"),
