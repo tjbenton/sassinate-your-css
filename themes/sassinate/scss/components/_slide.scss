@@ -5,8 +5,26 @@
   margin-top: 0 !important;
   position: absolute;
   top: 0px;
-  transform: translate3d(0%, 0px, 0px);
   transform-origin: center center;
+  transform: translate3d(0%, 0%, 0%);
   width: 100%;
   z-index: 1;
+  @each $color in (primary, secondary, tertiary){
+    &--#{$color}{
+      background: color($color);
+    }
+  }
+
+  &__wrapper{
+    display: flex;
+    flex: 1;
+    position: relative;
+  }
+
+  &__content{
+    flex: 1;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+  }
 }

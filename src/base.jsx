@@ -1,58 +1,58 @@
 /*eslint max-statements:0,complexity:0*/
 import React from "react/addons";
 
-const getStyles = function getStyles() {
+const getStyles = function getStyles(){
   const styles = {};
-  if (this.props.italic) {
+  if(this.props.italic){
     styles.fontStyle = "italic";
   }
-  if (this.props.bold) {
+  if(this.props.bold){
     styles.fontWeight = "bold";
   }
-  if (this.props.caps) {
+  if(this.props.caps){
     styles.textTransform = "uppercase";
   }
-  if (this.props.margin) {
+  if(this.props.margin){
     styles.margin = this.props.margin;
   }
-  if (this.props.padding) {
+  if(this.props.padding){
     styles.padding = this.props.padding;
   }
-  if (this.props.textColor) {
+  if(this.props.textColor){
     let color = "";
-    if (!this.context.styles.colors.hasOwnProperty(this.props.textColor)) {
+    if(!this.context.styles.colors.hasOwnProperty(this.props.textColor)){
       color = this.props.textColor;
     } else {
       color = this.context.styles.colors[this.props.textColor];
     }
     styles.color = color;
   }
-  if (this.props.textFont) {
+  if(this.props.textFont){
     let font = "";
-    if (!this.context.styles.fonts.hasOwnProperty(this.props.textFont)) {
+    if(!this.context.styles.fonts.hasOwnProperty(this.props.textFont)){
       font = this.props.textFont;
     } else {
       font = this.context.styles.fonts[this.props.textFont];
     }
     styles.fontFamily = font;
   }
-  if (this.props.textSize) {
+  if(this.props.textSize){
     styles.fontSize = this.props.textSize;
   }
-  if (this.props.textAlign) {
+  if(this.props.textAlign){
     styles.textAlign = this.props.textAlign;
   }
-  if (this.props.bgColor) {
+  if(this.props.bgColor){
     let color = "";
-    if (!this.context.styles.colors.hasOwnProperty(this.props.bgColor)) {
+    if(!this.context.styles.colors.hasOwnProperty(this.props.bgColor)){
       color = this.props.bgColor;
     } else {
       color = this.context.styles.colors[this.props.bgColor];
     }
     styles.backgroundColor = color;
   }
-  if (this.props.bgImage) {
-    if (this.props.bgDarken) {
+  if(this.props.bgImage){
+    if(this.props.bgDarken){
       styles.backgroundImage =
       "linear-gradient( rgba(0, 0, 0, " + this.props.bgDarken +
         "), rgba(0, 0, 0, " + this.props.bgDarken +
@@ -66,20 +66,23 @@ const getStyles = function getStyles() {
   return styles;
 };
 
+const classNames = function(...rest){
+  let classNames = [];
+  classNames.push(...rest)
+  if(this.props.className){
+    classNames.push(this.props.className.split(" "));
+  }
+  return classNames.filter(Boolean).join(" ");
+}
+
 class Base extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.getStyles = getStyles;
+    this.classNames = classNames;
   }
-  classNames(...rest){
-    let classNames = [];
-    classNames.push(...rest)
-    if(this.props.className){
-      classNames.push(this.props.className.split(" "));
-    }
-    return classNames.filter(Boolean).join(" ");
-  }
-  render() {
+
+  render(){
     return null;
   }
 }
@@ -98,7 +101,8 @@ Base.defaultProps = {
 };
 
 Base.Mixin = {
-  getStyles
+  getStyles,
+  classNames
 };
 
 export default Base;
