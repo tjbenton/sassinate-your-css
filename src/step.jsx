@@ -58,6 +58,7 @@ const Step = React.createClass({
 
     this.props.className && className.push(this.props.className);
 
+    // handles adding the active classes
     if(this.state.active){
       className.push(...[
         "is-active",
@@ -66,9 +67,11 @@ const Step = React.createClass({
       ]);
     }
 
+    // handles the exiting classes
     if(!this.state.active && this.state.was_active){
       className.push(...[
         "is-active",
+        ...(this.props.isInactive || "").split(" "),
         this.props.animateOut ? `u-animate u-animate--${this.props.animateOut}` : ""
       ]);
     }
