@@ -32,6 +32,7 @@ const Step = React.createClass({
     const key = _.findKey(state.fragments[slide], {
       "id": parseInt(fragment.dataset.fid)
     });
+
     if (slide in state.fragments && state.fragments[slide].hasOwnProperty(key)){
       this.setState({
         active: state.fragments[slide][key].visible
@@ -58,11 +59,18 @@ const Step = React.createClass({
     this.props.className && className.push(this.props.className);
 
     if(this.state.active){
-      className.push(...["is-active", ...(this.props.isActive || "").split(" "), this.props.animateIn ? `u-animate u-animate--${this.props.animateIn}` : ""]);
+      className.push(...[
+        "is-active",
+        ...(this.props.isActive || "").split(" "),
+        this.props.animateIn ? `u-animate u-animate--${this.props.animateIn}` : ""
+      ]);
     }
 
     if(!this.state.active && this.state.was_active){
-      className.push(...["is-active", this.props.animateOut ? `u-animate u-animate--${this.props.animateOut}` : ""]);
+      className.push(...[
+        "is-active",
+        this.props.animateOut ? `u-animate u-animate--${this.props.animateOut}` : ""
+      ]);
     }
 
     return (
