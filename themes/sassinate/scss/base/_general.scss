@@ -47,7 +47,7 @@
 //  4. Default iOS settings
 //  5. Enable WP8 fastclick
 html, body{
-  background: color(b);
+  //background: color(b);
   color: map-get($config, color); // 1
   font: #{map-get($config, font-size)}/#{map-get($config, line-height)} get($config, font-family); // 2
   overflow: hidden; // 3

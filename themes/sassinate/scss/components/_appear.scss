@@ -1,0 +1,9 @@
+.c-appear{
+  opacity: 0;
+  &.is-active{
+    opacity: 1;
+  }
+  ul &{
+    display: inline;
+  }
+}

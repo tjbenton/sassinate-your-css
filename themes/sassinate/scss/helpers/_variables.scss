@@ -3,8 +3,9 @@
 @include define-color-set("default", (
   colors: (
     primary: (
-      -1: #808c99, name: "light gray",
-      0: #6b717f, name: "gray"
+      -1: #808c99,
+      0: #6b717f,
+      name: "light gray"
     ),
     secondary: (0: #c69, name: "pink"),
     tertiary: (0: #699, name: "turqiose"),

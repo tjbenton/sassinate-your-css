@@ -1,14 +1,13 @@
 const colors = {
-  // primary: "#f9c300",
-  primary: "blue",
-  secondary: "black",
-  tertiary: "white"
+  primary: "#6b717f",
+  secondary: "#c69",
+  tertiary: "#699"
 };
 
 const fonts = {
-  primary: "Open Sans Condensed",
-  secondary: "Lobster Two",
-  tertiary: "monospace"
+  primary: "Source Sans Pro",
+  secondary: "Source Serif Pro",
+  tertiary: "Source Code Pro"
 };
 
 module.exports = {
@@ -21,7 +20,7 @@ module.exports = {
     },
     heading: {
       h1: {
-        color: colors.tertiary,
+        color: colors.primary,
         fontSize: "7.05em",
         fontFamily: fonts.primary,
         lineHeight: 1,
@@ -32,13 +31,13 @@ module.exports = {
       h2: {
         color: colors.secondary,
         fontSize: "5.88em",
-        fontFamily: fonts.primary,
+        fontFamily: fonts.secondary,
         lineHeight: 1,
         fontWeight: "bold",
         margin: 0
       },
       h3: {
-        color: "black",
+        color: colors.primary,
         fontSize: "4.9em",
         fontFamily: fonts.secondary,
         lineHeight: 1,
@@ -46,7 +45,7 @@ module.exports = {
         margin: "0.5em auto"
       },
       h4: {
-        color: "black",
+        color: colors.primary,
         fontSize: "3.82em",
         fontFamily: fonts.primary,
         lineHeight: 1,
@@ -54,7 +53,7 @@ module.exports = {
         margin: "0.5em auto"
       },
       h5: {
-        color: "black",
+        color: colors.secondary,
         fontSize: "3.19em",
         fontFamily: fonts.primary,
         lineHeight: 1,
@@ -62,7 +61,7 @@ module.exports = {
         margin: "0.5em auto"
       },
       h6: {
-        color: "black",
+        color: colors.secondary,
         fontSize: "2.66em",
         fontFamily: fonts.primary,
         lineHeight: 1,
