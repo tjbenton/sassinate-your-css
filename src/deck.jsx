@@ -71,6 +71,7 @@ class Deck extends React.Component {
   }
   _togglePresenterMode() {
     const suffix = this.context.presenter ? "" : "?presenter";
+
     this.context.router.replaceWith("/" + (this.context.slide) + suffix);
   }
   _getSuffix() {
@@ -264,6 +265,15 @@ class Deck extends React.Component {
       transitionDuration: child.props.transition.transitionDuration ? child.props.transitionDuration : this.props.transitionDuration
     });
   }
+  classState(current){
+    let body = document.body,
+        classes = ["presenter", "overview", "export", "default"];
+    if(!body.classList.contains(`t-${current}`)){
+      for(let [i, item] of classes.entries()){
+        body.classList[item !== current ? "remove" : "add"](`t-${item}`);
+      }
+    }
+  }
   render() {
     const globals = this.context.export ? {
       body: assign(this.context.styles.global.body, {
@@ -275,16 +285,20 @@ class Deck extends React.Component {
 
     let componentToRender;
     if (this.context.presenter) {
+      this.classState("presenter");
       componentToRender = (
         <Presenter slides={this.props.children}
                    slide={this.context.slide}
                    lastSlide={this.state.lastSlide} />
       );
     } else if (this.context.export) {
+      this.classState("export");
       componentToRender = <Export slides={this.props.children} />;
     } else if (this.context.overview) {
+      this.classState("overview");
       componentToRender = <Overview slides={this.props.children} slide={this.context.slide} />;
     } else {
+      this.classState("default");
       componentToRender = (
         <TransitionGroup component="div" className="u-transition-group">
           {this._renderSlide()}
