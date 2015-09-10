@@ -85,101 +85,23 @@ class Presenter extends Base {
     return notes;
   }
   render() {
-    const styles = {
-      presenter: {
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flex: 1,
-        flexDirection: "column"
-      },
-      header: {
-        position: "absolute",
-        display: "block",
-        color: "white",
-        width: "100%",
-        height: "20%",
-        textAlign: "center",
-        padding: "20px 50px"
-      },
-      slideInfo: {
-        position: "relative",
-        top: "50%",
-        transform: "translateY(-50%)",
-        float: "left",
-        margin: 0,
-        lineHeight: 1,
-        display: "inline-block",
-        fontSize: 28
-      },
-      clock: {
-        position: "relative",
-        top: "50%",
-        transform: "translateY(-50%)",
-        float: "right",
-        margin: 0,
-        lineHeight: 1,
-        display: "inline-block",
-        fontSize: 28
-      },
-      preview: {
-        display: "flex",
-        width: "100%",
-        height: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1
-      },
-      main: {
-        display: "inline-block",
-        width: "50%",
-        height: "60%",
-        border: "2px solid white",
-        padding: 20,
-        margin: 20,
-        position: "relative"
-      },
-      next: {
-        display: "inline-block",
-        width: "40%",
-        height: "50%",
-        border: "2px solid white",
-        padding: 20,
-        margin: 20,
-        position: "relative",
-        color: "white"
-      },
-      notes: {
-        background: "black",
-        position: "absolute",
-        display: "block",
-        color: "white",
-        width: "100%",
-        height: "20%",
-        bottom: "0px",
-        textAlign: "left",
-        padding: "20px 50px",
-        columnCount: "2",
-        fontSize: "0.8em"
-      }
-    };
     return (
-      <div className="c-presenter" style={[styles.presenter]}>
-        <div style={styles.header}>
-          <h2 style={styles.slideInfo}>
+      <div className="c-presenter">
+        <div className="c-presenter__header">
+          <h2 className="c-presenter__info">
             Slide {this.props.slide + 1} of {this.props.slides.length}
           </h2>
-          <h2 style={styles.clock}>{this.state.time}</h2>
+          <h2 className="c-presenter__clock">{this.state.time}</h2>
         </div>
-        <div style={styles.preview}>
-          <div className="c-presenter__main js-presentor-main" style={[styles.main]}>
+        <div className="c-presenter__preview">
+          <div className="c-presenter__main js-presentor-main">
             {this._renderMainSlide()}
           </div>
-          <div className="c-presentor__next spectacle-presenter-next" style={[styles.next]}>
+          <div className="c-presenter__next">
             {this._renderNextSlide()}
           </div>
         </div>
-        <div className="c-presenter__notes" style={[styles.notes]}>
+        <div className="c-presenter__notes">
           {this._renderNotes()}
         </div>
       </div>
