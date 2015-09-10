@@ -164,7 +164,7 @@ class Presenter extends Base {
       }
     };
     return (
-      <div className="s-presenter c-presenter" style={[styles.presenter]}>
+      <div className="c-presenter" style={[styles.presenter]}>
         <div style={styles.header}>
           <h2 style={styles.slideInfo}>
             Slide {this.props.slide + 1} of {this.props.slides.length}

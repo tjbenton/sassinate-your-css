@@ -1,0 +1,11 @@
+.c-notes{
+  display: none;
+  text-align: left;
+  .c-notes__note{
+
+  }
+
+  .is-presenter &{
+    display: block;
+  }
+}
