@@ -8,13 +8,7 @@
       name: "light gray"
     ),
     secondary: (0: #c69, name: "pink"),
-    tertiary: (0: #699, name: "turqiose"),
-    a: (0: #c6538c, name: "pink"),
-    b: (0: #178399, name: "blue"),
-    c: (0: #894082, name: "purple"),
-    d: (0: #2a7137, name: "green"),
-    e: (0: #d44029, name: "red"),
-    f: (0: #ec6c21, name: "orange")
+    tertiary: (0: #699, name: "turqiose")
   )
 ));
 
@@ -26,8 +20,8 @@ $fonts: (
 
 $config: (
  border-radius: 6px,
- border-color: color(a, -6),
- color: color(a, 2),
+ border-color: color(primary, -6),
+ color: color(primary, 2),
  font-family: map-get($fonts, primary),
  font-size: 14px,
  line-height: 1.4em,

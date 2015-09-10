@@ -14,7 +14,7 @@
 // <h5>Heading 5</h5>
 // <h6>Heading 6</h6>
 h1, h2, h3, h4, h5, h6{
- color: color(a, 3);
+ color: color(primary, 3);
  display: block;
  font-size: 1em;
  font-weight: 600;
@@ -33,32 +33,32 @@ h2, h4, h5{
  font-weight: 200;
 }
 
-h1, h4{
- color: color(b, 0);
+h2, h3{
+  font-family: "Source Serif Pro";
 }
 
-h2, h5{
- color: color(c, 0);
+h2, h5, h6{
+ color: color(secondary, 0);
 }
 
 h1{
- font-size: em(50px); // 29px
+ font-size: em(50px);
 }
 
 h2{
- font-size: em(40px); // 26.25px
+ font-size: em(40px);
 }
 
 h3{
- font-size: em(28px); // 24.5px
+ font-size: em(28px);
 }
 
 h4{
- font-size: em(24px); // 21.75px
+ font-size: em(24px);
 }
 
 h5{
- font-size: em(18px); // 17.5px
+ font-size: em(18px);
 }
 
 
@@ -71,16 +71,16 @@ h5{
 // @markup
 // <a href="#">Link</a>
 a, p a{
- color: color(b, 0);
+ color: color(secondary, 0);
  text-decoration: none;
  &:hover, &:active, &:focus{
   text-decoration: underline;
  }
  &:hover{
-  color: color(b, -2);
+  color: color(secondary, -2);
  }
  &:active, &:focus{
-  color: color(b, 2);
+  color: color(secondary, 2);
  }
 }
 
