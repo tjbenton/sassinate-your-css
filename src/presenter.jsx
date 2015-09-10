@@ -74,8 +74,15 @@ class Presenter extends Base {
   }
   _renderNotes() {
     const child = this.props.slides[this.props.slide];
-    if (!child.props.notes) { return false; }
-    return <div dangerouslySetInnerHTML={{__html: child.props.notes}} />;
+    let notes = []
+    React.Children.forEach(child.props.children, (obj) => {
+      console.log(obj.type.displayName);
+      if(obj.type.displayName === "Notes"){
+        notes.push(obj);
+      }
+    });
+
+    return notes;
   }
   render() {
     const styles = {
@@ -143,6 +150,7 @@ class Presenter extends Base {
         color: "white"
       },
       notes: {
+        background: "black",
         position: "absolute",
         display: "block",
         color: "white",
@@ -156,7 +164,7 @@ class Presenter extends Base {
       }
     };
     return (
-      <div className="spectacle-presenter" style={[styles.presenter]}>
+      <div className="s-presenter c-presenter spectacle-presenter" style={[styles.presenter]}>
         <div style={styles.header}>
           <h2 style={styles.slideInfo}>
             Slide {this.props.slide + 1} of {this.props.slides.length}
@@ -171,7 +179,7 @@ class Presenter extends Base {
             {this._renderNextSlide()}
           </div>
         </div>
-        <div className="spectacle-presenter-notes" style={[styles.notes]}>
+        <div className="c-presenter__notes" style={[styles.notes]}>
           {this._renderNotes()}
         </div>
       </div>

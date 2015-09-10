@@ -1,7 +1,6 @@
-import Step from "./step";
 import BlockQuote, {Quote, Cite} from "./block-quote";
-import CodePane from "./code-pane";
 import Code from "./code";
+import CodePane from "./code-pane";
 import Deck from "./deck";
 import Fill from "./fill";
 import Fit from "./fit";
@@ -12,7 +11,9 @@ import Link from "./link";
 import List, {ListItem} from "./list";
 import S from "./s";
 import Slide from "./slide";
+import Step from "./step";
 import Text from "./text";
+import Notes from "./notes";
 
 export {
   BlockQuote,
@@ -28,6 +29,7 @@ export {
   Link,
   List,
   ListItem,
+  Notes,
   Quote,
   S,
   Slide,

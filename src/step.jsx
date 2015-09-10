@@ -52,7 +52,7 @@ const Step = React.createClass({
     }
   },
   render(){
-    let className = ["c-appear", "fragment"];
+    let className = ["c-step", "fragment"];
 
     this.props.className && className.push(this.props.className);
 

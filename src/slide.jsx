@@ -89,6 +89,8 @@ const Slide = React.createClass({
         padding: this.state.zoom > 0.6 ? config.margin : 10
       }
     };
+
+
     return (
       <div
         className={this.classNames("c-slide")}
