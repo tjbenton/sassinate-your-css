@@ -14,6 +14,7 @@ import {
   List,
   ListItem,
   Notes,
+  Note,
   Quote,
   Slide,
   Step,
@@ -59,10 +60,8 @@ export default class extends React.Component {
          <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out"><Heading fit size={5}>CSS preprocessor</Heading></Step>
          <Step fid="2" animateIn="bounce-in-right" animateOut="bounce-out"><Heading fit size={5}>Syntactically Awesome Stylesheets</Heading></Step>
          <Notes>
-           <ul>
-             <li><Step>CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</Step></li>
-             <li><Step>Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Step></li>
-           </ul>
+           <Note step="1">CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</Note>
+           <Note step="2">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
         {/*

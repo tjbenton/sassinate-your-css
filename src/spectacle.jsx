@@ -9,11 +9,12 @@ import Image from "./image";
 import Layout from "./layout";
 import Link from "./link";
 import List, {ListItem} from "./list";
+import Notes from "./notes";
+import Note from "./note";
 import S from "./s";
 import Slide from "./slide";
 import Step from "./step";
 import Text from "./text";
-import Notes from "./notes";
 
 export {
   BlockQuote,
@@ -29,6 +30,7 @@ export {
   Link,
   List,
   ListItem,
+  Note,
   Notes,
   Quote,
   S,

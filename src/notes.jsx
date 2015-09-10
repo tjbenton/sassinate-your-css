@@ -9,9 +9,9 @@ export default class Notes extends Base {
   };
   render() {
     return (
-      <div refs="notes" className={this.classNames("s-notes")} style={[this.props.style]}>
+      <ul refs="notes" className={this.classNames("c-notes")} style={[this.props.style]}>
         {this.props.children}
-      </div>
+      </ul>
     );
   }
-}
+};
