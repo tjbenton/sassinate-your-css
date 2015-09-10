@@ -54,30 +54,38 @@ const Step = React.createClass({
     }
   },
   render(){
-    let className = ["c-step", "js-step"];
+    let classes = ["c-step", "js-step"],
+        {
+          className,
+          isActive,
+          isInactive,
+          animateIn,
+          animateOut
+        } = this.props;
 
-    this.props.className && className.push(this.props.className);
+    // adds any passes classes
+    className && classes.push(...className.split(" "));
 
     // handles adding the active classes
     if(this.state.active){
-      className.push(...[
+      classes.push(...[
         "is-active",
-        ...(this.props.isActive || "").split(" "),
-        this.props.animateIn ? `u-animate u-animate--${this.props.animateIn}` : ""
+        ...(isActive || "").split(" "),
+        animateIn ? `u-animate u-animate--${animateIn}` : ""
       ]);
     }
 
     // handles the exiting classes
     if(!this.state.active && this.state.was_active){
-      className.push(...[
+      classes.push(...[
         "is-active",
-        ...(this.props.isInactive || "").split(" "),
-        this.props.animateOut ? `u-animate u-animate--${this.props.animateOut}` : ""
+        ...(isInactive || "").split(" "),
+        animateOut ? `u-animate u-animate--${animateOut}` : ""
       ]);
     }
 
     return (
-      <div className={className.join(" ")} ref="fragment">
+      <div className={classes.filter(Boolean).join(" ")} ref="fragment">
         {this.props.children}
       </div>
     );
