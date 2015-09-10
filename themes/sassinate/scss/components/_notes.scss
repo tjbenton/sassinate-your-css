@@ -1,8 +1,20 @@
 .c-notes{
+  background: color(primary, 5);
   display: none;
+  height: 100%;
+  list-style: none outside none;
+  margin: 0;
+  padding: map-get($config, spacing);
+  position: absolute;
   text-align: left;
-  .c-notes__note{
+  width: 100%;
 
+  .c-notes__note{
+    color: color(primary, -6);
+    &.is-active{
+      color: color(primary, -11);
+      font-size: 1.3em;
+    }
   }
 
   .t-presenter .c-presenter__notes &{

@@ -52,7 +52,7 @@ const Note = React.createClass({
     }
   },
   render(){
-    let classes = ["c-note"],
+    let classes = ["c-notes__note"],
         {
           className,
           isActive,
