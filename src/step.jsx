@@ -36,7 +36,8 @@ const Step = React.createClass({
       this.setState({
         active: state.fragments[slide][key].visible
       }, () => {
-        let endVal = this.state.active ? 1 : 0;
+        let endVal = this.state.active ? 1 : 0,
+            node = this.getDOMNode();
         if(this.context.export || this.context.overview){
           endVal = 1;
         }
@@ -45,14 +46,14 @@ const Step = React.createClass({
               this.setState({
                 was_active: state.fragments[slide][key].visible
               });
-              this.getDOMNode().removeEventListener("animationend", handler);
+              node.removeEventListener("animationend", handler);
             };
-        this.getDOMNode().addEventListener("animationend", handler);
+        node.addEventListener("animationend", handler);
       });
     }
   },
   render(){
-    let className = ["c-step", "fragment"];
+    let className = ["c-step", "js-step"];
 
     this.props.className && className.push(this.props.className);
 

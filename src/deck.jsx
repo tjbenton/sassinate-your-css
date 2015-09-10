@@ -131,9 +131,10 @@ class Deck extends React.Component {
     const fragments = store.getState().fragments;
     // Not proud of this at all. 0.14 Parent based contexts will fix this.
     if (this.context.presenter) {
-      const main = document.querySelector(".spectacle-presenter-main");
+      const main = document.querySelector(".js-presentor-main");
       if (main) {
-        const frags = main.querySelectorAll(".fragment");
+        // const frags = main.querySelectorAll(".fragment");
+        const frags = main.querySelectorAll(".js-step");
         if (!frags.length) {
           return true;
         }

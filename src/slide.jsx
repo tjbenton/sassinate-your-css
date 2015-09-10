@@ -51,7 +51,7 @@ const Slide = React.createClass({
   componentDidMount(){
     this.setZoom();
     const slide = React.findDOMNode(this.refs.slide);
-    const frags = slide.querySelectorAll(".fragment");
+    const frags = slide.querySelectorAll(".js-step");
     if(frags && frags.length){
       Array.prototype.slice.call(frags, 0).forEach((frag, i) => {
         frag.dataset.fid = i;
