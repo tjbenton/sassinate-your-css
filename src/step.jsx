@@ -2,7 +2,7 @@ import React from "react/addons";
 import tweenState from "react-tween-state";
 import _ from "lodash";
 
-const Appear = React.createClass({
+const Step = React.createClass({
   // mixins: [tweenState.Mixin],
   propTypes: {
     children: React.PropTypes.node
@@ -72,4 +72,4 @@ const Appear = React.createClass({
   }
 });
 
-export default Appear;
+export default Step;

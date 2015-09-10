@@ -1,4 +1,4 @@
-import Appear from "./appear";
+import Step from "./step";
 import BlockQuote, {Quote, Cite} from "./block-quote";
 import CodePane from "./code-pane";
 import Code from "./code";
@@ -15,11 +15,10 @@ import Slide from "./slide";
 import Text from "./text";
 
 export {
-  Appear,
   BlockQuote,
   Cite,
-  CodePane,
   Code,
+  CodePane,
   Deck,
   Fill,
   Fit,
@@ -27,10 +26,11 @@ export {
   Image,
   Layout,
   Link,
-  ListItem,
   List,
+  ListItem,
   Quote,
   S,
   Slide,
+  Step,
   Text
 };

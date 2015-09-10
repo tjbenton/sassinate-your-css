@@ -1,7 +1,7 @@
 import React from "react/addons";
 
 import {
-  Appear, BlockQuote, Cite, CodePane, Deck, Fill,
+  Step, BlockQuote, Cite, CodePane, Deck, Fill,
   Heading, Image, Layout, Link, ListItem, List, Quote, Slide, Text
 } from "../src/spectacle";
 
@@ -24,11 +24,78 @@ export default class extends React.Component {
   render() {
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={800}>
-        <Slide transition={["zoom"]} bgImage={images.abstract}>
+        <Slide transition={["zoom"]} bgImage={images.abstract} bgLighten=".5">
           <Image src={images.sass} margin="0px auto 40px" />
+          {/*
+            Sassinate your CSS
+          */}
         </Slide>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps textColor="black">
+
+        <Slide bgImage={images.abstract} bgLighten=".5">
+          <Heading size={1} fit caps>
+            About me
+          </Heading>
+          <Text>
+            Some awesome info about me
+          </Text>
+        </Slide>
+        <Slide notes={`
+                <ul>
+                  <li>CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</li>
+                  <li>Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</li>
+                </ul>
+              `}>
+         <Heading fit size={1}>What is SASS?</Heading>
+         <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out"><Heading fit size={5}>CSS preprocessor</Heading></Step>
+         <Step fid="2" animateIn="bounce-in-right" animateOut="bounce-out"><Heading fit size={5}>Syntactically Awesome Stylesheets</Heading></Step>
+        </Slide>
+        {/*
+            - It's a CSS pre-processor
+        - There're 2 different filetypes for 2 different writing styles
+            - `.sass` which is indention based
+            - `.scss` which looks a lot more like regular CSS
+        - What can SASS do that CSS can't?
+            - Nesting
+            - Variables
+            - Mixins
+            - Functions
+            - Conditionals
+            - Loops
+            - It allows you to write highly organized CSS with partials.
+        - Easy ways to get started today with a project setup
+            - Codepen.io
+            - Sassmiester.com
+        - Does it work with node?
+            - Yes
+            - Libsass is a port of SASS to work with js build tools
+            - Plugins are available for all build tools
+                - Npm
+                - Fly
+                - Gulp
+                - Grunt
+                - Brunch
+                - And more..
+        - Let's get started!
+        - Show picture of what we're going to be building
+            - Ideas on what to build
+                - A Google Card
+                    - Leaning towards this because it's simple but complex
+                    - General layout
+                    - Buttons
+                    - Animations
+                    - Typography
+                    - Can show off the power of `@extend`
+                - The sassinate entrance(if it's awesome)
+        - Start with the folder structure of the project
+        - Show first example that uses plain CSS to show that you can right normal CSS in SASS(a good example could be buttons)
+        - For first showcase show nesting :mind-blown
+        - Then go back and refactor it to allow for more flexibility.
+                - Add a `$config`
+                - Add `em` function
+                - Add `color` function(don't go into detail about it yet though
+        */}
+        <Slide transition={["zoom"]} bgColor="white">
+          <Heading size={1} fit caps>
             Spectacle
           </Heading>
           <Heading size={1} fit caps margin="-20px 0px">
@@ -44,8 +111,8 @@ export default class extends React.Component {
         </Slide>
 
         <Slide transition={["zoom", "slide"]}>
-          <Heading caps size={1}>What's wrong with css?</Heading>
-          <BlockQuote>
+          <Heading fit caps size={1}>What's wrong with css?</Heading>
+          <BlockQuote fit>
             <Quote>
               It's <span>old</span>. It's really old.
               It <span>can't be changed</span>.
@@ -76,21 +143,21 @@ export default class extends React.Component {
         </Slide>
         {
         // <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
-        //   <Appear fid="1">
+        //   <Step fid="1">
         //     <Heading size={1} caps fit textColor="primary">
         //       Full Width
         //     </Heading>
-        //   </Appear>
-        //   <Appear fid="2">
+        //   </Step>
+        //   <Step fid="2">
         //     <Heading size={1} caps fit textColor="tertiary">
         //       Adjustable Darkness
         //     </Heading>
-        //   </Appear>
-        //   <Appear fid="3">
+        //   </Step>
+        //   <Step fid="3">
         //     <Heading size={1} caps fit textColor="primary">
         //       Background Imagery
         //     </Heading>
-        //   </Appear>
+        //   </Step>
         // </Slide>
         }
         <Slide transition={["zoom", "fade"]} bgColor="primary">
@@ -124,12 +191,12 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <List>
-            <ListItem><Appear fid="1">Inline style based theme system</Appear></ListItem>
-            <ListItem><Appear fid="2">Autofit text</Appear></ListItem>
-            <ListItem><Appear fid="3">Flexbox layout system</Appear></ListItem>
-            <ListItem><Appear fid="4">React-Router navigation</Appear></ListItem>
-            <ListItem><Appear fid="5">PDF export</Appear></ListItem>
-            <ListItem><Appear fid="6">And...</Appear></ListItem>
+            <ListItem><Step fid="1">Inline style based theme system</Step></ListItem>
+            <ListItem><Step fid="2">Autofit text</Step></ListItem>
+            <ListItem><Step fid="3">Flexbox layout system</Step></ListItem>
+            <ListItem><Step fid="4">React-Router navigation</Step></ListItem>
+            <ListItem><Step fid="5">PDF export</Step></ListItem>
+            <ListItem><Step fid="6">And...</Step></ListItem>
           </List>
         </Slide>
         <Slide transition={["slide"]} bgColor="primary">
