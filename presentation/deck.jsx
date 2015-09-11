@@ -7,6 +7,7 @@ import {
   Code,
   Deck,
   Fill,
+  Fit,
   Heading,
   Image,
   Layout,
