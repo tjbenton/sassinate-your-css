@@ -65,8 +65,51 @@ export default class extends React.Component {
            <Note step="2">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
+        <Slide>
+          <Heading size={1}>There're 2 different filetypes</Heading>
+          <Layout>
+            <CodePane fill lang="stylus">
+              {`
+              nav
+                ul
+                  margin: 0
+                  padding: 0
+                  list-style: none
+
+                li
+                  display: inline-block
+
+                a
+                  display: block
+                  padding: 6px 12px
+                  text-decoration: none
+              `}
+            </CodePane>
+            <CodePane fill lang="scss" style="margin-top: 0;">
+              {`
+                nav{
+                  ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+
+                  li{
+                    display: inline-block;
+                  }
+
+                  a{
+                    display: block;
+                    padding: 6px 12px;
+                    text-decoration: none;
+                  }
+                }
+              `}
+            </CodePane>
+          </Layout>
+        </Slide>
         {/*
-        - There're 2 different filetypes for 2 different writing styles
+        -
             - `.sass` which is indention based
             - `.scss` which looks a lot more like regular CSS
         - What can SASS do that CSS can't?
