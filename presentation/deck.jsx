@@ -65,7 +65,6 @@ export default class extends React.Component {
          </Notes>
         </Slide>
         {/*
-            - It's a CSS pre-processor
         - There're 2 different filetypes for 2 different writing styles
             - `.sass` which is indention based
             - `.scss` which looks a lot more like regular CSS

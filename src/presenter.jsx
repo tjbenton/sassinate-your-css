@@ -93,11 +93,15 @@ class Presenter extends Base {
           <h2 className="c-presenter__clock">{this.state.time}</h2>
         </div>
         <div className="c-presenter__preview">
-          <div className="c-presenter__main js-presentor-main">
-            {this._renderMainSlide()}
+          <div className="c-presenter__main o-10:7 js-presentor-main">
+            <div className="o-10:7__container">
+              {this._renderMainSlide()}
+            </div>
           </div>
-          <div className="c-presenter__next">
-            {this._renderNextSlide()}
+          <div className="c-presenter__next o-10:7">
+            <div className="o-10:7__container">
+              {this._renderNextSlide()}
+            </div>
           </div>
         </div>
         <div className="c-presenter__notes">
