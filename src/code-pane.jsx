@@ -20,7 +20,7 @@ class CodePane extends Base {
     source: React.PropTypes.string
   };
   createMarkup() {
-    const markup = highlight.highlight(this.props.lang, this.props.source);
+    const markup = highlight.highlight(this.props.lang, this.props.source ? this.props.source : this.props.children);
     return {
       __html: markup.value
     };
