@@ -19,18 +19,27 @@ class CodePane extends Base {
     lang: React.PropTypes.string,
     source: React.PropTypes.string
   };
-  createMarkup() {
-    let code = this.props.source ? this.props.source : this.props.children,
-        markup = highlight.highlight(this.props.lang === "sass" ? "stylus" : this.props.lang, normalize(code));
+  getMarkup() {
+    let {lang, source, children} = this.props;
+
+    lang = lang === "sass" ? "stylus" : lang === "js" ? "javascript" : lang;
 
     return {
-      __html: markup.value
+      code: {
+        __html: highlight.highlight(lang, normalize(source ? source : children)).value
+      },
+      lang
     };
   }
   render() {
+    let markup = this.getMarkup(),
+        lang = markup.lang;
+    if(["less", "sass", "scss", "stylus"].indexOf(lang) >= 0){
+      lang += " css";
+    }
     return (
       <pre className={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
-        <code className="hljs c-code-pane__code" dangerouslySetInnerHTML={this.createMarkup()} />
+        <code className={`c-code-pane__code hljs ${lang}`} dangerouslySetInnerHTML={markup.code} />
       </pre>
     );
   }

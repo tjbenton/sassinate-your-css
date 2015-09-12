@@ -104,7 +104,7 @@ class Presenter extends Base {
             </div>
           </div>
         </div>
-        <div className="c-presenter__notes">
+        <div className="c-presenter__notes t-secondary">
           {this._renderNotes()}
         </div>
       </div>
