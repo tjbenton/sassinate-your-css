@@ -66,46 +66,58 @@ export default class extends React.Component {
          </Notes>
         </Slide>
         <Slide>
-          <Heading size={1}>There're 2 different filetypes</Heading>
+          <Heading size={1}>Filetypes</Heading>
           <Layout>
-            <CodePane fill lang="stylus">
-              {`
-              nav
-                ul
-                  margin: 0
-                  padding: 0
-                  list-style: none
+            <Fill>
+              <Heading size={5}>SASS</Heading>
+              <CodePane lang="sass">
+                {`
+                nav
+                  ul
+                    margin: 0
+                    padding: 0
+                    list-style: none
 
-                li
-                  display: inline-block
+                  li
+                    display: inline-block
 
-                a
-                  display: block
-                  padding: 6px 12px
-                  text-decoration: none
-              `}
-            </CodePane>
-            <CodePane fill lang="scss" style="margin-top: 0;">
-              {`
-                nav{
-                  ul{
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
+                  a
+                    display: block
+                    padding: 6px 12px
+                    text-decoration: none
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <Heading size={5}>SCSS</Heading>
+              <CodePane lang="scss">
+                {`
+                  nav{
+                    ul{
+                      margin: 0;
+                      padding: 0;
+                      list-style: none;
+                    }
+
+                    li{
+                      display: inline-block;
+                    }
+
+                    a{
+                      display: block;
+                      padding: 6px 12px;
+                      text-decoration: none;
+                    }
                   }
-
-                  li{
-                    display: inline-block;
-                  }
-
-                  a{
-                    display: block;
-                    padding: 6px 12px;
-                    text-decoration: none;
-                  }
-                }
-              `}
-            </CodePane>
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note><Code>.sass</Code> which is indention based</Note>
+            <Note><Code>.scss</Code> which looks a lot more like regular CSS</Note>
+          </Notes>
+        </Slide>
           </Layout>
         </Slide>
         {/*
