@@ -5,33 +5,36 @@
 ///  2. Resets the `box-model` to what it should have been.
 ///  3. Removes margin from all elements, because default margin sucks.
 ///  4. Removes the `outline` from all elements.
-///  5. The pseudo elements inherit it's parent box-sizing style.
+///  5. This is to reset the line height for all elements to match the base line-height
+///     so that when an elements font-size changes it's line-height changes proportionally
+///  6. The pseudo elements inherit it's parent box-sizing style.
 ///     This makes it easy to change if needed.
-///  6. Pseudo elements are absolutely positioned by default since
+///  7. Pseudo elements are absolutely positioned by default since
 ///     absolutely positioned pseudo elements out number relatively
 ///     positioned pseudo elements.
-///  7. This should reduce the bloat of declaring vertical spacing
+///  8. This should reduce the bloat of declaring vertical spacing
 ///     on every single element/component.
-///  8. Resets the root elements to not have a margin.
+///  9. Resets the root elements to not have a margin.
 *{
   border-color: inherit; // 1
   box-sizing: border-box; // 2
   margin: 0; // 3
   outline: none; // 4
+  line-height: map-get($config, line-height); // 5
   &:after, &:before{
-    box-sizing: inherit; // 5
-    position: absolute; // 6
+    box-sizing: inherit; // 6
+    position: absolute; // 7
   }
 
   &#{$not-hidden} ~ &{
-    margin-top: 1em; // 7
+    margin-top: 1em; // 8
   }
 }
 
 :root{
  &, & body{
   > * ~ *{
-   margin-top: 0; // 8
+   margin-top: 0; // 9
   }
  }
 }
