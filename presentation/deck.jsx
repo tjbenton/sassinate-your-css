@@ -118,23 +118,34 @@ export default class extends React.Component {
             <Note><Code>.scss</Code> which looks a lot more like regular CSS</Note>
           </Notes>
         </Slide>
+        <Slide>
+          <Heading size={4}>What can SASS do that CSS can't?</Heading>
+          <List style={{
+              columnCount: 2
+            }}>
+            <ListItem><Step fid="1">Nesting</Step></ListItem>
+            <ListItem><Step fid="2">Variables</Step></ListItem>
+            <ListItem><Step fid="3">Mixins</Step></ListItem>
+            <ListItem><Step fid="4">Functions</Step></ListItem>
+            <ListItem><Step fid="5">Conditionals</Step></ListItem>
+            <ListItem><Step fid="6">Loops</Step></ListItem>
+            <ListItem><Step fid="7">It allows you to write highly organized CSS with partials</Step></ListItem>
+          </List>
+        </Slide>
+        <Slide>
+          <Heading size={4}>Not sure if you'll like it?</Heading>
+          <Layout>
+            <Fill>
+              <Heading size={6}><Link href="http://codepen.io/">Codepen.io</Link></Heading>
+              Insert screenshot
+            </Fill>
+            <Fill>
+              <Heading size={6}><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
+              Insert screenshot
+            </Fill>
           </Layout>
         </Slide>
         {/*
-        -
-            - `.sass` which is indention based
-            - `.scss` which looks a lot more like regular CSS
-        - What can SASS do that CSS can't?
-            - Nesting
-            - Variables
-            - Mixins
-            - Functions
-            - Conditionals
-            - Loops
-            - It allows you to write highly organized CSS with partials.
-        - Easy ways to get started today with a project setup
-            - Codepen.io
-            - Sassmiester.com
         - Does it work with node?
             - Yes
             - Libsass is a port of SASS to work with js build tools
