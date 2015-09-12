@@ -20,14 +20,16 @@ class CodePane extends Base {
     source: React.PropTypes.string
   };
   createMarkup() {
-    const markup = highlight.highlight(this.props.lang, this.props.source ? this.props.source : this.props.children);
+    let code = this.props.source ? this.props.source : this.props.children,
+        markup = highlight.highlight(this.props.lang === "sass" ? "stylus" : this.props.lang, normalize(code));
+
     return {
       __html: markup.value
     };
   }
   render() {
     return (
-      <pre clasName={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
+      <pre className={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
         <code className="hljs c-code-pane__code" dangerouslySetInnerHTML={this.createMarkup()} />
       </pre>
     );
@@ -35,3 +37,24 @@ class CodePane extends Base {
 }
 
 export default CodePane;
+
+
+function normalize(content){
+  content = content.replace(/(?:\\[rn]+)+/g, "\n").split("\n"); // fix stupid shit windows does and then convert it to an array of lines
+  // remove lines from the beggining
+  for(let i = 0; i++ && content[i].length === 0;){
+    content.shift();
+  };
+
+  // remove trailing blank lines
+  for(let i = content.length; i-- && content[i].length === 0;){
+    content.pop();
+  };
+
+  return content.map(line => line.slice(
+           content.join("\n") // converts content to string to string
+             .match(/^\s*/gm) // gets the extra whitespace at the beginning of the line and returns a map of the spaces
+             .sort((a, b) => a.length - b.length)[0].length // sorts the spaces array from smallest to largest and then checks returns the length of the first item in the array
+         )) // remove extra whitespace from the beginning of each line
+         .join("\n").replace(/[^\S\r\n]+$/gm, ""); // convert to string and remove all trailing white spaces
+}
