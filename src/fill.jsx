@@ -3,20 +3,17 @@ import Radium from "radium";
 
 @Radium
 class Fill extends React.Component {
+  static propTypes: {
+    children: React.PropTypes.node
+  };
   render() {
-    const styles = {
-      flex: 1
-    };
     return (
-      <div className="u-fill" style={[styles, this.props.style]}>
+      <div className="u-fill">
         {this.props.children}
       </div>
     );
   }
 }
 
-Fill.propTypes = {
-  children: React.PropTypes.node
-};
 
 export default Fill;
