@@ -56,7 +56,7 @@ export default class extends React.Component {
             Some awesome info about me
           </Text>
         </Slide>
-        <Slide>
+        <Slide transition={["slide"]}>
          <Heading fit size={1}>What is SASS?</Heading>
          <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out"><Heading fit size={5}>CSS preprocessor</Heading></Step>
          <Step fid="2" animateIn="bounce-in-right" animateOut="bounce-out"><Heading fit size={5}><Link href="http://sass-lang.com/">Syntactically Awesome Stylesheets</Link></Heading></Step>
@@ -65,7 +65,7 @@ export default class extends React.Component {
            <Note step="2">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
-        <Slide>
+        <Slide transition={["zoom"]}>
           <Heading size={1}>Filetypes</Heading>
           <Layout>
             <Fill>
@@ -118,7 +118,7 @@ export default class extends React.Component {
             <Note><Code>.scss</Code> which looks a lot more like regular CSS</Note>
           </Notes>
         </Slide>
-        <Slide>
+        <Slide transition={["zoom", "slide"]}>
           <Heading size={4}>What can SASS do that CSS can't?</Heading>
           <List style={{
               columnCount: 2
@@ -145,18 +145,27 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
+        <Slide>
+          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
+          - Yes
+          - Libsass is a port of SASS to work with js build tools
+          - Plugins are available for all build tools
+              - Npm
+              - Fly
+              - Gulp
+              - Grunt
+              - Brunch
+              - And more..
+        </Slide>
+        <Slide>
+          <Heading size={2}>Let's get started!</Heading>
+        </Slide>
+        <Slide>
+
+        </Slide>
+
+
         {/*
-        - Does it work with node?
-            - Yes
-            - Libsass is a port of SASS to work with js build tools
-            - Plugins are available for all build tools
-                - Npm
-                - Fly
-                - Gulp
-                - Grunt
-                - Brunch
-                - And more..
-        - Let's get started!
         - Show picture of what we're going to be building
             - Ideas on what to build
                 - A Google Card
@@ -169,7 +178,7 @@ export default class extends React.Component {
                 - The sassinate entrance(if it's awesome)
         - Start with the folder structure of the project
         - Show first example that uses plain CSS to show that you can right normal CSS in SASS(a good example could be buttons)
-        - For first showcase show nesting :mind-blown
+        - For first showcase show nesting :mind-blown:
         - Then go back and refactor it to allow for more flexibility.
                 - Add a `$config`
                 - Add `em` function

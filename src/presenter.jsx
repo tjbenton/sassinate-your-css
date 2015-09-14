@@ -76,7 +76,7 @@ class Presenter extends Base {
     const child = this.props.slides[this.props.slide];
     let notes = []
     React.Children.forEach(child.props.children, (obj) => {
-      if(obj.type.displayName === "Notes"){
+      if((obj.type || {}).displayName === "Notes"){
         notes.push(obj);
       }
     });
