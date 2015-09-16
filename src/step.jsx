@@ -27,17 +27,19 @@ const Step = React.createClass({
     this.context.flux.stores.SlideStore.unlisten(this._storeChange);
   },
   _storeChange(state){
-    const slide = this.context.slide;
-    const fragment = React.findDOMNode(this.refs.fragment);
-    const key = _.findKey(state.fragments[slide], {
-      "id": parseInt(fragment.dataset.fid)
-    });
+    const slide = this.context.slide,
+          fragment = React.findDOMNode(this.refs.fragment),
+          key = _.findKey(state.fragments[slide], {
+            "id": parseInt(fragment.dataset.fid)
+          });
 
     if (slide in state.fragments && state.fragments[slide].hasOwnProperty(key)){
+      let step = state.fragments[slide][key];
       this.setState({
-        active: state.fragments[slide][key].visible
+        visible: step.visible,
+        type: step.prev ? "prev" : step.current ? "current" : step.next ? "next" : false
       }, () => {
-        let endVal = this.state.active ? 1 : 0,
+        let endVal = this.state.visible ? 1 : 0,
             node = this.getDOMNode();
         if(this.context.export || this.context.overview){
           endVal = 1;
@@ -45,7 +47,7 @@ const Step = React.createClass({
         // used to delay the state of was active
         let handler = () => {
               this.setState({
-                was_active: state.fragments[slide][key].visible
+                was_active: step.visible
               });
               node.removeEventListener("animationend", handler);
             };
@@ -57,31 +59,36 @@ const Step = React.createClass({
     let classes = ["c-step", "js-step"],
         {
           className,
-          isActive,
-          isInactive,
+          isVisible,
+          isInvisible,
           animateIn,
           animateOut
         } = this.props;
 
-    // adds any passes classes
+    // adds any passed classes
     className && classes.push(...className.split(" "));
 
     // handles adding the active classes
-    if(this.state.active){
+    if(this.state.visible){
       classes.push(...[
-        "is-active",
-        ...(isActive || "").split(" "),
+        "is-visible",
+        ...(isVisible || "").split(" "),
         animateIn ? `u-animate u-animate--${animateIn}` : ""
       ]);
     }
 
     // handles the exiting classes
-    if(!this.state.active && this.state.was_active){
+    if(!this.state.visible && this.state.was_active){
       classes.push(...[
-        "is-active",
-        ...(isInactive || "").split(" "),
+        "is-visible",
+        ...(isInvisible || "").split(" "),
         animateOut ? `u-animate u-animate--${animateOut}` : ""
       ]);
+    }
+
+    // this will set `is-prev`, `is-current`, `is-next`
+    if(!!this.state.type){
+      classes.push(`is-${this.state.type}`);
     }
 
     return (

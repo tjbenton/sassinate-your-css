@@ -12,7 +12,7 @@
 
   .c-notes__note{
     color: color(primary, -6);
-    &.is-active{
+    &.is-current{
       color: color(primary, -11);
       font-size: 1.3em;
     }

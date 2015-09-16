@@ -1,9 +1,27 @@
 .c-step{
   opacity: 0;
-  &.is-active{
+  &.is-visible{
     opacity: 1;
   }
-  ul &{
-    display: inline;
+
+  &--highlight{
+    opacity: 1;
+    &.is-current{
+      box-shadow: 0 0 0 10px color(secondary);
+      border-radius: .25em;
+    }
+  }
+
+  &--current{
+    &.is-visible{
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    &.is-current{
+      opacity: 1;
+      height: auto;
+      overflow: visible;
+    }
   }
 }

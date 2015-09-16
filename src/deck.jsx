@@ -151,9 +151,11 @@ class Deck extends React.Component {
       const hidden = _.filter(fragments[slide], function (s) {
         return s.visible !== true;
       });
+
       if (forward === true && visible.length !== count) {
         this.context.flux.actions.SlideActions.updateFragment({
           fragment: hidden[0],
+          current: _.size(visible),
           visible: true
         });
         return false;
@@ -161,6 +163,7 @@ class Deck extends React.Component {
       if (forward === false && hidden.length !== count) {
         this.context.flux.actions.SlideActions.updateFragment({
           fragment: visible[_.size(visible) - 1],
+          current: _.size(visible),
           visible: false
         });
         return false;
