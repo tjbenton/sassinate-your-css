@@ -402,6 +402,90 @@ export default class extends React.Component {
         <Slide>
           Mind Blown
         </Slide>
+
+        <Slide>
+          <Heading className="o-headline" size={2}>Variables</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  $font-size: 14px;
+                  body{
+                    font-size: $font-size;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  body{
+                    font-size: 14px;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>All variables are identified by the <Code>$</Code></Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={2}>Scoped Variables?</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  $font-size: 14px;
+
+                  body {
+                    font-size: $font-size;
+
+                    @media (min-width: 1024px) {
+                      $font-size: 16px; // scoped to this media query globally
+                      font-size: $font-size;
+                    }
+                  }
+
+                  .container {
+                    $font-size: 12px; // scoped to \`.container\`
+                    font-size: $font-size;
+                  }
+
+                  .component {
+                    font-size: $font-size; // uses the default value
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  body {
+                    font-size: 14px;
+                  }
+
+                  @media (min-width: 1024px) {
+                    body {
+                      font-size: 16px;
+                    }
+                  }
+
+                  .container {
+                    font-size: 12px;
+                  }
+
+                  .component {
+                    font-size: 14px;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>All variables are identified by the <Code>$</Code></Note>
+          </Notes>
+        </Slide>
         </Slide>
 
 
