@@ -788,6 +788,19 @@ export default class extends React.Component {
                 - Add `em` function
                 - Add `color` function(don't go into detail about it yet though
         */}
+        <Slide>
+          <Heading size={4}>Not sure if you'll like it?</Heading>
+          <Layout>
+            <Fill>
+              <Heading size={6}><Link href="http://codepen.io/">Codepen.io</Link></Heading>
+              Insert screenshot
+            </Fill>
+            <Fill>
+              <Heading size={6}><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
+              Insert screenshot
+            </Fill>
+          </Layout>
+        </Slide>
         <Slide transition={["zoom"]} bgColor="white">
           <Heading size={1} fit caps>
             Spectacle
