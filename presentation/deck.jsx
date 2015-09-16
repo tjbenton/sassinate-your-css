@@ -178,35 +178,230 @@ export default class extends React.Component {
           </List>
         </Slide>
         <Slide>
-          <Heading size={4}>Not sure if you'll like it?</Heading>
+          <Heading className="o-headline" size={2}>Nesting</Heading>
           <Layout>
             <Fill>
-              <Heading size={6}><Link href="http://codepen.io/">Codepen.io</Link></Heading>
-              Insert screenshot
+              <CodePane lang="scss">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
+
+                    .crumb {
+                      display: inline-block;
+                      font-size: 1em;
+                      line-height: 1em;
+                      margin-top: 0;
+                      position: relative;
+                    }
+                  }
+                `}
+              </CodePane>
             </Fill>
             <Fill>
-              <Heading size={6}><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
-              Insert screenshot
+              <CodePane lang="css">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
+                  }
+
+                  .breadcrumbs .crumb {
+                    display: inline-block;
+                    font-size: 1em;
+                    line-height: 1em;
+                    margin-top: 0;
+                    position: relative;
+                  }
+                `}
+              </CodePane>
             </Fill>
           </Layout>
         </Slide>
         <Slide>
-          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
-          - Yes
-          - Libsass is a port of SASS to work with js build tools
-          - Plugins are available for all build tools
-              - Npm
-              - Fly
-              - Gulp
-              - Grunt
-              - Brunch
-              - And more..
+          <Heading className="o-headline" size={3}>
+            So what if we want to reference the parent?
+          </Heading>
         </Slide>
         <Slide>
-          <Heading size={2}>Let's get started!</Heading>
-        </Slide>
-        <Slide>
+          <Heading className="o-headline" size={3}><Code>&amp;</Code> to the rescue!</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
 
+                    &__crumb {
+                      display: inline-block;
+                      font-size: 1em;
+                      line-height: 1em;
+                      margin-top: 0;
+                      position: relative;
+                      &:not(:first-child):after {
+                        content: "\e6e2a";
+                        margin-top: 50%;
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                      }
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
+                  }
+
+                  .breadcrumbs__crumb {
+                    display: inline-block;
+                    font-size: 1em;
+                    line-height: 1em;
+                    margin-top: 0;
+                    position: relative;
+                  }
+
+                  .breadcrumbs__crumb:not(:first-child):after {
+                    content: "\e6e2a";
+                    margin-top: 50%;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Heading fit size={2}>Nesting isn't just for selectors</Heading>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={4}>Properties</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .c-island {
+                    border: 1px solid #e2e2e2 {
+                      radius: 6px;
+                    };
+                    margin: 0 {
+                      top: 10px;
+                    };
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .c-island {
+                    border: 1px solid #e2e2e2;
+                    border-radius: 6px;
+                    margin: 0;
+                    margin-top: 10px;
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={4}>Media Queries</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  body {
+                    font-size: 14px;
+
+                    @media (min-width: 1024px) {
+                      font-size: 16px;
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  body {
+                    font-size: 14px;
+                  }
+
+                  @media (min-width: 1024px) {
+                    font-size: 16px;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={2}>Keyframes</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .u-animate {
+                    animation: {
+                      duration: 1s;
+                      fill-mode: both;
+                    }
+
+                    &--fade-in-down {
+                      animation-name: fade-in-down;
+
+                      @keyframes fade-in-down {
+                        0%{
+                          opacity: 0;
+                          transform: translate3d(0, -100%, 0);
+                        }
+                        100%{
+                          opacity: 1;
+                          transform: none;
+                        }
+                      }
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .u-animate {
+                    animation-duration: 1s;
+                    animation-fill-mode: both;
+                  }
+
+                  .u-animate--fade-in-down {
+                    animation-name: fade-in-down;
+                  }
+
+                  @keyframes fade-in-down {
+                    0% {
+                      opacity: 0;
+                      transform: translate3d(0, -100%, 0);
+                    }
+                    100% {
+                      opacity: 1;
+                      transform: none;
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          Mind Blown
+        </Slide>
         </Slide>
 
 
