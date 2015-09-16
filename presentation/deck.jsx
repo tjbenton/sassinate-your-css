@@ -58,12 +58,56 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["slide"]}>
          <Heading fit size={1}>What is SASS?</Heading>
-         <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out"><Heading fit size={5}>CSS preprocessor</Heading></Step>
-         <Step fid="2" animateIn="bounce-in-right" animateOut="bounce-out"><Heading fit size={5}><Link href="http://sass-lang.com/">Syntactically Awesome Stylesheets</Link></Heading></Step>
+         <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out">
+           <Heading fit size={5}>CSS preprocessor</Heading>
+         </Step>
+         <Step fid="2" animateIn="bounce-in-down" animateOut="bounce-out-down">
+           <Heading fit size={4}>Built in Ruby</Heading>
+         </Step>
+         <Step fid="3" animateIn="bounce-in-right" animateOut="bounce-out">
+           <Heading fit size={6}><Link href="http://sass-lang.com/">Syntactically Awesome Stylesheets</Link></Heading>
+         </Step>
          <Notes>
            <Note step="1">CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</Note>
-           <Note step="2">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
+           <Note step="3">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
+        </Slide>
+        <Slide>
+          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
+          <Step fid="2">
+            <Heading fit size={2}><Link href="https://github.com/sass/libsass">Libsass</Link></Heading>
+          </Step>
+          <Notes>
+            <Note>Libsass is a port of SASS to work with js build tools</Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading>Why <Link href="http://webdesign.tutsplus.com/articles/getting-to-know-libsass--cms-23114">Libsass</Link>?</Heading>
+          <Layout>
+            <Fill>
+              <Heading size={6}>Pros</Heading>
+              <List>
+                <Step fid="1">
+                  <ListItem>It's faster!</ListItem>
+                </Step>
+                <Step fid="2">
+                  <ListItem>Allows integration with any language</ListItem>
+                </Step>
+                <Step fid="3">
+                  <ListItem>Integrates with your favorite build tool</ListItem>
+                </Step>
+              </List>
+            </Fill>
+            <Fill>
+              <Heading size={6}>Cons</Heading>
+              <List>
+                <Step fid="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
+              </List>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note step="4">It's not a straight port so there're some inconsistencies but there's a compatiblity site to help out with these inconsistencies</Note>
+          </Notes>
         </Slide>
         <Slide transition={["zoom"]}>
           <Heading size={1}>Filetypes</Heading>
