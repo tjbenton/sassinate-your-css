@@ -167,13 +167,14 @@ export default class extends React.Component {
           <List style={{
               columnCount: 2
             }}>
-            <ListItem><Step fid="1">Nesting</Step></ListItem>
-            <ListItem><Step fid="2">Variables</Step></ListItem>
-            <ListItem><Step fid="3">Mixins</Step></ListItem>
-            <ListItem><Step fid="4">Functions</Step></ListItem>
-            <ListItem><Step fid="5">Conditionals</Step></ListItem>
-            <ListItem><Step fid="6">Loops</Step></ListItem>
-            <ListItem><Step fid="7">It allows you to write highly organized CSS with partials</Step></ListItem>
+            <Step fid="1"><ListItem>Nesting</ListItem></Step>
+            <Step fid="2"><ListItem>Variables</ListItem></Step>
+            <Step fid="3"><ListItem>Placeholders</ListItem></Step>
+            <Step fid="4"><ListItem>Mixins</ListItem></Step>
+            <Step fid="5"><ListItem>Functions</ListItem></Step>
+            <Step fid="6"><ListItem>Conditionals</ListItem></Step>
+            <Step fid="7"><ListItem>Loops</ListItem></Step>
+            <Step fid="8"><ListItem>Partials</ListItem></Step>
           </List>
         </Slide>
         <Slide>
