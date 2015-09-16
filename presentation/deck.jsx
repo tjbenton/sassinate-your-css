@@ -486,6 +486,165 @@ export default class extends React.Component {
             <Note>All variables are identified by the <Code>$</Code></Note>
           </Notes>
         </Slide>
+        <Slide>
+          <Heading className="o-headline" size={2}>Placeholders</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  %clear {
+                    &:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+                  }
+
+                  .container {
+                    background: blue
+                    margin: 0;
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .container {
+                    background: blue
+                    margin: 0;
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>Placeholders are also known as silent selectors</Note>
+            <Note>If you don't <Code>@extend</Code> onto them that css doesn't show up</Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={2}>Placeholders</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  %clear {
+                    &:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+                  }
+
+                  .clear {
+                    @extend %clear;
+                  }
+
+                  .container {
+                    @extend %clear;
+                    background: blue
+                    margin: 0;
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .clear:after, .container:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+
+                  .container {
+                    background: blue;
+                    margin: 0;
+                    padding: 1.4em;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>
+              When you use <Code>@extend</Code> it's always best practice to place
+              it at the top of your selector so other devs know that other styles
+              are going to be applied to the current selector.
+            </Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size={2}>Extends</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  /* clear placeholder */
+                  %clear {
+                    &:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+                  }
+
+                  .card{
+                    display: block;
+                    background: #fff;
+                    box-shadow: 0 0 5px 1px rgba(black, .4);
+                    position: relative;
+                    transition: all 0s;
+
+                    .content{
+                      font-size: .85em;
+                      margin: 0;
+                    }
+                  }
+
+                  .cards{
+                    @extend %clear;
+                    > li{
+                      @extend .card;
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .cards:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+
+                  .card, .cards > li {
+                    display: block;
+                    background: #fff;
+                    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+                    position: relative;
+                    transition: all 0s;
+                  }
+
+                  .card .content, .cards > li .content {
+                    font-size: .85em;
+                    margin: 0;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>You can extend simple CSS selectors</Note>
+            <Note>Be careful because everything in that selector will be applied to the extended selector</Note>
+          </Notes>
+        </Slide>
         </Slide>
 
 
