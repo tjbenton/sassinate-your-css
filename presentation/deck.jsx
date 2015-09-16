@@ -645,6 +645,127 @@ export default class extends React.Component {
             <Note>Be careful because everything in that selector will be applied to the extended selector</Note>
           </Notes>
         </Slide>
+        <Slide transition={["spin", "slide"]}>
+          <Heading className="o-headline" size={2}>Mixins</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  @mixin clear{
+                    &:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+                  }
+
+                  .container{
+                    @include clear;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .container:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>Sass uses the <Code>@mixin</Code> directive to define mixins, and the <Code>@include</Code> directive to use them.</Note>
+            <Note>Mixins allow you to reuse code blocks anywhere</Note>
+          </Notes>
+        </Slide>
+        <Slide transition={["spin", "slide"]}>
+          <Heading size={5}>Mixin Arguments</Heading>
+          <Layout>
+            <Fill>
+              <Step fid="0" className="c-step--current">
+                <CodePane lang="scss">
+                  {`
+                    @mixin clear($extend: true) {
+                      @if $extend {
+                        @extend %clear;
+                      }
+                      @else {
+                        &:after {
+                          content: "";
+                          display: table;
+                          clear: both;
+                        }
+                      }
+                    }
+
+                    %clear {
+                      @include clear(false);
+                    }
+                  `}
+                </CodePane>
+              </Step>
+              <Step fid="1" className="c-step--current">
+                <CodePane lang="scss">
+                  {`
+                    .one {
+                      @include clear;
+                      background: blue;
+                    }
+
+                    .two {
+                      @include clear(true);
+                      background: red;
+                    }
+
+                    .three {
+                      @include clear(false);
+                      background: yellow;
+                    }
+                  `}
+                </CodePane>
+              </Step>
+            </Fill>
+            <Fill>
+              <Step fid="1" className="c-step--current">
+                <CodePane lang="css">
+                  {`
+                    .one:after, .two:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+
+                    .one {
+                      background: blue;
+                    }
+
+                    .two {
+                      background: red;
+                    }
+
+                    .three {
+                      background: yellow;
+                    }
+
+                    .three:after {
+                      content: "";
+                      display: table;
+                      clear: both;
+                    }
+                  `}
+                </CodePane>
+              </Step>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>What makes mixins so powerful is the ability to pass in arguments to get different results</Note>
+            <Note>You can pass in defaults to each argument</Note>
+          </Notes>
+        </Slide>
         </Slide>
 
 
