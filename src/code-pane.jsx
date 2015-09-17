@@ -2,6 +2,7 @@ import React from "react/addons";
 import highlight from "highlight.js";
 import Base from "./base";
 import Radium from "radium";
+import Step from "./step";
 
 @Radium
 class CodePane extends Base {
@@ -19,9 +20,37 @@ class CodePane extends Base {
     lang: React.PropTypes.string,
     source: React.PropTypes.string
   };
-  getMarkup() {
-    let {lang, source, children} = this.props;
+  render() {
 
+    let children;
+
+    if(typeof this.props.children === "string"){
+      children = (<Highlight lang={this.props.lang} source={this.props.children} />);
+    }
+    else{
+      children = React.Children.map(this.props.children, (child) => {
+        return React.addons.cloneWithProps(child, {
+          lang: this.props.lang
+        })
+      });
+    }
+
+    return (
+      <pre className={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
+        <div className="c-code-pane__wrapper">
+          {children}
+        </div>
+      </pre>
+    );
+  }
+}
+
+export default CodePane;
+
+
+export class Highlight extends Base {
+  getMarkup(){
+    let {lang, source, children } = this.props;
     lang = lang === "sass" ? "stylus" : lang === "js" ? "javascript" : lang;
 
     return {
@@ -31,22 +60,29 @@ class CodePane extends Base {
       lang
     };
   }
-  render() {
+
+  render(){
     let markup = this.getMarkup(),
         lang = markup.lang;
+
     if(["less", "sass", "scss", "stylus"].indexOf(lang) >= 0){
       lang += " css";
     }
-    return (
-      <pre className={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
+
+    if(this.props.step){
+      return (
+        <Step fid={this.props.step} className={`c-code-pane__step ${this.props.className}`}>
+          <code className={`c-code-pane__code hljs ${lang}`} dangerouslySetInnerHTML={markup.code} />
+        </Step>
+      );
+    }
+    else{
+      return (
         <code className={`c-code-pane__code hljs ${lang}`} dangerouslySetInnerHTML={markup.code} />
-      </pre>
-    );
+      );
+    }
   }
 }
-
-export default CodePane;
-
 
 function normalize(content){
   content = content.replace(/(?:\\[rn]+)+/g, "\n").split("\n"); // fix stupid shit windows does and then convert it to an array of lines

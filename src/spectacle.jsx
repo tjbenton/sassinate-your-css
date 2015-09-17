@@ -1,6 +1,6 @@
 import BlockQuote, {Quote, Cite} from "./block-quote";
 import Code from "./code";
-import CodePane from "./code-pane";
+import CodePane, {Highlight} from "./code-pane";
 import Deck from "./deck";
 import Fill from "./fill";
 import Fit from "./fit";
@@ -25,6 +25,7 @@ export {
   Fill,
   Fit,
   Heading,
+  Highlight,
   Image,
   Layout,
   Link,

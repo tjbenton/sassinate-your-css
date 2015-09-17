@@ -3,19 +3,20 @@ import React from "react/addons";
 import {
   BlockQuote,
   Cite,
-  CodePane,
   Code,
+  CodePane,
   Deck,
   Fill,
   Fit,
   Heading,
+  Highlight,
   Image,
   Layout,
   Link,
   List,
   ListItem,
-  Notes,
   Note,
+  Notes,
   Quote,
   Slide,
   Step,
@@ -47,7 +48,6 @@ export default class extends React.Component {
             Sassinate your CSS
           */}
         </Slide>
-
         <Slide bgImage={images.abstract} bgLighten=".5">
           <Heading size={1} fit caps>
             About me
@@ -659,8 +659,15 @@ export default class extends React.Component {
                     }
                   }
 
+                  .clear{
+                    @include clear;
+                  }
+
                   .container{
                     @include clear;
+                    background: blue
+                    margin: 0;
+                    padding: 1.4em;
                   }
                 `}
               </CodePane>
@@ -668,6 +675,18 @@ export default class extends React.Component {
             <Fill>
               <CodePane lang="css">
                 {`
+                  .clear:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+
+                  .container {
+                    background: blue
+                    margin: 0;
+                    padding: 1.4em;
+                  }
+
                   .container:after {
                     content: "";
                     display: table;
@@ -682,83 +701,80 @@ export default class extends React.Component {
             <Note>Mixins allow you to reuse code blocks anywhere</Note>
           </Notes>
         </Slide>
-        <Slide transition={["spin", "slide"]}>
+        <Slide transition={["fade", "slide"]}>
+          <Heading size={5}>Mixin Arguments</Heading>
+          <CodePane lang="scss">
+            {`
+              @mixin clear($extend: true) {
+                @if $extend {
+                  @extend %clear;
+                }
+                @else {
+                  &:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+                }
+              }
+
+              %clear {
+                @include clear(false);
+              }
+            `}
+          </CodePane>
+        </Slide>
+        <Slide transition={["fade"]}>
           <Heading size={5}>Mixin Arguments</Heading>
           <Layout>
             <Fill>
-              <Step fid="0" className="c-step--current">
-                <CodePane lang="scss">
-                  {`
-                    @mixin clear($extend: true) {
-                      @if $extend {
-                        @extend %clear;
-                      }
-                      @else {
-                        &:after {
-                          content: "";
-                          display: table;
-                          clear: both;
-                        }
-                      }
-                    }
+              <CodePane lang="scss">
+                {`
+                  .one {
+                    @include clear;
+                    background: blue;
+                  }
 
-                    %clear {
-                      @include clear(false);
-                    }
-                  `}
-                </CodePane>
-              </Step>
-              <Step fid="1" className="c-step--current">
-                <CodePane lang="scss">
-                  {`
-                    .one {
-                      @include clear;
-                      background: blue;
-                    }
+                  .two {
+                    @include clear(true);
+                    background: red;
+                  }
 
-                    .two {
-                      @include clear(true);
-                      background: red;
-                    }
-
-                    .three {
-                      @include clear(false);
-                      background: yellow;
-                    }
-                  `}
-                </CodePane>
-              </Step>
+                  .three {
+                    @include clear(false);
+                    background: yellow;
+                  }
+                `}
+              </CodePane>
             </Fill>
             <Fill>
-              <Step fid="1" className="c-step--current">
-                <CodePane lang="css">
-                  {`
-                    .one:after, .two:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
+              <CodePane lang="css">
+                {`
+                  .one:after, .two:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+                  
+                  .one {
+                    background: blue;
+                  }
 
-                    .one {
-                      background: blue;
-                    }
+                  .two {
+                    background: red;
+                  }
 
-                    .two {
-                      background: red;
-                    }
+                  .three {
+                    background: yellow;
+                  }
 
-                    .three {
-                      background: yellow;
-                    }
-
-                    .three:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
-                  `}
-                </CodePane>
-              </Step>
+                  .three:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+                `}
+              </CodePane>
             </Fill>
           </Layout>
           <Notes>
@@ -766,6 +782,9 @@ export default class extends React.Component {
             <Note>You can pass in defaults to each argument</Note>
           </Notes>
         </Slide>
+
+        <Slide>
+          <Heading size={2}>Let's get started!</Heading>
         </Slide>
 
 
