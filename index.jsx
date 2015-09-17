@@ -13,10 +13,10 @@ import Deck from "./presentation/deck";
 import config from "./presentation/config";
 
 // compiles the scss for the page inserts it on change
-require("!style!css!sass!./themes/sassinate/scss/index.scss");
 require("!style!css!highlight.js/styles/color-brewer.css");
 // tomorrow
 // color-brewer
+require("!style!css!sass!./themes/sassinate/scss/index.scss");
 
 const flux = new Flux();
 Alt.debug("flux", flux);
