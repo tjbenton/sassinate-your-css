@@ -68,10 +68,16 @@ const getStyles = function getStyles(){
 };
 
 const classNames = function(...rest){
-  let classNames = [];
-  classNames.push(...rest)
-  if(this.props.className){
-    classNames.push(this.props.className.split(" "));
+  let classNames = [],
+      { className } = this.props;
+  classNames.push(...rest);
+  if(className){
+    console.log(className);
+    if(typeof className === "string"){
+      className = className.split(" ");
+    }
+
+    classNames.push(...className);
   }
   return classNames.filter(Boolean).join(" ");
 }
