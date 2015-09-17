@@ -4,9 +4,13 @@
     size: 1em;
     weight: 400;
   }
-  &__code{
+  &__wrapper{
     font-weight: 400;
-    padding: 20;
+    padding: 20px;
     text-align: left;
+  }
+  &__code, &__step{
+    margin: 0;
+    padding: 0;
   }
 }
