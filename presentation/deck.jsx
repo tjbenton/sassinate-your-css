@@ -665,7 +665,7 @@ export default class extends React.Component {
 
                   .container{
                     @include clear;
-                    background: blue
+                    background: blue;
                     margin: 0;
                     padding: 1.4em;
                   }
@@ -682,7 +682,7 @@ export default class extends React.Component {
                   }
 
                   .container {
-                    background: blue
+                    background: blue;
                     margin: 0;
                     padding: 1.4em;
                   }
