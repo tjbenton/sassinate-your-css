@@ -729,52 +729,62 @@ export default class extends React.Component {
           <Layout>
             <Fill>
               <CodePane lang="scss">
-                {`
-                  .one {
-                    @include clear;
-                    background: blue;
-                  }
+                <Highlight order="1">
+                  {`
+                    .one {
+                      @include clear;
+                      background: blue;
+                    }
 
-                  .two {
-                    @include clear(true);
-                    background: red;
-                  }
-
-                  .three {
-                    @include clear(false);
-                    background: yellow;
-                  }
-                `}
+                    .two {
+                      @include clear(true);
+                      background: red;
+                    }
+                  `}
+                </Highlight>
+                <Highlight order="2">
+                  {`
+                    .three {
+                      @include clear(false);
+                      background: yellow;
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
             <Fill>
-              <CodePane lang="css">
-                {`
-                  .one:after, .two:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                  }
+                <CodePane lang="css">
+                  <Highlight order="1">
+                    {`
+                      .one:after, .two:after {
+                        content: "";
+                        display: table;
+                        clear: both;
+                      }
 
-                  .one {
-                    background: blue;
-                  }
+                      .one {
+                        background: blue;
+                      }
 
-                  .two {
-                    background: red;
-                  }
+                      .two {
+                        background: red;
+                      }
+                    `}
+                  </Highlight>
+                  <Highlight order="2">
+                    {`
+                      .three {
+                        background: yellow;
+                      }
 
-                  .three {
-                    background: yellow;
-                  }
-
-                  .three:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                  }
-                `}
-              </CodePane>
+                      .three:after {
+                        content: "";
+                        display: table;
+                        clear: both;
+                      }
+                    `}
+                  </Highlight>
+                </CodePane>
             </Fill>
           </Layout>
           <Notes>
