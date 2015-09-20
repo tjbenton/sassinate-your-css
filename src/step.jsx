@@ -25,28 +25,29 @@ export const StepMixin = {
   },
   _storeChange(state){
     const slide = this.context.slide,
-          fragment = React.findDOMNode(this.refs.fragment),
-          step = state.fragments[slide][`order${fragment.dataset.order}`];
-
-    if(slide in state.fragments && !!step){
-      this.setState({
-        visible: step.visible,
-        type: step.prev ? "prev" : step.current ? "current" : step.next ? "next" : false
-      }, () => {
-        let endVal = this.state.visible ? 1 : 0,
-            node = this.getDOMNode();
-        if(this.context.export || this.context.overview){
-          endVal = 1;
-        }
-        // used to delay the state of was active
-        let handler = () => {
-              this.setState({
-                was_active: step.visible
-              });
-              node.removeEventListener("animationend", handler);
-            };
-        node.addEventListener("animationend", handler);
-      });
+          fragment = React.findDOMNode(this.refs.fragment);
+    if(fragment !== null){
+      const step = (state.fragments[slide] || {})[`order${fragment.dataset.order}`];
+      if(slide in state.fragments && !!step){
+        this.setState({
+          visible: step.visible,
+          type: step.prev ? "prev" : step.current ? "current" : step.next ? "next" : false
+        }, () => {
+          let endVal = this.state.visible ? 1 : 0,
+              node = this.getDOMNode();
+          if(this.context.export || this.context.overview){
+            endVal = 1;
+          }
+          // used to delay the state of was active
+          let handler = () => {
+                this.setState({
+                  was_active: step.visible
+                });
+                node.removeEventListener("animationend", handler);
+              };
+          node.addEventListener("animationend", handler);
+        });
+      }
     }
   }
 };
