@@ -53,11 +53,13 @@ const Slide = React.createClass({
     const slide = React.findDOMNode(this.refs.slide);
     const frags = slide.querySelectorAll(".js-step");
     if(frags && frags.length){
-      Array.prototype.slice.call(frags, 0).forEach((frag, i) => {
-        frag.dataset.fid = i;
+      [].slice.call(frags, 0).forEach((frag, i) => {
+        if(!frag.dataset.order){
+          frag.dataset.order = i;
+        }
         this.context.flux.actions.SlideActions.addFragment({
           slide: this.props.slideIndex,
-          id: i,
+          id: frag.dataset.order,
           visible: this.props.lastSlide > this.props.slideIndex
         });
       });

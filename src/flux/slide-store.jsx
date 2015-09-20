@@ -6,14 +6,14 @@ export default class SlideStore {
 
   onAddFragment(payload) {
     const fragments = this.fragments;
-    const fid = "f" + payload.id;
+    const order = "order" + payload.id;
     if (!fragments.hasOwnProperty(payload.slide)) {
       fragments[payload.slide] = {};
-      fragments[payload.slide][fid] = payload;
+      fragments[payload.slide][order] = payload;
     } else {
       const slide = fragments[payload.slide];
-      if (!slide.hasOwnProperty(fid)) {
-        slide[fid] = payload;
+      if (!slide.hasOwnProperty(order)) {
+        slide[order] = payload;
       }
     }
     this.setState({
@@ -23,7 +23,7 @@ export default class SlideStore {
   onUpdateFragment(payload) {
     let fragments = this.fragments,
         slide = fragments[payload.fragment.slide];
-    slide["f" + payload.fragment.id].visible = payload.visible;
+    slide[`order${payload.fragment.id}`].visible = payload.visible;
 
     // sets the current step
     for(let step in slide){

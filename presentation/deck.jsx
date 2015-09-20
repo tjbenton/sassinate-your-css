@@ -58,13 +58,13 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["slide"]}>
          <Heading fit size={1}>What is SASS?</Heading>
-         <Step fid="1" animateIn="bounce-in-left" animateOut="bounce-out">
+         <Step order="1" animateIn="bounce-in-left" animateOut="bounce-out">
            <Heading fit size={5}>CSS preprocessor</Heading>
          </Step>
-         <Step fid="2" animateIn="bounce-in-down" animateOut="bounce-out-down">
+         <Step order="2" animateIn="bounce-in-down" animateOut="bounce-out-down">
            <Heading fit size={4}>Built in Ruby</Heading>
          </Step>
-         <Step fid="3" animateIn="bounce-in-right" animateOut="bounce-out">
+         <Step order="3" animateIn="bounce-in-right" animateOut="bounce-out">
            <Heading fit size={6}><Link href="http://sass-lang.com/">Syntactically Awesome Stylesheets</Link></Heading>
          </Step>
          <Notes>
@@ -74,7 +74,7 @@ export default class extends React.Component {
         </Slide>
         <Slide>
           <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
-          <Step fid="2">
+          <Step order="2">
             <Heading fit size={2}><Link href="https://github.com/sass/libsass">Libsass</Link></Heading>
           </Step>
           <Notes>
@@ -87,13 +87,13 @@ export default class extends React.Component {
             <Fill>
               <Heading size={6}>Pros</Heading>
               <List>
-                <Step fid="1">
+                <Step order="1">
                   <ListItem>It's faster!</ListItem>
                 </Step>
-                <Step fid="2">
+                <Step order="2">
                   <ListItem>Allows integration with any language</ListItem>
                 </Step>
-                <Step fid="3">
+                <Step order="3">
                   <ListItem>Integrates with your favorite build tool</ListItem>
                 </Step>
               </List>
@@ -101,7 +101,7 @@ export default class extends React.Component {
             <Fill>
               <Heading size={6}>Cons</Heading>
               <List>
-                <Step fid="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
+                <Step order="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
               </List>
             </Fill>
           </Layout>
@@ -167,14 +167,14 @@ export default class extends React.Component {
           <List style={{
               columnCount: 2
             }}>
-            <Step fid="1"><ListItem>Nesting</ListItem></Step>
-            <Step fid="2"><ListItem>Variables</ListItem></Step>
-            <Step fid="3"><ListItem>Placeholders</ListItem></Step>
-            <Step fid="4"><ListItem>Mixins</ListItem></Step>
-            <Step fid="5"><ListItem>Functions</ListItem></Step>
-            <Step fid="6"><ListItem>Conditionals</ListItem></Step>
-            <Step fid="7"><ListItem>Loops</ListItem></Step>
-            <Step fid="8"><ListItem>Partials</ListItem></Step>
+            <Step order="1"><ListItem>Nesting</ListItem></Step>
+            <Step order="2"><ListItem>Variables</ListItem></Step>
+            <Step order="3"><ListItem>Placeholders</ListItem></Step>
+            <Step order="4"><ListItem>Mixins</ListItem></Step>
+            <Step order="5"><ListItem>Functions</ListItem></Step>
+            <Step order="6"><ListItem>Conditionals</ListItem></Step>
+            <Step order="7"><ListItem>Loops</ListItem></Step>
+            <Step order="8"><ListItem>Partials</ListItem></Step>
           </List>
         </Slide>
         <Slide>
@@ -279,7 +279,7 @@ export default class extends React.Component {
           <Heading fit size={2}>Nesting isn't just for selectors</Heading>
         </Slide>
         <Slide>
-          <Heading className="o-headline" size={4}>Properties</Heading>
+          <Heading className="o-headline" size={4}>Nested Properties</Heading>
           <Layout>
             <Fill>
               <CodePane lang="scss">
@@ -755,7 +755,7 @@ export default class extends React.Component {
                     display: table;
                     clear: both;
                   }
-                  
+
                   .one {
                     background: blue;
                   }
@@ -782,7 +782,12 @@ export default class extends React.Component {
             <Note>You can pass in defaults to each argument</Note>
           </Notes>
         </Slide>
-
+        <Slide>
+          <Step order="1">Step 1</Step>
+          <Step order="2">Step 2</Step>
+          <Step order="1">Step 1</Step>
+          <Step order="1">Step 1</Step>
+        </Slide>
         <Slide>
           <Heading size={2}>Let's get started!</Heading>
         </Slide>
@@ -869,17 +874,17 @@ export default class extends React.Component {
         </Slide>
         {
         // <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
-        //   <Step fid="1">
+        //   <Step order="1">
         //     <Heading size={1} caps fit textColor="primary">
         //       Full Width
         //     </Heading>
         //   </Step>
-        //   <Step fid="2">
+        //   <Step order="2">
         //     <Heading size={1} caps fit textColor="tertiary">
         //       Adjustable Darkness
         //     </Heading>
         //   </Step>
-        //   <Step fid="3">
+        //   <Step order="3">
         //     <Heading size={1} caps fit textColor="primary">
         //       Background Imagery
         //     </Heading>
@@ -917,12 +922,12 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <List>
-            <ListItem><Step fid="1">Inline style based theme system</Step></ListItem>
-            <ListItem><Step fid="2">Autofit text</Step></ListItem>
-            <ListItem><Step fid="3">Flexbox layout system</Step></ListItem>
-            <ListItem><Step fid="4">React-Router navigation</Step></ListItem>
-            <ListItem><Step fid="5">PDF export</Step></ListItem>
-            <ListItem><Step fid="6">And...</Step></ListItem>
+            <ListItem><Step order="1">Inline style based theme system</Step></ListItem>
+            <ListItem><Step order="2">Autofit text</Step></ListItem>
+            <ListItem><Step order="3">Flexbox layout system</Step></ListItem>
+            <ListItem><Step order="4">React-Router navigation</Step></ListItem>
+            <ListItem><Step order="5">PDF export</Step></ListItem>
+            <ListItem><Step order="6">And...</Step></ListItem>
           </List>
         </Slide>
         <Slide transition={["slide"]} bgColor="primary">

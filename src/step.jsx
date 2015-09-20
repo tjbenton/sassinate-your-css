@@ -28,12 +28,9 @@ const Step = React.createClass({
   _storeChange(state){
     const slide = this.context.slide,
           fragment = React.findDOMNode(this.refs.fragment),
-          key = _.findKey(state.fragments[slide], {
-            "id": parseInt(fragment.dataset.fid)
-          });
+          step = state.fragments[slide][`order${fragment.dataset.order}`];
 
-    if (slide in state.fragments && state.fragments[slide].hasOwnProperty(key)){
-      let step = state.fragments[slide][key];
+    if(slide in state.fragments && !!step){
       this.setState({
         visible: step.visible,
         type: step.prev ? "prev" : step.current ? "current" : step.next ? "next" : false
@@ -60,6 +57,7 @@ const Step = React.createClass({
           className,
           isVisible,
           isInvisible,
+          order,
           animateIn,
           animateOut
         } = this.props;
@@ -91,7 +89,7 @@ const Step = React.createClass({
     }
 
     return (
-      <div className={classes.filter(Boolean).join(" ")} ref="fragment">
+      <div className={classes.filter(Boolean).join(" ")} data-order={order} ref="fragment">
         {this.props.children}
       </div>
     );
