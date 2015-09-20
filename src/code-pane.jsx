@@ -57,28 +57,23 @@ export class Highlight extends Base {
       code: {
         __html: highlight.highlight(lang, normalize(source ? source : children)).value
       },
-      lang
+      lang: ["less", "sass", "scss", "stylus"].indexOf(lang) >= 0 ? `${lang} css` : lang
     };
   }
 
   render(){
-    let markup = this.getMarkup(),
-        lang = markup.lang;
+    let markup = this.getMarkup();
 
-    if(["less", "sass", "scss", "stylus"].indexOf(lang) >= 0){
-      lang += " css";
-    }
-
-    if(this.props.step){
+    if(this.props.order){
       return (
-        <Step fid={this.props.step} className={`c-code-pane__step ${this.props.className}`}>
-          <code className={`c-code-pane__code hljs ${lang}`} dangerouslySetInnerHTML={markup.code} />
+        <Step order={this.props.order} className={`c-code-pane__step ${this.props.className}`}>
+          <code className={`c-code-pane__code hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
         </Step>
       );
     }
     else{
       return (
-        <code className={`c-code-pane__code hljs ${lang}`} dangerouslySetInnerHTML={markup.code} />
+        <code className={`c-code-pane__code hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
       );
     }
   }
