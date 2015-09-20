@@ -13,12 +13,14 @@
 // <h4>Heading 4</h4>
 // <h5>Heading 5</h5>
 // <h6>Heading 6</h6>
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6,
+.c-h1, .c-h2, .c-h3, .c-h4, .c-h5, .c-h6{
  color: color(primary, 3);
  display: block;
  font-size: 1em;
+ font-size: 2.66em;
  font-weight: 600;
- letter-spacing: -.02em;
+ letter-spacing: -.01em;
  line-height: 1.25em;
  margin: 0;
  a{
@@ -29,36 +31,49 @@ h1, h2, h3, h4, h5, h6{
  }
 }
 
-h2, h4, h5{
+h2, h4, h5,
+.c-h2, .c-h4, .c-h5,{
  font-weight: 200;
 }
 
-h2, h3{
+h2, h3,
+.c-h2, .c-h3{
   font-family: "Source Serif Pro";
 }
 
-h2, h5, h6{
+h2, h5, h6,
+.c-h2, .c-h5, .c-h6{
  color: color(secondary, 0);
 }
 
-h1{
+h1,
+.c-h1{
  font-size: em(50px);
+ font-size: 7.05em;
 }
 
-h2{
+h2,
+.c-h2{
  font-size: em(40px);
+ font-size: 5.88em;
 }
 
-h3{
+h3,
+.c-h3{
  font-size: em(28px);
+ font-size: 4.9em;
 }
 
-h4{
+h4,
+.c-h4{
  font-size: em(24px);
+ font-size: 3.82em;
 }
 
-h5{
+h5,
+.c-h5{
  font-size: em(18px);
+ font-size: 3.19em;
 }
 
 

@@ -23,10 +23,11 @@ class Heading extends Base {
   }
   resize() {
     if (this.props.fit) {
-      const el = React.findDOMNode(this.refs.text);
-      const state = this.state;
-      const width = el.offsetWidth || el.getComputedTextLength();
-      const height = el.offsetHeight || 24;
+      const el = React.findDOMNode(this.refs.text),
+            state = this.state,
+            width = el.offsetWidth || el.getComputedTextLength(),
+            height = el.offsetHeight || 24;
+
       if (state.width !== width || state.height !== height) {
         this.setState({
           width,
@@ -40,7 +41,7 @@ class Heading extends Base {
     const viewBox = [
       0, 0,
       this.state.width,
-      this.state.height - 8
+      this.state.height
     ].join(" ");
     const styles = {
       svg: {
@@ -51,30 +52,21 @@ class Heading extends Base {
       },
       text: {
         fontFamily: "inherit",
-        fontSize: "1rem",
+        fontSize: "inherit",
         fontWeight: "inherit",
         textAnchor: "middle"
       }
     };
     return this.props.fit
-    ? <div
-        style={[
-          this.context.styles.components.heading["h" + this.props.size],
-          this.getStyles(), this.props.style]}>
-        <svg {...this.props}
-          viewBox={viewBox}
-          style={styles.svg}>
-          <text
-            ref="text"
-            x="50%"
-            y="13"
-            style={styles.text}>
+    ? <div className={`c-h${this.props.size}`} style={[this.getStyles(), this.props.style]}>
+        <svg {...this.props} enable-backround={viewBox} viewBox={viewBox} style={styles.svg}>
+          <text ref="text" x="50%" y={this.state.height - ~~(this.state.height / 6)} style={styles.text}>
             {this.props.children}
           </text>
         </svg>
       </div>
     : React.createElement(Tag, {
-        style: [this.context.styles.components.heading["h" + this.props.size], this.getStyles(), this.props.style]
+        style: [this.getStyles(), this.props.style]
       }, this.props.children);
   }
 }
