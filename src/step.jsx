@@ -1,6 +1,5 @@
 import React from "react/addons";
 import tweenState from "react-tween-state";
-import _ from "lodash";
 
 const Step = React.createClass({
   // mixins: [tweenState.Mixin],
