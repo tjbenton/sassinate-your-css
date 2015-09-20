@@ -1,8 +1,6 @@
 import React from "react/addons";
-import tweenState from "react-tween-state";
 
-const Step = React.createClass({
-  // mixins: [tweenState.Mixin],
+export const StepMixin = {
   propTypes: {
     children: React.PropTypes.node
   },
@@ -50,7 +48,12 @@ const Step = React.createClass({
         node.addEventListener("animationend", handler);
       });
     }
-  },
+  }
+};
+
+
+const Step = React.createClass({
+  mixins: [StepMixin],
   render(){
     let classes = ["c-step", "js-step"],
         {
