@@ -23,6 +23,7 @@
     "react-router": "^1.0.0-beta2",
     "react-tween-state": "0.0.5",
     "tween-functions": "^1.0.2",
+    "typewriter": "^0.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^5.2.0",
