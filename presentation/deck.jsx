@@ -48,14 +48,16 @@ export default class extends React.Component {
             Sassinate your CSS
           */}
         </Slide>
-        <Slide bgImage={images.abstract} bgLighten=".5">
-          <Heading size={1} fit caps>
-            About me
-          </Heading>
-          <Text>
-            Some awesome info about me
-          </Text>
-        </Slide>
+        {/*
+          <Slide bgImage={images.abstract} bgLighten=".5">
+            <Heading size={1} fit caps>
+              About me
+            </Heading>
+            <Text>
+              Some awesome info about me
+            </Text>
+          </Slide>
+        */}
         <Slide transition={["slide"]}>
          <Heading fit size={1}>What is SASS?</Heading>
          <Step order="1" style={{marginTop: "-.5em"}} animateIn="bounce-in-left" animateOut="bounce-out">
@@ -69,94 +71,62 @@ export default class extends React.Component {
            <Note step="3">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
-        <Slide>
-          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
-          <Step order="2">
-            <Heading fit size={2}><Link href="https://github.com/sass/libsass">Libsass</Link></Heading>
-          </Step>
-          <Notes>
-            <Note>Libsass is a port of SASS to work with js build tools</Note>
-          </Notes>
-        </Slide>
-        <Slide>
-          <Heading>Why <Link href="http://webdesign.tutsplus.com/articles/getting-to-know-libsass--cms-23114">Libsass</Link>?</Heading>
-          <Layout>
-            <Fill>
-              <Heading size={6}>Pros</Heading>
-              <List>
-                <Step order="1">
-                  <ListItem>It's faster!</ListItem>
-                </Step>
-                <Step order="2">
-                  <ListItem>Allows integration with any language</ListItem>
-                </Step>
-                <Step order="3">
-                  <ListItem>Integrates with your favorite build tool</ListItem>
-                </Step>
-              </List>
-            </Fill>
-            <Fill>
-              <Heading size={6}>Cons</Heading>
-              <List>
-                <Step order="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
-              </List>
-            </Fill>
-          </Layout>
-          <Notes>
-            <Note step="4">It's not a straight port so there're some inconsistencies but there's a compatiblity site to help out with these inconsistencies</Note>
-          </Notes>
-        </Slide>
         <Slide transition={["zoom"]}>
           <Heading size={1}>Filetypes</Heading>
           <Layout>
             <Fill>
-              <Heading size={5}>SASS</Heading>
-              <CodePane lang="sass">
-                {`
-                nav
-                  ul
-                    margin: 0
-                    padding: 0
-                    list-style: none
+              <Step order="1">
+                <Heading size={5}><Code>.sass</Code></Heading>
+                <CodePane lang="sass">
+                  {`
+                  nav
+                    ul
+                      margin: 0
+                      padding: 0
+                      list-style: none
 
-                  li
-                    display: inline-block
+                    li
+                      display: inline-block
 
-                  a
-                    display: block
-                    padding: 6px 12px
-                    text-decoration: none
-                `}
-              </CodePane>
+                    a
+                      display: block
+                      padding: 6px 12px
+                      text-decoration: none
+                  `}
+                </CodePane>
+              </Step>
             </Fill>
             <Fill>
-              <Heading size={5}>SCSS</Heading>
-              <CodePane lang="scss">
-                {`
-                  nav{
-                    ul{
-                      margin: 0;
-                      padding: 0;
-                      list-style: none;
-                    }
+              <Step order="2">
+                <Heading size={5}><Code>.scss</Code></Heading>
+                <CodePane lang="scss">
+                  {`
+                    nav{
+                      ul{
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                      }
 
-                    li{
-                      display: inline-block;
-                    }
+                      li{
+                        display: inline-block;
+                      }
 
-                    a{
-                      display: block;
-                      padding: 6px 12px;
-                      text-decoration: none;
+                      a{
+                        display: block;
+                        padding: 6px 12px;
+                        text-decoration: none;
+                      }
                     }
-                  }
-                `}
-              </CodePane>
+                  `}
+                </CodePane>
+              </Step>
             </Fill>
           </Layout>
           <Notes>
-            <Note><Code>.sass</Code> which is indention based</Note>
-            <Note><Code>.scss</Code> which looks a lot more like regular CSS</Note>
+            <Note order="1"><Code>.sass</Code> which is indention based</Note>
+            <Note order="2"><Code>.scss</Code> which looks a lot more like regular CSS</Note>
+            <Note>I will be using the <Code>.scss</Code> for the examples because they're easier to read, and look more like <Code>.css</Code></Note>
           </Notes>
         </Slide>
         <Slide transition={["zoom", "slide"]}>
@@ -178,38 +148,42 @@ export default class extends React.Component {
           <Heading className="o-headline" size={2}>Nesting</Heading>
           <Layout>
             <Fill>
-              <CodePane lang="scss">
-                {`
-                  .breadcrumbs {
-                    font-size: .85em;
+              <Step order="1">
+                <CodePane lang="scss">
+                  {`
+                    .breadcrumbs {
+                      font-size: .85em;
 
-                    .crumb {
+                      .crumb {
+                        display: inline-block;
+                        font-size: 1em;
+                        line-height: 1em;
+                        margin-top: 0;
+                        position: relative;
+                      }
+                    }
+                  `}
+                </CodePane>
+              </Step>
+            </Fill>
+            <Fill>
+              <Step order="2">
+                <CodePane lang="css">
+                  {`
+                    .breadcrumbs {
+                      font-size: .85em;
+                    }
+
+                    .breadcrumbs .crumb {
                       display: inline-block;
                       font-size: 1em;
                       line-height: 1em;
                       margin-top: 0;
                       position: relative;
                     }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .breadcrumbs {
-                    font-size: .85em;
-                  }
-
-                  .breadcrumbs .crumb {
-                    display: inline-block;
-                    font-size: 1em;
-                    line-height: 1em;
-                    margin-top: 0;
-                    position: relative;
-                  }
-                `}
-              </CodePane>
+                  `}
+                </CodePane>
+              </Step>
             </Fill>
           </Layout>
         </Slide>
@@ -222,53 +196,57 @@ export default class extends React.Component {
           <Heading className="o-headline" size={3}><Code>&amp;</Code> to the rescue!</Heading>
           <Layout>
             <Fill>
-              <CodePane lang="scss">
-                {`
-                  .breadcrumbs {
-                    font-size: .85em;
+              <Step order="1">
+                <CodePane lang="scss">
+                  {`
+                    .breadcrumbs {
+                      font-size: .85em;
 
-                    &__crumb {
+                      &__crumb {
+                        display: inline-block;
+                        font-size: 1em;
+                        line-height: 1em;
+                        margin-top: 0;
+                        position: relative;
+                        &:not(:first-child):after {
+                          content: "\e6e2a";
+                          margin-top: 50%;
+                          position: absolute;
+                          right: 10px;
+                          top: 50%;
+                        }
+                      }
+                    }
+                  `}
+                </CodePane>
+              </Step>
+            </Fill>
+            <Fill>
+              <Step order="2">
+                <CodePane lang="css">
+                  {`
+                    .breadcrumbs {
+                      font-size: .85em;
+                    }
+
+                    .breadcrumbs__crumb {
                       display: inline-block;
                       font-size: 1em;
                       line-height: 1em;
                       margin-top: 0;
                       position: relative;
-                      &:not(:first-child):after {
-                        content: "\e6e2a";
-                        margin-top: 50%;
-                        position: absolute;
-                        right: 10px;
-                        top: 50%;
-                      }
                     }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .breadcrumbs {
-                    font-size: .85em;
-                  }
 
-                  .breadcrumbs__crumb {
-                    display: inline-block;
-                    font-size: 1em;
-                    line-height: 1em;
-                    margin-top: 0;
-                    position: relative;
-                  }
-
-                  .breadcrumbs__crumb:not(:first-child):after {
-                    content: "\e6e2a";
-                    margin-top: 50%;
-                    position: absolute;
-                    right: 10px;
-                    top: 50%;
-                  }
-                `}
-              </CodePane>
+                    .breadcrumbs__crumb:not(:first-child):after {
+                      content: "\e6e2a";
+                      margin-top: 50%;
+                      position: absolute;
+                      right: 10px;
+                      top: 50%;
+                    }
+                  `}
+                </CodePane>
+              </Step>
             </Fill>
           </Layout>
         </Slide>
@@ -280,30 +258,56 @@ export default class extends React.Component {
           <Layout>
             <Fill>
               <CodePane lang="scss">
-                {`
-                  .c-island {
+                <Highlight>
+                  {`
+                    .c-island {
+                  `}
+                </Highlight>
+                <Highlight className="c-step--grow" order="1" adjust="2">
+                  {`
                     border: 1px solid #e2e2e2 {
                       radius: 6px;
                     };
+                  `}
+                </Highlight>
+                <Highlight className="c-step--grow" order="2" adjust="2">
+                  {`
                     margin: 0 {
                       top: 10px;
                     };
-                    padding: 1.4em;
-                  }
-                `}
+                  `}
+                </Highlight>
+                <Highlight>
+                  {`
+                      padding: 1.4em;
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
             <Fill>
               <CodePane lang="css">
-                {`
-                  .c-island {
+                <Highlight>
+                 {`.c-island {`}
+                </Highlight>
+                <Highlight className="c-step--grow" order="1" adjust="2">
+                  {`
                     border: 1px solid #e2e2e2;
                     border-radius: 6px;
+                  `}
+                </Highlight>
+                <Highlight className="c-step--grow" order="2" adjust="2">
+                  {`
                     margin: 0;
                     margin-top: 10px;
-                    padding: 1.4em;
-                  }
-                `}
+                  `}
+                </Highlight>
+                <Highlight>
+                  {`
+                      padding: 1.4em;
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
           </Layout>
@@ -332,7 +336,9 @@ export default class extends React.Component {
                   }
 
                   @media (min-width: 1024px) {
-                    font-size: 16px;
+                    body {
+                      font-size: 16px;
+                    }
                   }
                 `}
               </CodePane>
@@ -1481,7 +1487,44 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
-
+        {/* Only if there's time */}
+        <Slide>
+          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
+          <Step order="2">
+            <Heading fit size={2}><Link href="https://github.com/sass/libsass">Libsass</Link></Heading>
+          </Step>
+          <Notes>
+            <Note>Libsass is a port of SASS to work with js build tools</Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading>Why <Link href="http://webdesign.tutsplus.com/articles/getting-to-know-libsass--cms-23114">Libsass</Link>?</Heading>
+          <Layout>
+            <Fill>
+              <Heading size={6}>Pros</Heading>
+              <List>
+                <Step order="1">
+                  <ListItem>It's faster!</ListItem>
+                </Step>
+                <Step order="2">
+                  <ListItem>Allows integration with any language</ListItem>
+                </Step>
+                <Step order="3">
+                  <ListItem>Integrates with your favorite build tool</ListItem>
+                </Step>
+              </List>
+            </Fill>
+            <Fill>
+              <Heading size={6}>Cons</Heading>
+              <List>
+                <Step order="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
+              </List>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note step="4">It's not a straight port so there're some inconsistencies but there's a compatiblity site to help out with these inconsistencies</Note>
+          </Notes>
+        </Slide>
 
         {/*
         - Show picture of what we're going to be building
@@ -1515,6 +1558,8 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
+
+      {/*
         <Slide transition={["zoom"]} bgColor="white">
           <Heading size={1} fit caps>
             Spectacle
@@ -1562,25 +1607,6 @@ export default class extends React.Component {
             source={require("raw!./deck.example")}
             margin="20px auto"/>
         </Slide>
-        {
-        // <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
-        //   <Step order="1">
-        //     <Heading size={1} caps fit textColor="primary">
-        //       Full Width
-        //     </Heading>
-        //   </Step>
-        //   <Step order="2">
-        //     <Heading size={1} caps fit textColor="tertiary">
-        //       Adjustable Darkness
-        //     </Heading>
-        //   </Step>
-        //   <Step order="3">
-        //     <Heading size={1} caps fit textColor="primary">
-        //       Background Imagery
-        //     </Heading>
-        //   </Step>
-        // </Slide>
-        }
         <Slide transition={["zoom", "fade"]} bgColor="primary">
           <Heading caps fit>Flexible Layouts</Heading>
           <Layout>
@@ -1632,6 +1658,7 @@ export default class extends React.Component {
           </Heading>
           <Link href="http://www.formidablelabs.com"><Image width="100%" src={images.logo}/></Link>
         </Slide>
+      */}
       </Deck>
     );
   }

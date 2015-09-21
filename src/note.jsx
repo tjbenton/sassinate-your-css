@@ -1,4 +1,5 @@
 import React from "react/addons";
+import Step from "./step";
 
 export default class Note extends React.Component{
   render(){

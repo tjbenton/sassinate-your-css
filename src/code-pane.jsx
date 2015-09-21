@@ -50,13 +50,13 @@ export default CodePane;
 
 export class Highlight extends Base {
   getMarkup(){
-    let {lang, source, children, format = true} = this.props,
+    let {lang, source, children, format = true, adjust = 0} = this.props,
         code = source ? source : children;
     lang = lang === "sass" ? "stylus" : lang === "js" ? "javascript" : lang;
 
     return {
       code: {
-        __html: highlight.highlight(lang, format ? normalize(code) : code).value
+        __html: highlight.highlight(lang, normalize(code, adjust)).value
       },
       lang: ["less", "sass", "scss", "stylus"].indexOf(lang) >= 0 ? `${lang} css` : lang
     };
@@ -80,22 +80,31 @@ export class Highlight extends Base {
   }
 }
 
-function normalize(content){
+function normalize(content, adjust = 5){
+  adjust = ~~adjust;
+  let check_list = ["", " ", "  ", "\n", "\S", "\r"];
   content = content.replace(/(?:\\[rn]+)+/g, "\n").split("\n"); // fix stupid shit windows does and then convert it to an array of lines
+
   // remove lines from the beggining
-  for(let i = 0; i++ && content[i].length === 0;){
-    content.shift();
-  };
+  while(content[0].length === 0 || check_list.indexOf(content[0]) > -1) content.shift();
 
   // remove trailing blank lines
-  for(let i = content.length; i-- && content[i].length === 0;){
-    content.pop();
-  };
+  for(let i = content.length; i-- && content[i].length === 0 || check_list.indexOf(content[i]) > -1;) content.pop();
+  // while(check_list.indexOf(line) > -1) content.pop();
 
-  return content.map(line => line.slice(
-           content.join("\n") // converts content to string to string
-             .match(/^\s*/gm) // gets the extra whitespace at the beginning of the line and returns a map of the spaces
-             .sort((a, b) => a.length - b.length)[0].length // sorts the spaces array from smallest to largest and then checks returns the length of the first item in the array
-         )) // remove extra whitespace from the beginning of each line
-         .join("\n").replace(/[^\S\r\n]+$/gm, ""); // convert to string and remove all trailing white spaces
+  content = content.map(line => line.slice(
+              content.join("\n") // converts content to string to string
+                .match(/^\s*/gm) // gets the extra whitespace at the beginning of the line and returns a map of the spaces
+                .sort((a, b) => a.length - b.length)[0].length // sorts the spaces array from smallest to largest and then checks returns the length of the first item in the array
+              )) // remove extra whitespace from the beginning of each line
+              .join("\n").replace(/[^\S\r\n]+$/gm, ""); // convert to string and remove all trailing white spaces from each line
+
+  if(!!adjust){
+    let spacing = "";
+    while(adjust--) spacing += " ";
+
+    return content.split("\n").filter(Boolean).map((line) => spacing + line).join("\n");
+  }
+
+  return content;
 }

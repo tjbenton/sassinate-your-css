@@ -12,6 +12,15 @@
     }
   }
 
+  &--grow{
+    height: 0;
+    overflow: hidden;
+    &.is-visible{
+      height: auto;
+      overflow: visible;
+    }
+  }
+
   &--current{
     &.is-visible{
       opacity: 0;
