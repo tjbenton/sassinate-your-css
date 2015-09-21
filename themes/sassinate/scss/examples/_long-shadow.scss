@@ -1,0 +1,30 @@
+@function longshadow($color, $length: 200, $x: right, $y: bottom, $iterator: 6) {
+ $val: 0px 0px $color;
+ $i: $iterator;
+ @while $length > $i{
+  $val: #{$val}, if($x == right, #{$i}px, #{$i * -1}px) if($y == bottom, #{$i}px, #{$i * -1}px) #{$color};
+  $i: $i + $iterator;
+ }
+ @return $val;
+}
+
+.long-shadow-example{
+ background: color(secondary);
+ overflow: hidden;
+
+ %text-shadow-heading{
+  line-height: 1;
+  margin: 0;
+  color: darken(white, 6%);
+ }
+
+ .c-h1{
+  @extend %text-shadow-heading;
+  text-shadow: longshadow(darken(color(secondary), 5%), 1000, $iterator: 6);
+ }
+
+ .c-h3{
+  @extend %text-shadow-heading;
+  text-shadow: longshadow(darken(color(secondary), 10%), 1000, $iterator: 6);
+ }
+}

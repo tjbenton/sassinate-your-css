@@ -1,0 +1,124 @@
+$loader: (
+  duration: 2s,
+  size: 2em,
+  gutter: 1em,
+  grid-size: 3,
+  offset: 1,
+  color: color(tertiary),
+  special-trail-color: #d1436b,
+  special-color: color(secondary, 3)
+);
+
+// diagonal loading order
+$diagonal-loading-order: (
+  (-1, -1),
+  (-1, 0),
+  (0, -1),
+  (-1, 1),
+  (0, 0),
+  (1, -1),
+  (0, 1),
+  (1, 0),
+  (1, 1)
+);
+
+$horizontal-loading-order: (
+  (-1, -1),
+  (0, -1),
+  (1, -1),
+  (-1, 0),
+  (0, 0),
+  (1, 0),
+  (-1, 1),
+  (0, 1),
+  (1, 1)
+);
+
+@function loader($a){
+  @return map-get($loader, $a);
+}
+
+@function plot($x: 0, $y: 0, $box-size: loader(size), $gutter: loader(gutter)){
+  $next: $box-size + $gutter;
+  $x: if($x == 0, $x, $x * $next);
+  $y: if($y == 0, $y, $y * $next) * -1;
+
+  @return $x $y 0 $box-size / 2;
+}
+
+
+// Loader
+.loader-example{
+  $loader-size: (loader(size) * loader(grid-size)) + (loader(gutter) * (loader(grid-size) - 1));
+  border-radius: 50%;
+  box-shadow: 0 0 5em $loader-size rgba(color(secondary, 2), .35);
+  height: 0;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  width: 0;
+  &:before{
+    animation:
+      loader map-get($loader, duration) linear forwards infinite,
+      loader-bg map-get($loader, duration) linear forwards infinite
+    ;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 2px; // set to `0` if you are using a square
+    left: 50%;
+    width: 2px; // set to `0` if you are using a square
+    top: 50%;
+  }
+}
+
+// only neccissary if you want a border-radius on the box-shadow
+@keyframes loader-bg{
+  26%, 65%{
+    background: loader(color);
+  }
+}
+
+@mixin loader-shadow($offset-number: 1, $modifier: 1, $length: 9, $plot-map: $diagonal-loading-order){
+  $val: ();
+
+  @for $i from 1 through $length{
+    $color: loader(color);
+    $offset: 0;
+    $this-plot: nth($plot-map, $i);
+
+    @if $i == $length{
+      $color: loader(special-color);
+    }
+
+    @if $i == $offset-number{
+      $offset: loader(offset) * $modifier;
+    }
+
+    $opacity: if(if($modifier > 0, $i < $offset-number, $i > $offset-number), 1, 0);
+
+    $shadow: plot(nth($this-plot, 1), nth($this-plot, 2) + $offset) rgba($color, $opacity);
+
+    $val: $val, $shadow;
+  }
+
+  box-shadow: $val;
+}
+
+@mixin loader-frames($percent: 0%, $modifier: 1, $increment: 5%, $length: 9){
+  @for $i from 1 through 9{
+    #{$percent}{
+      @include loader-shadow($i, $modifier);
+    }
+    $percent: $percent + $increment;
+  }
+}
+
+@keyframes loader{
+  @include loader-frames();
+  45%, 55%{
+    @include loader-shadow(10);
+  }
+  @include loader-frames(60%, -1);
+}
