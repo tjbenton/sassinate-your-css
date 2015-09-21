@@ -87,8 +87,8 @@ const Slide = React.createClass({
         maxHeight: config.height,
         width: config.width,
         fontSize: 16 * this.state.zoom,
-        transform: " translate(-50%,-50%) scale(" + this.state.contentScale + ")",
-        padding: this.state.zoom > 0.6 ? config.margin : 10
+        transform: " translate(-50%,-50%) scale(" + this.state.contentScale + ")"
+        // padding: this.state.zoom > 0.6 ? config.margin : 10
       }
     };
 
@@ -106,7 +106,7 @@ const Slide = React.createClass({
         ]}
       >
         <div className="c-slide__wrapper" style={[styles.inner]}>
-          <div ref="content" className="c-slide__content" style={[styles.content, this.context.styles.components.content]}>
+          <div ref="content" className="c-slide__content" style={[styles.content]}>
             {this.props.children}
           </div>
         </div>
