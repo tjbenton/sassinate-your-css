@@ -343,6 +343,14 @@ export default class extends React.Component {
           </Layout>
         </Slide>
         <Slide>
+          <Heading className="o-headline" size={2}>Be smart about it</Heading>
+          <List>
+            <ListItem>Never go more then 3 levels deep.</ListItem>
+            <ListItem>Ensure the CSS output is clean and reusable.</ListItem>
+            <ListItem>Use nesting when it makes sense to, not as a default option.</ListItem>
+          </List>
+        </Slide>
+        <Slide>
           <Heading className="o-headline" size={2}>Keyframes</Heading>
           <Layout>
             <Fill>
@@ -402,7 +410,6 @@ export default class extends React.Component {
         <Slide>
           Mind Blown
         </Slide>
-
         <Slide>
           <Heading className="o-headline" size={2}>Variables</Heading>
           <Layout>
