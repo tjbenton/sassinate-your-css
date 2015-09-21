@@ -9,9 +9,20 @@
   transform: translate3d(0%, 0%, 0%);
   width: 100%;
   z-index: 1;
-  @each $color in (primary, secondary, tertiary){
-    &--#{$color}{
-      background: color($color);
+
+  @each $theme in (primary, secondary, tertiary){
+    &.t-#{$theme}{
+      background: color($theme);
+    }
+  }
+
+  &.t-secondary{
+    color: white;
+  }
+
+  &--stretch{
+    .c-slide__content{
+      height: 100%;
     }
   }
 
@@ -24,7 +35,12 @@
   &__content{
     flex: 1;
     left: 50%;
+    margin: auto;
+    max-height: 700px;
+    max-width: 1000px;
+    padding: map-get($config, spacing);
     position: absolute;
+    text-align: center;
     top: 50%;
   }
 }

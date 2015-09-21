@@ -33,6 +33,10 @@ $config: (
  padding: 10px
 );
 
+$easing: (
+ swift: cubic-bezier(.55, 0, .1, 1),
+ bounce: cubic-bezier(.19, 1.32, .48, 1)
+);
 
 // @author Tyler Benton
 // @page helpers/variables

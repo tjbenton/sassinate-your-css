@@ -1,4 +1,11 @@
 .u-fill{
   flex: 1;
   margin-top: 0;
+  position: relative;
+  
+  &--center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

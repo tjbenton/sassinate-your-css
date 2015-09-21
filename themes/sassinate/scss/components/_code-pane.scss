@@ -1,12 +1,12 @@
 .c-code-pane{
   font: {
     family: map-get($fonts, tertiary);
-    size: 1em;
+    size: .85em;
     weight: 400;
   }
   &__wrapper{
     font-weight: 400;
-    padding: 20px;
+    padding: 10px;
     text-align: left;
   }
   &__code, &__step{
