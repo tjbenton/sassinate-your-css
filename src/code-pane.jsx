@@ -50,12 +50,13 @@ export default CodePane;
 
 export class Highlight extends Base {
   getMarkup(){
-    let {lang, source, children } = this.props;
+    let {lang, source, children, format = true} = this.props,
+        code = source ? source : children;
     lang = lang === "sass" ? "stylus" : lang === "js" ? "javascript" : lang;
 
     return {
       code: {
-        __html: highlight.highlight(lang, normalize(source ? source : children)).value
+        __html: highlight.highlight(lang, format ? normalize(code) : code).value
       },
       lang: ["less", "sass", "scss", "stylus"].indexOf(lang) >= 0 ? `${lang} css` : lang
     };
