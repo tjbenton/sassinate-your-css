@@ -58,14 +58,11 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["slide"]}>
          <Heading fit size={1}>What is SASS?</Heading>
-         <Step order="1" animateIn="bounce-in-left" animateOut="bounce-out">
+         <Step order="1" style={{marginTop: "-.5em"}} animateIn="bounce-in-left" animateOut="bounce-out">
            <Heading fit size={5}>CSS preprocessor</Heading>
          </Step>
-         <Step order="2" animateIn="bounce-in-down" animateOut="bounce-out-down">
+         <Step order="2" style={{marginTop: "-.5em"}} animateIn="bounce-in-down" animateOut="bounce-out-down">
            <Heading fit size={4}>Built in Ruby</Heading>
-         </Step>
-         <Step order="3" animateIn="bounce-in-right" animateOut="bounce-out">
-           <Heading fit size={6}><Link href="http://sass-lang.com/">Syntactically Awesome Stylesheets</Link></Heading>
          </Step>
          <Notes>
            <Note step="1">CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</Note>
