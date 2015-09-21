@@ -14,10 +14,6 @@ module.exports = {
   colors: colors,
   fonts: fonts,
   components: {
-    content: {
-      margin: "auto",
-      textAlign: "center"
-    },
     image: {
       display: "block",
       margin: "0.5em auto"
