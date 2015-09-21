@@ -22,7 +22,7 @@
     "react": "^0.13.3",
     "react-router": "^1.0.0-beta2",
     "react-tween-state": "0.0.5",
-    "tween-functions": "^1.0.2"
+    "tween-functions": "^1.0.2",
   },
   "devDependencies": {
     "autoprefixer": "^5.2.0",
@@ -43,6 +43,7 @@
     "postcss-loader": "^0.6.0",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^1.2.7",
+    "react-tween-state": "0.0.5",
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.3",
     "surge": "latest",
