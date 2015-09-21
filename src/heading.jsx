@@ -77,7 +77,10 @@ Heading.defaultProps = {
 
 Heading.propTypes = {
   children: React.PropTypes.node,
-  size: React.PropTypes.number
+  size: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
 };
 
 Heading.contextTypes = {
