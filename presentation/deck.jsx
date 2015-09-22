@@ -134,15 +134,150 @@ export default class extends React.Component {
           <List style={{
               columnCount: 2
             }}>
-            <Step order="1"><ListItem>Nesting</ListItem></Step>
-            <Step order="2"><ListItem>Variables</ListItem></Step>
-            <Step order="3"><ListItem>Placeholders</ListItem></Step>
-            <Step order="4"><ListItem>Mixins</ListItem></Step>
-            <Step order="5"><ListItem>Functions</ListItem></Step>
-            <Step order="6"><ListItem>Conditionals</ListItem></Step>
-            <Step order="7"><ListItem>Loops</ListItem></Step>
-            <Step order="8"><ListItem>Partials</ListItem></Step>
+            <Step order="1"><ListItem>Partials</ListItem></Step>
+            <Step order="2"><ListItem>Nesting</ListItem></Step>
+            <Step order="3"><ListItem>Variables</ListItem></Step>
+            <Step order="4"><ListItem>Placeholders</ListItem></Step>
+            <Step order="5"><ListItem>Mixins</ListItem></Step>
+            <Step order="6"><ListItem>Functions</ListItem></Step>
+            <Step order="7"><ListItem>Conditionals</ListItem></Step>
+            <Step order="8"><ListItem>Loops</ListItem></Step>
           </List>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size="1">Partials</Heading>
+        </Slide>
+        <Slide>
+          <Layout>
+            <Fill>
+              <Heading size="6"><Code>_navigation.scss</Code></Heading>
+              <CodePane lang="scss">
+                {`
+                  nav{
+                    background: $secondary-color;
+
+                    ul{
+                      margin: 0;
+                      padding: 0;
+                      list-style: none;
+                    }
+
+                    li{
+                      display: inline-block;
+                    }
+
+                    a{
+                      display: block;
+                      text-decoration: none;
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <Heading size="6"><Code>_variables.scss</Code></Heading>
+              <CodePane lang="scss">
+                {`
+                  $secondary-color: #31adb8;
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>Partials are indicated by <Code>_</Code></Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading className="o-headline" size="3">Importing partials</Heading>
+          <Layout>
+            <Fill>
+              <Heading size="4"><Code>main.scss</Code></Heading>
+              <CodePane lang="scss">
+                {`
+                  @import "variables",
+                          "navigation";
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <Heading size="4"><Code>main.css</Code></Heading>
+              <CodePane lang="css">
+                {`
+                  nav {
+                    background: #31adb8;
+                  }
+                  nav ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+                  nav li {
+                    display: inline-block;
+                  }
+                  nav a {
+                    display: block;
+                    text-decoration: none;
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>Partials are indicated by <Code>_</Code></Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .
+                  ├── base
+                  │   ├── _index.scss
+                  │   └── ...
+                  ├── components
+                  │   ├── _index.scss
+                  │   └── ...
+                  ├── helpers
+                  │   ├── functions/
+                  │   ├── mixins/
+                  │   ├── _index.scss
+                  │   └── _variables.scss
+                  ├── objects
+                  │   ├── _index.scss
+                  │   └── ...
+                  ├── pages
+                  │   ├── home.scss
+                  │   └── ...
+                  ├── scopes
+                  │   ├── _index.scss
+                  │   └── ...
+                  ├── utilities
+                  │   ├── _index.scss
+                  │   └── ...
+                  └── site.scss
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  // site.scss
+                  @import "helpers/index",
+                          "base/index",
+                          "layout/index",
+                          "objects/index",
+                          "components/index",
+                          "utilities/index",
+                          "scopes/index",
+                          "dev/index";
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Heading size="3">SourceMaps</Heading>
         </Slide>
         <Slide>
           <Heading className="o-headline" size={2}>Nesting</Heading>
