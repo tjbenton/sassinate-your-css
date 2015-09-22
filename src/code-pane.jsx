@@ -80,17 +80,28 @@ export class Highlight extends Base {
   }
 }
 
-function normalize(content, adjust = 5){
+
+/// @name normalize
+/// @author Tyler Benton
+/// @description
+///  - Removes trailing/leading blank lines
+///  - Removes extra whitespace before all the lines that are passed without affecting the
+///    formatting of the passes string.
+///  - Then removes trailing whitespace at the end of each line.
+///
+/// @arg {string} content - The content you want to be normalized
+/// @arg {number} adjust [0] - The amount of indention to add on the beginning as an override
+/// 
+/// @returns {string} - The normalized string
+function normalize(content, adjust = 0){
   adjust = ~~adjust;
-  let check_list = ["", " ", "  ", "\n", "\S", "\r"];
   content = content.replace(/(?:\\[rn]+)+/g, "\n").split("\n"); // fix stupid shit windows does and then convert it to an array of lines
 
-  // remove lines from the beggining
-  while(content[0].length === 0 || check_list.indexOf(content[0]) > -1) content.shift();
+  // remove lines from the beginning
+  while(!!!content[0].trim().length) content.shift();
 
   // remove trailing blank lines
-  for(let i = content.length; i-- && content[i].length === 0 || check_list.indexOf(content[i]) > -1;) content.pop();
-  // while(check_list.indexOf(line) > -1) content.pop();
+  while(!!!content[content.length - 1].trim().length) content.pop();
 
   content = content.map(line => line.slice(
               content.join("\n") // converts content to string to string
@@ -103,7 +114,7 @@ function normalize(content, adjust = 5){
     let spacing = "";
     while(adjust--) spacing += " ";
 
-    return content.split("\n").filter(Boolean).map((line) => spacing + line).join("\n");
+    return content.split("\n").map((line) => spacing + line).join("\n");
   }
 
   return content;
