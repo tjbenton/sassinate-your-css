@@ -20,11 +20,11 @@
 
  .c-h1{
   @extend %text-shadow-heading;
-  text-shadow: longshadow(darken(color(secondary), 5%), 1000, $iterator: 6);
+  text-shadow: longshadow(darken(color(secondary), 5%), 1000, $iterator: 2);
  }
 
  .c-h3{
   @extend %text-shadow-heading;
-  text-shadow: longshadow(darken(color(secondary), 10%), 1000, $iterator: 6);
+  text-shadow: longshadow(darken(color(secondary), 10%), 1000, $iterator: 2);
  }
 }
