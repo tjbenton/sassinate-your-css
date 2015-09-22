@@ -67,7 +67,7 @@ export class Highlight extends Base {
 
     if(this.props.order){
       return (
-        <Step order={this.props.order} className={`c-code-pane__step ${this.props.className}`}>
+        <Step order={~~this.props.order} className={`c-code-pane__step ${this.props.className}`}>
           <code className={`c-code-pane__code hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
         </Step>
       );
