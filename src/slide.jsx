@@ -38,14 +38,14 @@ const Slide = React.createClass({
     };
   },
   setZoom(){
-    const content = React.findDOMNode(this.refs.content);
-    const zoom = (content.offsetWidth / config.width);
-    const contentScaleY = (content.parentNode.offsetHeight / config.height);
-    const contentScaleX = (content.parentNode.offsetWidth / config.width);
-    const contentScale = Math.min(contentScaleY, contentScaleX);
+    const content = React.findDOMNode(this.refs.content),
+          height = ~~window.getComputedStyle(content, null).getPropertyValue("max-height").replace("px", ""),
+          width = ~~window.getComputedStyle(content, null).getPropertyValue("width").replace("px", ""),
+          zoom = (content.offsetWidth / width),
+          contentScale = Math.min((content.parentNode.offsetHeight / height), (content.parentNode.offsetWidth / width));
     this.setState({
       zoom: zoom > 0.6 ? zoom : 0.6,
-      contentScale: contentScale < 1 ? contentScale : 1
+      contentScale: contentScale < 1.75 ? contentScale : 1.75
     });
   },
   componentDidMount(){
@@ -84,8 +84,6 @@ const Slide = React.createClass({
         justifyContent: this.props.align ? this.props.align.split(" ")[0] : "center"
       },
       content: {
-        maxHeight: config.height,
-        width: config.width,
         fontSize: 16 * this.state.zoom,
         transform: " translate(-50%,-50%) scale(" + this.state.contentScale + ")"
         // padding: this.state.zoom > 0.6 ? config.margin : 10
