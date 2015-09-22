@@ -33,14 +33,15 @@
   }
 
   &__content{
+    $width: 1000px;
     flex: 1;
     left: 50%;
     margin: auto;
-    max-height: 700px;
-    max-width: 1000px;
+    max-height: $width / (16 / 9);
     padding: map-get($config, spacing);
     position: absolute;
     text-align: center;
     top: 50%;
+    width: $width;
   }
 }
