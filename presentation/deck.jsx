@@ -71,6 +71,9 @@ export default class extends React.Component {
            <Note step="3">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
+        <Slide>
+          <Heading size={2}><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
+        </Slide>
         <Slide transition={["zoom"]}>
           <Heading size={1}>Filetypes</Heading>
           <Layout>
@@ -545,17 +548,22 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
-        <Slide>
-          Mind Blown
-        </Slide>
+        {/*
+          <Slide>
+            Mind Blown
+          </Slide>
+        */}
         <Slide>
           <Heading className="o-headline" size={2}>Variables</Heading>
           <Layout>
             <Fill>
               <CodePane lang="scss">
                 {`
+                  /* @todo add \`!default\`, and \`!global\`*/
+                  /* @todo add an example of a string, value(14px), list, map, boolean */
                   $font-size: 14px;
-                  body{
+
+                  body {
                     font-size: $font-size;
                   }
                 `}
@@ -564,7 +572,7 @@ export default class extends React.Component {
             <Fill>
               <CodePane lang="css">
                 {`
-                  body{
+                  body {
                     font-size: 14px;
                   }
                 `}
@@ -580,50 +588,75 @@ export default class extends React.Component {
           <Layout>
             <Fill>
               <CodePane lang="scss">
-                {`
-                  $font-size: 14px;
+                <Highlight>
+                  {`
+                    /* @todo simplify */
+                    $font-size: 14px;
 
-                  body {
-                    font-size: $font-size;
-
+                    body {
+                      font-size: $font-size;
+                  `}
+                </Highlight>
+                <Highlight order="2" className="c-step--grow" adjust="2">
+                  {`
                     @media (min-width: 1024px) {
                       $font-size: 16px; // scoped to this media query globally
                       font-size: $font-size;
                     }
-                  }
+                  `}
+                </Highlight>
+                <Highlight>
+                  {`
+                    }
+                  `}
+                </Highlight>
+                <Highlight order="1" className="c-step--grow">
+                  {`
+                    .container {
+                      $font-size: 12px; // scoped to \`.container\`
+                      font-size: $font-size;
 
-                  .container {
-                    $font-size: 12px; // scoped to \`.container\`
-                    font-size: $font-size;
-                  }
+                      @media (min-width: 1024px) {
+                        font-size: $font-size;
+                      }
+                    }
 
-                  .component {
-                    font-size: $font-size; // uses the default value
-                  }
-                `}
+                    .component {
+                      font-size: $font-size; // uses the default value
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
             <Fill>
               <CodePane lang="css">
-                {`
-                  body {
-                    font-size: 14px;
-                  }
-
-                  @media (min-width: 1024px) {
+                <Highlight>
+                  {`
                     body {
-                      font-size: 16px;
+                      font-size: 14px;
                     }
-                  }
+                  `}
+                </Highlight>
+                <Highlight order={2} className="c-step--grow">
+                  {`
+                    @media (min-width: 1024px) {
+                      body {
+                        font-size: 16px;
+                      }
+                    }
+                  `}
+                </Highlight>
+                <Highlight order="1">
+                  {`
+                    .container {
+                      font-size: 12px;
+                    }
 
-                  .container {
-                    font-size: 12px;
-                  }
-
-                  .component {
-                    font-size: 14px;
-                  }
-                `}
+                    .component {
+                      font-size: 14px;
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
           </Layout>
@@ -646,7 +679,7 @@ export default class extends React.Component {
                   }
 
                   .container {
-                    background: blue
+                    background: blue;
                     margin: 0;
                     padding: 1.4em;
                   }
@@ -657,7 +690,7 @@ export default class extends React.Component {
               <CodePane lang="css">
                 {`
                   .container {
-                    background: blue
+                    background: blue;
                     margin: 0;
                     padding: 1.4em;
                   }
@@ -690,7 +723,7 @@ export default class extends React.Component {
 
                   .container {
                     @extend %clear;
-                    background: blue
+                    background: blue;
                     margin: 0;
                     padding: 1.4em;
                   }
@@ -729,15 +762,6 @@ export default class extends React.Component {
             <Fill>
               <CodePane lang="scss">
                 {`
-                  /* clear placeholder */
-                  %clear {
-                    &:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
-                  }
-
                   .card{
                     display: block;
                     background: #fff;
@@ -944,7 +968,7 @@ export default class extends React.Component {
               <CodePane lang="scss">
                 {`
                   @mixin media($width) {
-                    @media only screen and (max-width: $width) {
+                    @media only screen and (min-width: $width) {
                       @content;
                     }
                   }
@@ -960,7 +984,19 @@ export default class extends React.Component {
               </CodePane>
             </Fill>
             <Fill>
-              <CodePane lang="scss"></CodePane>
+              <CodePane lang="css">
+                {`
+                  .container {
+                    padding: 10px;
+                  }
+
+                  @media only screen and (min-width: 800px) {
+                    .container {
+                      padding: 30px;
+                    }
+                  }
+                `}
+              </CodePane>
             </Fill>
           </Layout>
           <Notes>
@@ -969,41 +1005,76 @@ export default class extends React.Component {
         </Slide>
         <Slide>
           <Heading className="o-headline" size="3">Misusing Mixins</Heading>
-          <CodePane lang="scss">
-            {`
-              @mixin box-shadow($shadows...){
-                -webkit-box-shadow: $shadows;
-                -moz-box-shadow: $shadows;
-                box-shadow: $shadows;
-              }
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  @mixin box-shadow($shadows...){
+                    -webkit-box-shadow: $shadows;
+                    -moz-box-shadow: $shadows;
+                    box-shadow: $shadows;
+                  }
 
-              @mixin opacity($opacity) {
-                opacity: $opacity;
-                $ie-opacity: $opacity * 100;
-                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie-opacity})"; // IE5-7
-                filter: alpha(opacity=$ie-opacity); // IE8
-              }
+                  @mixin transform($transforms...){
+                    -webkit-transform: scale($transforms);
+                    -moz-transform: scale($transforms);
+                    -ms-transform: scale($transforms);
+                    transform: scale($transforms);
+                  }
 
-              .container{
-                @include box-shadow(0 0 10px #e2e2e2);
-                @include opacity(.5);
-              }
-            `}
-          </CodePane>
+                  .container{
+                    @include box-shadow(0 0 10px #e2e2e2);
+                    @include transform(scale(.5));
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .container {
+                    -webkit-box-shadow: 0 0 10px #e2e2e2;
+                    -moz-box-shadow: 0 0 10px #e2e2e2;
+                    box-shadow: 0 0 10px #e2e2e2;
+                    -webkit-transform: scale(0.5);
+                    -moz-transform: scale(0.5);
+                    -ms-transform: scale(0.5);
+                    transform: scale(0.5);
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
           <Notes>
             <Note>Don't use mixins to add prefixes, there're libraries already out there that will do it for you.</Note>
           </Notes>
         </Slide>
         <Slide>
           <Heading center size="4"><Link href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</Link> all the things!!</Heading>
-          <CodePane lang="scss">
-            {`
-              .container{
-                border-radius: 0 0 10px #e2e2e2;
-                opacity: .5;
-              }
-            `}
-          </CodePane>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  .container {
+                    box-shadow: 0 0 10px #e2e2e2;
+                    transform: scale(0.5);
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .container {
+                    box-shadow: 0 0 10px #e2e2e2;
+                    -webkit-transform: scale(0.5);
+                    -ms-transform: scale(0.5);
+                    transform: scale(0.5);
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
         </Slide>
         <Slide>
           <Heading className="o-headline" size="2">Functions</Heading>
@@ -1112,94 +1183,102 @@ export default class extends React.Component {
           </Layout>
         </Slide>
         <Slide>
-          <Heading size="4">Mixing it up</Heading>
-          <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  $breakpoints: (
-                    sm: 600px,
-                    md: 900px,
-                    lg: 1200px
-                  );
+          <Heading size="4">Enhance mixins with functions</Heading>
+        </Slide>
+        <Slide>
+          <CodePane lang="scss">
+            {`
+              $breakpoints: (
+                sm: 600px,
+                md: 900px,
+                lg: 1200px
+              ) !default;
 
-                  @mixin media($size) {
-                    @if type-of($size) == "string"{
-                      $size: map-get($breakpoints, $size);
-                    }
+              @mixin media($size, $type: "min-width") {
+                @if type-of($size) == "string" {
+                  $size: map-get($breakpoints, $size);
+                }
 
-                    @media only screen and (max-width: $size) {
-                      @content;
-                    }
-                  }
-
-                  .container{
-                    padding: 10px;
-
-                    @include media(sm) {
-                      padding: 30px;
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    padding: 10px;
-                  }
-
-                  @media only screen and (max-width: 568px) {
-                    .container {
-                      padding: 30px;
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-          </Layout>
+                @media only screen and (#{$type}: $size) {
+                  @content;
+                }
+              }
+            `}
+          </CodePane>
           <Notes>
             <Note>You can use functions inside of mixins, but you can't use mixins inside of functions</Note>
           </Notes>
         </Slide>
         <Slide>
-          <Heading size="6">Did I mention nesting wasn't just for selectors?</Heading>
-          <Layout>
+          <Layout style={{fontSize: ".85em"}}>
             <Fill>
               <CodePane lang="scss">
-                {`
-                  .container{
-                    padding: 10px;
+                <Highlight>
+                  {`
+                    .container {
+                      padding: 10px;
 
-                    @include media(md) {
-                      @include media(lg) {
-                        padding: 50px;
+                      @include media(sm) {
+                        padding: 30px;
+                  `}
+                </Highlight>
+                <Highlight className="c-step--grow" order="1" adjust="4">
+                  {`
+                    @include media(lg, "max-width") {
+                      background: red;
+
+                      section {
+                        margin-top: 1.5em
                       }
                     }
-                  }
-                `}
+                  `}
+                </Highlight>
+                <Highlight>
+                  {`
+                      }
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
-            <Fill>
+            <Fill style={{flex: 2}}>
               <CodePane lang="css">
-                {`
-                  .container {
-                    padding: 10px;
-                  }
-
-                  @media only screen and (max-width: 768px) and (max-width: 1024px) {
+                <Highlight>
+                  {`
                     .container {
-                      padding: 50px;
+                      padding: 10px;
                     }
-                  }
-                `}
+
+                    @media only screen and (min-width: 600px) {
+                      .container {
+                        padding: 30px;
+                      }
+                    }
+                  `}
+                </Highlight>
+                <Highlight order="1">
+                  {`
+                    @media only screen and (min-width: 600px) and (max-width: 1200px) {
+                      .container {
+                        background: red;
+                      }
+
+                      .container section {
+                        margin-top: 1.5em
+                      }
+                    }
+                  `}
+                </Highlight>
               </CodePane>
             </Fill>
           </Layout>
+          <Notes>
+            <Note>You can use functions inside of mixins, but you can't use mixins inside of functions</Note>
+            <Note order="1">Did I mention nesting wasn't just for selectors?</Note>
+          </Notes>
         </Slide>
         <Slide>
-          <Heading size="4"><Link href="http://include-media.com/">@include-media</Link></Heading>
+          <Heading size="4"><Link href="http://include-media.com/">include-media.com</Link></Heading>
           <Text>For more media query features</Text>
         </Slide>
         <Slide>
@@ -1211,9 +1290,14 @@ export default class extends React.Component {
           </List>
         </Slide>
         <Slide>
-          <Heading size="3"><Code>@for</Code></Heading>
+          <Heading size="5" style={{fontSize: "3em"}}><Code>{`@for $var from <start> through <end>`}</Code></Heading>
+          <Notes>
+            <Note><Code>{`@for $var from <start> through <end>`}</Code> which starts at <Code>{`<start>`}</Code> and loops "through" each iteration and ends at <Code>{`<end>`}</Code></Note>
+          </Notes>
+        </Slide>
+        <Slide>
           <Layout>
-            <Fill>
+            <Fill style={{flex: 2}}>
               <CodePane lang="scss">
                 {`
                   .col{
@@ -1258,126 +1342,11 @@ export default class extends React.Component {
               </CodePane>
             </Fill>
           </Layout>
-          <Notes>
-            <Note>
-              <Note><Code>{`@for $var from <start> through <end>`}</Code> which starts at <Code>{`<start>`}</Code> and loops "through" each iteration and ends at <Code>{`<end>`}</Code></Note>
-            </Note>
-          </Notes>
-        </Slide>
-        <Slide>
-          <Heading size="3"><Code>@each</Code> with lists</Heading>
-          <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  $authors: ("Tyler", "Aaron", "Jessica", "Mike");
-
-                  .avatar{
-                    background: url(avatars/default.png) no-repeat;
-
-                    @each $author in $authors{
-                      $author: to-lower-case($author);
-
-                      &--#{$author}{
-                        background-image: url(avatars/#{$author}.png);
-                      }
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .avatar {
-                    background: url(avatars/default.png) no-repeat;
-                  }
-
-                  .avatar--tyler {
-                    background-image: url(avatars/tyler.png);
-                  }
-
-                  .avatar--aaron {
-                    background-image: url(avatars/aaron.png);
-                  }
-
-                  .avatar--jessica {
-                    background-image: url(avatars/jessica.png);
-                  }
-
-                  .avatar--mike {
-                    background-image: url(avatars/mike.png);
-                  }
-                `}
-              </CodePane>
-            </Fill>
-          </Layout>
-          <Notes>
-            <Note>
-              <Note>The <Code>@each</Code> directive takes the form <Code>{`@each $var in <list>`}</Code>.</Note>
-            </Note>
-          </Notes>
-        </Slide>
-        <Slide>
-          <Heading size="3"><Code>@each</Code> with maps</Heading>
-          <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  $social-media: (
-                    facebook: #365397,
-                    twitter: #00a9f1,
-                    google-plus: #e0452c,
-                    pinterest: #ce1a19,
-                    instagram: #396d9a,
-                    youtube: #ff3333
-                  );
-
-                  .social{
-                    @each $social-platform, $color in $social-media{
-                      &--#{$social-platform}{
-                        color: $color;
-                      }
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .social--facebook {
-                    color: #365397;
-                  }
-                  .social--twitter {
-                    color: #00a9f1;
-                  }
-                  .social--google-plus {
-                    color: #e0452c;
-                  }
-                  .social--pinterest {
-                    color: #ce1a19;
-                  }
-                  .social--instagram {
-                    color: #396d9a;
-                  }
-                  .social--youtube {
-                    color: #ff3333;
-                  }
-                `}
-              </CodePane>
-            </Fill>
-          </Layout>
-          <Notes>
-            <Note>
-              <Note>The <Code>@each</Code> directive takes the form <Code>{`@each $key, $value in <map>`}</Code>.</Note>
-            </Note>
-          </Notes>
         </Slide>
         <Slide>
           <Heading size="3"><Code>@while</Code></Heading>
           <Layout>
-            <Fill>
+            <Fill style={{flex: 1.5}}>
               <CodePane lang="scss">
                 {`
                   .col{
@@ -1427,6 +1396,100 @@ export default class extends React.Component {
             <Note>The <Code>@while</Code> directive takes a SassScript expression, and will continue to loop until the expression is false</Note>
           </Notes>
         </Slide>
+        <Slide>
+          <Heading size="3"><Code>@each</Code> with lists</Heading>
+          <Layout>
+            <Fill>
+              <CodePane lang="scss">
+                {`
+                  $authors: ("Tyler", "Aaron", "Jessica", "Mike");
+
+                  .avatar{
+                    background: url(avatars/default.png) no-repeat;
+
+                    @each $author in $authors{
+                      $author: to-lower-case($author);
+
+                      &--#{$author}{
+                        background-image: url(avatars/#{$author}.png);
+                      }
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .avatar {
+                    background: url(avatars/default.png) no-repeat;
+                  }
+                  .avatar--tyler {
+                    background-image: url(avatars/tyler.png);
+                  }
+                  .avatar--aaron {
+                    background-image: url(avatars/aaron.png);
+                  }
+                  .avatar--jessica {
+                    background-image: url(avatars/jessica.png);
+                  }
+                  .avatar--mike {
+                    background-image: url(avatars/mike.png);
+                  }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>
+              <Note>The <Code>@each</Code> directive takes the form <Code>{`@each $var in <list>`}</Code>.</Note>
+            </Note>
+          </Notes>
+        </Slide>
+        <Slide>
+          <Heading size="3"><Code>@each</Code> with maps</Heading>
+          <Layout>
+            <Fill style={{flex: 1.2}}>
+              <CodePane lang="scss">
+                {`
+                  $social-media: (
+                    facebook: #365397,
+                    twitter: #00a9f1,
+                    google-plus: #e0452c,
+                    pinterest: #ce1a19,
+                    instagram: #396d9a,
+                    youtube: #ff3333
+                  );
+
+                  .social{
+                    @each $social-platform, $color in $social-media{
+                      &--#{$social-platform}{
+                        color: $color;
+                      }
+                    }
+                  }
+                `}
+              </CodePane>
+            </Fill>
+            <Fill>
+              <CodePane lang="css">
+                {`
+                  .social--facebook { color: #365397; }
+                  .social--twitter { color: #00a9f1; }
+                  .social--google-plus { color: #e0452c; }
+                  .social--pinterest { color: #ce1a19; }
+                  .social--instagram { color: #396d9a; }
+                  .social--youtube { color: #ff3333; }
+                `}
+              </CodePane>
+            </Fill>
+          </Layout>
+          <Notes>
+            <Note>
+              <Note>The <Code>@each</Code> directive takes the form <Code>{`@each $key, $value in <map>`}</Code>.</Note>
+            </Note>
+          </Notes>
+        </Slide>
         <Slide className="long-shadow-example">
           <Heading fit size="1">Long Shadows</Heading>
           <Heading fit size="3">Sass function for Long Shadows</Heading>
@@ -1436,6 +1499,7 @@ export default class extends React.Component {
           <CodePane lang="scss">
             {`
               // http://bit.ly/1NGT8AO
+              // @todo Update this example to have the correct output
               @function longshadow($color, $length: 200, $x: right, $y: bottom, $iterator: 2) {
                 $val: 0px 0px $color;
                 $i: $iterator;
@@ -1462,19 +1526,17 @@ export default class extends React.Component {
                   .long-shadow-example{
                     background: $color;
 
-                    %text-shadow-heading{
+                    h1, h2{
                       line-height: 1;
                       margin: 0;
                       color: darken(white, 6%);
                     }
 
                     h1{
-                      @extend %text-shadow-heading;
                       text-shadow: longshadow(lighten($color, 5%));
                     }
 
                     h2{
-                      @extend %text-shadow-heading;
                       text-shadow: longshadow(darken($color, 5%));
                     }
                   }
@@ -1524,7 +1586,7 @@ export default class extends React.Component {
             <Fill>
               <CodePane lang="scss">
                 {`
-                  // http://codepen.io/tjbenton21/pen/yliLr?editors=010
+                  // http://bit.ly/1iIx91k
 
                   @keyframes loader{
                     @include loader-frames();
@@ -1603,63 +1665,7 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
-        <Slide>
-          <Heading className="o-headline" size="2">Partials</Heading>
-          <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  // http://bit.ly/1iIx91k
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  ds
-                `}
-              </CodePane>
-            </Fill>
-          </Layout>
-        </Slide>
         {/* Only if there's time */}
-        <Slide>
-          <Heading size={3}>Does it work with <Code>node</Code>?</Heading>
-          <Step order="2">
-            <Heading fit size={2}><Link href="https://github.com/sass/libsass">Libsass</Link></Heading>
-          </Step>
-          <Notes>
-            <Note>Libsass is a port of SASS to work with js build tools</Note>
-          </Notes>
-        </Slide>
-        <Slide>
-          <Heading>Why <Link href="http://webdesign.tutsplus.com/articles/getting-to-know-libsass--cms-23114">Libsass</Link>?</Heading>
-          <Layout>
-            <Fill>
-              <Heading size={6}>Pros</Heading>
-              <List>
-                <Step order="1">
-                  <ListItem>It's faster!</ListItem>
-                </Step>
-                <Step order="2">
-                  <ListItem>Allows integration with any language</ListItem>
-                </Step>
-                <Step order="3">
-                  <ListItem>Integrates with your favorite build tool</ListItem>
-                </Step>
-              </List>
-            </Fill>
-            <Fill>
-              <Heading size={6}>Cons</Heading>
-              <List>
-                <Step order="4"><ListItem><Link href="http://sass-compatibility.github.io/">Compatiblity</Link></ListItem></Step>
-              </List>
-            </Fill>
-          </Layout>
-          <Notes>
-            <Note step="4">It's not a straight port so there're some inconsistencies but there's a compatiblity site to help out with these inconsistencies</Note>
-          </Notes>
-        </Slide>
 
         {/*
         - Show picture of what we're going to be building
@@ -1692,6 +1698,9 @@ export default class extends React.Component {
               Insert screenshot
             </Fill>
           </Layout>
+        </Slide>
+        <Slide>
+          <Heading size="1">Questions?</Heading>
         </Slide>
 
       {/*
