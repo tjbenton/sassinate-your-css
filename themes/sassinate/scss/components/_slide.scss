@@ -33,16 +33,15 @@
   }
 
   &__content{
-    $width: 1000px;
     flex: 1;
     left: 50%;
     margin: auto;
-    max-height: $width / (16 / 9);
+    max-height: map-get($slide, height);
     padding: map-get($config, spacing);
     position: absolute;
     text-align: center;
     top: 50%;
-    width: $width;
+    width: map-get($slide, width);
     @media (min-height: map-get($slide, height)){
       padding: {
         top: 0;

@@ -44,3 +44,10 @@ $easing: (
 // @description
 // This is used to select all elements that aren't hidden.
 $not-hidden: ":not(style):not(link):not(meta):not(script)";
+
+
+$slide: (
+ width: 1000px
+);
+
+$slide: map-merge($slide, (height: map-get($slide, width) / (16 / 9)));
