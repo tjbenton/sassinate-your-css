@@ -48,83 +48,93 @@ export default class extends React.Component {
             Sassinate your CSS
           */}
         </Slide>
-        {/*
-          <Slide bgImage={images.abstract} bgLighten=".5">
-            <Heading size={1} fit caps>
-              About me
-            </Heading>
-            <Text>
-              Some awesome info about me
-            </Text>
-          </Slide>
-        */}
+        <Slide bgImage={images.abstract} bgLighten=".5">
+          <Heading size={1} fit caps>
+            About me
+          </Heading>
+          <Text>
+            @todo Add Some awesome info about me
+          </Text>
+        </Slide>
         <Slide transition={["slide"]}>
-         <Heading fit size={1}>What is SASS?</Heading>
-         <Step order="1" style={{marginTop: "-.5em"}} animateIn="bounce-in-left" animateOut="bounce-out">
-           <Heading fit size={5}>CSS preprocessor</Heading>
+         <Heading fit size="1">What is SASS?</Heading>
+         <Step order="1" style={{marginTop: "-.75em"}} animateIn="bounce-in-left" animateOut="bounce-out">
+           <Heading fit size="5" style={{lineHeight: "1em"}}>CSS preprocessor</Heading>
          </Step>
-         <Step order="2" style={{marginTop: "-.5em"}} animateIn="bounce-in-down" animateOut="bounce-out-down">
-           <Heading fit size={4}>Built in Ruby</Heading>
+         <Step order="2" style={{marginTop: "-.75em"}} animateIn="bounce-in-down" animateOut="bounce-out-down">
+           <Heading fit size="4" style={{lineHeight: "1em"}}>Built in Ruby</Heading>
          </Step>
          <Notes>
            <Note step="1">CSS preprocessor — a layer between the stylesheets you author and the <Code>.css</Code> files you serve to the browser.</Note>
-           <Note step="3">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
+           <Note step="2">Sass (short for Syntactically Awesome Stylesheets) plugs the holes in CSS as a language, allowing you to write DRY code that’ll be faster, more efficient, and easier to maintain.</Note>
          </Notes>
         </Slide>
         <Slide>
-          <Heading size={2}><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
+          <Heading size="2"><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
+        </Slide>
+        <Slide>
+          <Heading size="1">Filetypes</Heading>
         </Slide>
         <Slide transition={["zoom"]}>
-          <Heading size={1}>Filetypes</Heading>
           <Layout>
-            <Fill>
-              <Step order="1">
-                <Heading size={5}><Code>.sass</Code></Heading>
-                <CodePane lang="sass">
-                  {`
-                  nav
-                    ul
-                      margin: 0
-                      padding: 0
-                      list-style: none
+            <CodePane filename=".sass" lang="sass">
+              <Highlight order="1">
 
-                    li
-                      display: inline-block
+                {`
+                nav
+                  ul
+                    margin: 0
+                    padding: 0
+                    list-style: none
 
-                    a
-                      display: block
-                      padding: 6px 12px
-                      text-decoration: none
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
-            <Fill>
-              <Step order="2">
-                <Heading size={5}><Code>.scss</Code></Heading>
-                <CodePane lang="scss">
-                  {`
-                    nav{
-                      ul{
-                        margin: 0;
-                        padding: 0;
-                        list-style: none;
-                      }
+                  li
+                    display: inline-block
+                    display: shitasdfasdfasdflkajshdflaksjdhflkajshdflkjasdhflkajsdhflakjsdhflaksjdfhlaskjdhfalksjdhfalksjdhflaksjdhflaskjdfhlaskdjfhalskdjfhasdlfkjhasldkfjhasldkjfh
 
-                      li{
-                        display: inline-block;
-                      }
+                  a
+                    display: block
+                    padding: 6px 12px
+                    text-decoration: none
 
-                      a{
-                        display: block;
-                        padding: 6px 12px;
-                        text-decoration: none;
-                      }
+
+                  asdfasdfasdf
+
+
+
+                  asdfasdfasdfasdf
+
+
+                  sadfasdfasdfasdfasdfasdfadsf
+
+
+
+                  asdfasdfasdf
+                `}
+              </Highlight>
+            </CodePane>
+            <CodePane filename=".scss" lang="scss">
+              <Highlight order="2">
+                {`
+                  nav{
+                    ul{
+                      margin: 0;
+                      padding: 0;
+                      list-style: none;
                     }
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
+
+                    li{
+                      display: inline-block;
+                    }
+
+                    a{
+                      display: block;
+                      padding: 6px 12px;
+                      text-decoration: none;
+                    }
+                  }
+                `}
+              </Highlight>
+            </CodePane>
           </Layout>
           <Notes>
             <Note order="1"><Code>.sass</Code> which is indention based</Note>
@@ -134,9 +144,7 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["zoom", "slide"]}>
           <Heading size={4}>What can SASS do that CSS can't?</Heading>
-          <List style={{
-              columnCount: 2
-            }}>
+          <List style={{ columnCount: 2 }}>
             <Step order="1"><ListItem>Partials</ListItem></Step>
             <Step order="2"><ListItem>Nesting</ListItem></Step>
             <Step order="3"><ListItem>Variables</ListItem></Step>
@@ -152,39 +160,33 @@ export default class extends React.Component {
         </Slide>
         <Slide>
           <Layout>
-            <Fill>
-              <Heading size="6"><Code>_navigation.scss</Code></Heading>
-              <CodePane lang="scss">
-                {`
-                  nav{
-                    background: $secondary-color;
+            <CodePane filename="_navigation.scss" lang="scss">
+              {`
+                nav{
+                  background: $secondary-color;
 
-                    ul{
-                      margin: 0;
-                      padding: 0;
-                      list-style: none;
-                    }
-
-                    li{
-                      display: inline-block;
-                    }
-
-                    a{
-                      display: block;
-                      text-decoration: none;
-                    }
+                  ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
                   }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <Heading size="6"><Code>_variables.scss</Code></Heading>
-              <CodePane lang="scss">
-                {`
-                  $secondary-color: #31adb8;
-                `}
-              </CodePane>
-            </Fill>
+
+                  li{
+                    display: inline-block;
+                  }
+
+                  a{
+                    display: block;
+                    text-decoration: none;
+                  }
+                }
+              `}
+            </CodePane>
+            <CodePane filename="_variables.scss" lang="scss">
+              {`
+                $secondary-color: #31adb8;
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Partials are indicated by <Code>_</Code></Note>
@@ -193,37 +195,31 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size="3">Importing partials</Heading>
           <Layout>
-            <Fill>
-              <Heading size="4"><Code>main.scss</Code></Heading>
-              <CodePane lang="scss">
-                {`
-                  @import "variables",
-                          "navigation";
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <Heading size="4"><Code>main.css</Code></Heading>
-              <CodePane lang="css">
-                {`
-                  nav {
-                    background: #31adb8;
-                  }
-                  nav ul {
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                  }
-                  nav li {
-                    display: inline-block;
-                  }
-                  nav a {
-                    display: block;
-                    text-decoration: none;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+            <CodePane filename="main.scss" lang="scss">
+              {`
+                @import "variables",
+                        "navigation";
+              `}
+            </CodePane>
+            <CodePane filename="main.css" lang="css">
+              {`
+                nav {
+                  background: #31adb8;
+                }
+                nav ul {
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
+                }
+                nav li {
+                  display: inline-block;
+                }
+                nav a {
+                  display: block;
+                  text-decoration: none;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Partials are indicated by <Code>_</Code></Note>
@@ -231,98 +227,93 @@ export default class extends React.Component {
         </Slide>
         <Slide>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  .
-                  ├── base
-                  │   ├── _index.scss
-                  │   └── ...
-                  ├── components
-                  │   ├── _index.scss
-                  │   └── ...
-                  ├── helpers
-                  │   ├── functions/
-                  │   ├── mixins/
-                  │   ├── _index.scss
-                  │   └── _variables.scss
-                  ├── objects
-                  │   ├── _index.scss
-                  │   └── ...
-                  ├── pages
-                  │   ├── home.scss
-                  │   └── ...
-                  ├── scopes
-                  │   ├── _index.scss
-                  │   └── ...
-                  ├── utilities
-                  │   ├── _index.scss
-                  │   └── ...
-                  └── site.scss
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  // site.scss
-                  @import "helpers/index",
-                          "base/index",
-                          "layout/index",
-                          "objects/index",
-                          "components/index",
-                          "utilities/index",
-                          "scopes/index",
-                          "dev/index";
-                `}
-              </CodePane>
-            </Fill>
+            <CodePane lang="bash">
+              {`
+                .
+                ├── base
+                │   ├── _index.scss
+                │   └── ...
+                ├── components
+                │   ├── _index.scss
+                │   └── ...
+                ├── helpers
+                │   ├── functions/
+                │   ├── mixins/
+                │   ├── _index.scss
+                │   └── _variables.scss
+                ├── objects
+                │   ├── _index.scss
+                │   └── ...
+                ├── pages
+                │   ├── home.scss
+                │   └── ...
+                ├── scopes
+                │   ├── _index.scss
+                │   └── ...
+                ├── utilities
+                │   ├── _index.scss
+                │   └── ...
+                └── site.scss
+              `}
+            </CodePane>
+            <CodePane lang="scss">
+              {`
+                // site.scss
+                @import "helpers/index",
+                        "base/index",
+                        "layout/index",
+                        "objects/index",
+                        "components/index",
+                        "utilities/index",
+                        "scopes/index",
+                        "dev/index";
+              `}
+            </CodePane>
           </Layout>
         </Slide>
         <Slide>
           <Heading size="3">SourceMaps</Heading>
         </Slide>
         <Slide>
+          <Text>Add info about source maps</Text>
+        </Slide>
+        <Slide>
           <Heading className="o-headline" size={2}>Nesting</Heading>
           <Layout>
-            <Fill>
-              <Step order="1">
-                <CodePane lang="scss">
-                  {`
-                    .breadcrumbs {
-                      font-size: .85em;
+            <Step order="1">
+              <CodePane lang="scss">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
 
-                      .crumb {
-                        display: inline-block;
-                        font-size: 1em;
-                        line-height: 1em;
-                        margin-top: 0;
-                        position: relative;
-                      }
-                    }
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
-            <Fill>
-              <Step order="2">
-                <CodePane lang="css">
-                  {`
-                    .breadcrumbs {
-                      font-size: .85em;
-                    }
-
-                    .breadcrumbs .crumb {
+                    .crumb {
                       display: inline-block;
                       font-size: 1em;
                       line-height: 1em;
                       margin-top: 0;
                       position: relative;
                     }
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
+                  }
+                `}
+              </CodePane>
+            </Step>
+            <Step order="2">
+              <CodePane lang="css">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
+                  }
+
+                  .breadcrumbs .crumb {
+                    display: inline-block;
+                    font-size: 1em;
+                    line-height: 1em;
+                    margin-top: 0;
+                    position: relative;
+                  }
+                `}
+              </CodePane>
+            </Step>
           </Layout>
         </Slide>
         <Slide>
@@ -333,59 +324,55 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={3}><Code>&amp;</Code> to the rescue!</Heading>
           <Layout>
-            <Fill>
-              <Step order="1">
-                <CodePane lang="scss">
-                  {`
-                    .breadcrumbs {
-                      font-size: .85em;
+            <Step order="1">
+              <CodePane lang="scss">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
 
-                      &__crumb {
-                        display: inline-block;
-                        font-size: 1em;
-                        line-height: 1em;
-                        margin-top: 0;
-                        position: relative;
-                        &:not(:first-child):after {
-                          content: "\e6e2a";
-                          margin-top: 50%;
-                          position: absolute;
-                          right: 10px;
-                          top: 50%;
-                        }
-                      }
-                    }
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
-            <Fill>
-              <Step order="2">
-                <CodePane lang="css">
-                  {`
-                    .breadcrumbs {
-                      font-size: .85em;
-                    }
-
-                    .breadcrumbs__crumb {
+                    &__crumb {
                       display: inline-block;
                       font-size: 1em;
                       line-height: 1em;
                       margin-top: 0;
                       position: relative;
+                      &:not(:first-child):after {
+                        content: "\e6e2a";
+                        margin-top: 50%;
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                      }
                     }
+                  }
+                `}
+              </CodePane>
+            </Step>
+            <Step order="2">
+              <CodePane lang="css">
+                {`
+                  .breadcrumbs {
+                    font-size: .85em;
+                  }
 
-                    .breadcrumbs__crumb:not(:first-child):after {
-                      content: "\e6e2a";
-                      margin-top: 50%;
-                      position: absolute;
-                      right: 10px;
-                      top: 50%;
-                    }
-                  `}
-                </CodePane>
-              </Step>
-            </Fill>
+                  .breadcrumbs__crumb {
+                    display: inline-block;
+                    font-size: 1em;
+                    line-height: 1em;
+                    margin-top: 0;
+                    position: relative;
+                  }
+
+                  .breadcrumbs__crumb:not(:first-child):after {
+                    content: "\e6e2a";
+                    margin-top: 50%;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                  }
+                `}
+              </CodePane>
+            </Step>
           </Layout>
         </Slide>
         <Slide>
@@ -394,93 +381,85 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={4}>Nested Properties</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                <Highlight>
-                  {`
-                    .c-island {
-                  `}
-                </Highlight>
-                <Highlight className="c-step--grow" order="1" adjust="2">
-                  {`
-                    border: 1px solid #e2e2e2 {
-                      radius: 6px;
-                    };
-                  `}
-                </Highlight>
-                <Highlight className="c-step--grow" order="2" adjust="2">
-                  {`
-                    margin: 0 {
-                      top: 10px;
-                    };
-                  `}
-                </Highlight>
-                <Highlight>
-                  {`
-                      padding: 1.4em;
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                <Highlight>
-                 {`.c-island {`}
-                </Highlight>
-                <Highlight className="c-step--grow" order="1" adjust="2">
-                  {`
-                    border: 1px solid #e2e2e2;
-                    border-radius: 6px;
-                  `}
-                </Highlight>
-                <Highlight className="c-step--grow" order="2" adjust="2">
-                  {`
-                    margin: 0;
-                    margin-top: 10px;
-                  `}
-                </Highlight>
-                <Highlight>
-                  {`
-                      padding: 1.4em;
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
+            <CodePane lang="scss">
+              <Highlight>
+                {`
+                  .c-island {
+                `}
+              </Highlight>
+              <Highlight className="c-step--grow" order="1" adjust="2">
+                {`
+                  border: 1px solid #e2e2e2 {
+                    radius: 6px;
+                  };
+                `}
+              </Highlight>
+              <Highlight className="c-step--grow" order="2" adjust="2">
+                {`
+                  margin: 0 {
+                    top: 10px;
+                  };
+                `}
+              </Highlight>
+              <Highlight>
+                {`
+                    padding: 1.4em;
+                  }
+                `}
+              </Highlight>
+            </CodePane>
+            <CodePane lang="css">
+              <Highlight>
+               {`.c-island {`}
+              </Highlight>
+              <Highlight className="c-step--grow" order="1" adjust="2">
+                {`
+                  border: 1px solid #e2e2e2;
+                  border-radius: 6px;
+                `}
+              </Highlight>
+              <Highlight className="c-step--grow" order="2" adjust="2">
+                {`
+                  margin: 0;
+                  margin-top: 10px;
+                `}
+              </Highlight>
+              <Highlight>
+                {`
+                    padding: 1.4em;
+                  }
+                `}
+              </Highlight>
+            </CodePane>
           </Layout>
         </Slide>
         <Slide>
           <Heading className="o-headline" size={4}>Media Queries</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  body {
-                    font-size: 14px;
-
-                    @media (min-width: 1024px) {
-                      font-size: 16px;
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  body {
-                    font-size: 14px;
-                  }
+            <CodePane lang="scss">
+              {`
+                body {
+                  font-size: 14px;
 
                   @media (min-width: 1024px) {
-                    body {
-                      font-size: 16px;
-                    }
+                    font-size: 16px;
                   }
-                `}
-              </CodePane>
-            </Fill>
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                body {
+                  font-size: 14px;
+                }
+
+                @media (min-width: 1024px) {
+                  body {
+                    font-size: 16px;
+                  }
+                }
+              `}
+            </CodePane>
           </Layout>
         </Slide>
         <Slide>
@@ -494,58 +473,54 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Keyframes</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  .u-animate {
-                    animation: {
-                      duration: 1s;
-                      fill-mode: both;
-                    }
+            <CodePane lang="scss">
+              {`
+                .u-animate {
+                  animation: {
+                    duration: 1s;
+                    fill-mode: both;
+                  }
 
-                    &--fade-in-down {
-                      animation-name: fade-in-down;
+                  &--fade-in-down {
+                    animation-name: fade-in-down;
 
-                      @keyframes fade-in-down {
-                        0%{
-                          opacity: 0;
-                          transform: translate3d(0, -100%, 0);
-                        }
-                        100%{
-                          opacity: 1;
-                          transform: none;
-                        }
+                    @keyframes fade-in-down {
+                      0%{
+                        opacity: 0;
+                        transform: translate3d(0, -100%, 0);
+                      }
+                      100%{
+                        opacity: 1;
+                        transform: none;
                       }
                     }
                   }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .u-animate {
-                    animation-duration: 1s;
-                    animation-fill-mode: both;
-                  }
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .u-animate {
+                  animation-duration: 1s;
+                  animation-fill-mode: both;
+                }
 
-                  .u-animate--fade-in-down {
-                    animation-name: fade-in-down;
-                  }
+                .u-animate--fade-in-down {
+                  animation-name: fade-in-down;
+                }
 
-                  @keyframes fade-in-down {
-                    0% {
-                      opacity: 0;
-                      transform: translate3d(0, -100%, 0);
-                    }
-                    100% {
-                      opacity: 1;
-                      transform: none;
-                    }
+                @keyframes fade-in-down {
+                  0% {
+                    opacity: 0;
+                    transform: translate3d(0, -100%, 0);
                   }
-                `}
-              </CodePane>
-            </Fill>
+                  100% {
+                    opacity: 1;
+                    transform: none;
+                  }
+                }
+              `}
+            </CodePane>
           </Layout>
         </Slide>
         {/*
@@ -556,28 +531,24 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Variables</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  /* @todo add \`!default\`, and \`!global\`*/
-                  /* @todo add an example of a string, value(14px), list, map, boolean */
-                  $font-size: 14px;
+            <CodePane lang="scss">
+              {`
+                /* @todo add \`!default\`, and \`!global\`*/
+                /* @todo add an example of a string, value(14px), list, map, boolean */
+                $font-size: 14px;
 
-                  body {
-                    font-size: $font-size;
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  body {
-                    font-size: 14px;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                body {
+                  font-size: $font-size;
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                body {
+                  font-size: 14px;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>All variables are identified by the <Code>$</Code></Note>
@@ -586,79 +557,75 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Scoped Variables?</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                <Highlight>
-                  {`
-                    /* @todo simplify */
-                    $font-size: 14px;
+            <CodePane lang="scss">
+              <Highlight>
+                {`
+                  /* @todo simplify */
+                  $font-size: 14px;
 
-                    body {
-                      font-size: $font-size;
-                  `}
-                </Highlight>
-                <Highlight order="2" className="c-step--grow" adjust="2">
-                  {`
+                  body {
+                    font-size: $font-size;
+                `}
+              </Highlight>
+              <Highlight order="2" className="c-step--grow" adjust="2">
+                {`
+                  @media (min-width: 1024px) {
+                    $font-size: 16px; // scoped to this media query globally
+                    font-size: $font-size;
+                  }
+                `}
+              </Highlight>
+              <Highlight>
+                {`
+                  }
+                `}
+              </Highlight>
+              <Highlight order="1" className="c-step--grow">
+                {`
+                  .container {
+                    $font-size: 12px; // scoped to \`.container\`
+                    font-size: $font-size;
+
                     @media (min-width: 1024px) {
-                      $font-size: 16px; // scoped to this media query globally
                       font-size: $font-size;
                     }
-                  `}
-                </Highlight>
-                <Highlight>
-                  {`
-                    }
-                  `}
-                </Highlight>
-                <Highlight order="1" className="c-step--grow">
-                  {`
-                    .container {
-                      $font-size: 12px; // scoped to \`.container\`
-                      font-size: $font-size;
+                  }
 
-                      @media (min-width: 1024px) {
-                        font-size: $font-size;
-                      }
-                    }
-
-                    .component {
-                      font-size: $font-size; // uses the default value
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                <Highlight>
-                  {`
+                  .component {
+                    font-size: $font-size; // uses the default value
+                  }
+                `}
+              </Highlight>
+            </CodePane>
+            <CodePane lang="css">
+              <Highlight>
+                {`
+                  body {
+                    font-size: 14px;
+                  }
+                `}
+              </Highlight>
+              <Highlight order={2} className="c-step--grow">
+                {`
+                  @media (min-width: 1024px) {
                     body {
-                      font-size: 14px;
+                      font-size: 16px;
                     }
-                  `}
-                </Highlight>
-                <Highlight order={2} className="c-step--grow">
-                  {`
-                    @media (min-width: 1024px) {
-                      body {
-                        font-size: 16px;
-                      }
-                    }
-                  `}
-                </Highlight>
-                <Highlight order="1">
-                  {`
-                    .container {
-                      font-size: 12px;
-                    }
+                  }
+                `}
+              </Highlight>
+              <Highlight order="1">
+                {`
+                  .container {
+                    font-size: 12px;
+                  }
 
-                    .component {
-                      font-size: 14px;
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
+                  .component {
+                    font-size: 14px;
+                  }
+                `}
+              </Highlight>
+            </CodePane>
           </Layout>
           <Notes>
             <Note>All variables are identified by the <Code>$</Code></Note>
@@ -667,36 +634,32 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Placeholders</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  %clear {
-                    &:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
+            <CodePane lang="scss">
+              {`
+                %clear {
+                  &:after {
+                    content: "";
+                    display: table;
+                    clear: both;
                   }
+                }
 
-                  .container {
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .container {
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .container {
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Placeholders are also known as silent selectors</Note>
@@ -706,47 +669,43 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Placeholders</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  %clear {
-                    &:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
-                  }
-
-                  .clear {
-                    @extend %clear;
-                  }
-
-                  .container {
-                    @extend %clear;
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .clear:after, .container:after {
+            <CodePane lang="scss">
+              {`
+                %clear {
+                  &:after {
                     content: "";
                     display: table;
                     clear: both;
                   }
+                }
 
-                  .container {
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .clear {
+                  @extend %clear;
+                }
+
+                .container {
+                  @extend %clear;
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .clear:after, .container:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                .container {
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>
@@ -759,55 +718,51 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={2}>Extends</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  .card{
-                    display: block;
-                    background: #fff;
-                    box-shadow: 0 0 5px 1px rgba(black, .4);
-                    position: relative;
-                    transition: all 0s;
+            <CodePane lang="scss">
+              {`
+                .card{
+                  display: block;
+                  background: #fff;
+                  box-shadow: 0 0 5px 1px rgba(black, .4);
+                  position: relative;
+                  transition: all 0s;
 
-                    .content{
-                      font-size: .85em;
-                      margin: 0;
-                    }
-                  }
-
-                  .cards{
-                    @extend %clear;
-                    > li{
-                      @extend .card;
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .cards:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                  }
-
-                  .card, .cards > li {
-                    display: block;
-                    background: #fff;
-                    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
-                    position: relative;
-                    transition: all 0s;
-                  }
-
-                  .card .content, .cards > li .content {
+                  .content{
                     font-size: .85em;
                     margin: 0;
                   }
-                `}
-              </CodePane>
-            </Fill>
+                }
+
+                .cards{
+                  @extend %clear;
+                  > li{
+                    @extend .card;
+                  }
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .cards:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                .card, .cards > li {
+                  display: block;
+                  background: #fff;
+                  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+                  position: relative;
+                  transition: all 0s;
+                }
+
+                .card .content, .cards > li .content {
+                  font-size: .85em;
+                  margin: 0;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>You can extend simple CSS selectors</Note>
@@ -817,53 +772,49 @@ export default class extends React.Component {
         <Slide transition={["spin", "slide"]}>
           <Heading className="o-headline" size={2}>Mixins</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  @mixin clear{
-                    &:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
-                  }
-
-                  .clear{
-                    @include clear;
-                  }
-
-                  .container{
-                    @include clear;
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .clear:after {
+            <CodePane lang="scss">
+              {`
+                @mixin clear{
+                  &:after {
                     content: "";
                     display: table;
                     clear: both;
                   }
+                }
 
-                  .container {
-                    background: blue;
-                    margin: 0;
-                    padding: 1.4em;
-                  }
+                .clear{
+                  @include clear;
+                }
 
-                  .container:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .container{
+                  @include clear;
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .clear:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                .container {
+                  background: blue;
+                  margin: 0;
+                  padding: 1.4em;
+                }
+
+                .container:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Sass uses the <Code>@mixin</Code> directive to define mixins, and the <Code>@include</Code> directive to use them.</Note>
@@ -896,65 +847,61 @@ export default class extends React.Component {
         <Slide transition={["fade"]}>
           <Heading size={5}>Mixin Arguments</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                <Highlight order="1">
-                  {`
-                    .one {
-                      @include clear;
-                      background: blue;
-                    }
+            <CodePane lang="scss">
+              <Highlight order="1">
+                {`
+                  .one {
+                    @include clear;
+                    background: blue;
+                  }
 
-                    .two {
-                      @include clear(true);
-                      background: red;
-                    }
-                  `}
-                </Highlight>
-                <Highlight order="2">
-                  {`
-                    .three {
-                      @include clear(false);
-                      background: yellow;
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                <Highlight order="1">
-                  {`
-                    .one:after, .two:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
+                  .two {
+                    @include clear(true);
+                    background: red;
+                  }
+                `}
+              </Highlight>
+              <Highlight order="2">
+                {`
+                  .three {
+                    @include clear(false);
+                    background: yellow;
+                  }
+                `}
+              </Highlight>
+            </CodePane>
+            <CodePane lang="css">
+              <Highlight order="1">
+                {`
+                  .one:after, .two:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
 
-                    .one {
-                      background: blue;
-                    }
+                  .one {
+                    background: blue;
+                  }
 
-                    .two {
-                      background: red;
-                    }
-                  `}
-                </Highlight>
-                <Highlight order="2">
-                  {`
-                    .three {
-                      background: yellow;
-                    }
+                  .two {
+                    background: red;
+                  }
+                `}
+              </Highlight>
+              <Highlight order="2">
+                {`
+                  .three {
+                    background: yellow;
+                  }
 
-                    .three:after {
-                      content: "";
-                      display: table;
-                      clear: both;
-                    }
-                  `}
-                </Highlight>
-              </CodePane>
-            </Fill>
+                  .three:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                  }
+                `}
+              </Highlight>
+            </CodePane>
           </Layout>
           <Notes>
             <Note>What makes mixins so powerful is the ability to pass in arguments to get different results</Note>
@@ -964,40 +911,36 @@ export default class extends React.Component {
         <Slide>
           <Heading size="3">@content</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  @mixin media($width) {
-                    @media only screen and (min-width: $width) {
-                      @content;
-                    }
+            <CodePane lang="scss">
+              {`
+                @mixin media($width) {
+                  @media only screen and (min-width: $width) {
+                    @content;
                   }
+                }
 
-                  .container{
-                    padding: 10px;
+                .container{
+                  padding: 10px;
 
-                    @include media(800px) {
-                      padding: 30px;
-                    }
+                  @include media(800px) {
+                    padding: 30px;
                   }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .container {
+                  padding: 10px;
+                }
+
+                @media only screen and (min-width: 800px) {
                   .container {
-                    padding: 10px;
+                    padding: 30px;
                   }
-
-                  @media only screen and (min-width: 800px) {
-                    .container {
-                      padding: 30px;
-                    }
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note><Code>@content</Code> is a special directive for mixins only</Note>
@@ -1006,44 +949,40 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size="3">Misusing Mixins</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  @mixin box-shadow($shadows...){
-                    -webkit-box-shadow: $shadows;
-                    -moz-box-shadow: $shadows;
-                    box-shadow: $shadows;
-                  }
+            <CodePane lang="scss">
+              {`
+                @mixin box-shadow($shadows...){
+                  -webkit-box-shadow: $shadows;
+                  -moz-box-shadow: $shadows;
+                  box-shadow: $shadows;
+                }
 
-                  @mixin transform($transforms...){
-                    -webkit-transform: scale($transforms);
-                    -moz-transform: scale($transforms);
-                    -ms-transform: scale($transforms);
-                    transform: scale($transforms);
-                  }
+                @mixin transform($transforms...){
+                  -webkit-transform: scale($transforms);
+                  -moz-transform: scale($transforms);
+                  -ms-transform: scale($transforms);
+                  transform: scale($transforms);
+                }
 
-                  .container{
-                    @include box-shadow(0 0 10px #e2e2e2);
-                    @include transform(scale(.5));
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  .container {
-                    -webkit-box-shadow: 0 0 10px #e2e2e2;
-                    -moz-box-shadow: 0 0 10px #e2e2e2;
-                    box-shadow: 0 0 10px #e2e2e2;
-                    -webkit-transform: scale(0.5);
-                    -moz-transform: scale(0.5);
-                    -ms-transform: scale(0.5);
-                    transform: scale(0.5);
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .container{
+                  @include box-shadow(0 0 10px #e2e2e2);
+                  @include transform(scale(.5));
+                }
+              `}
+            </CodePane>
+            <CodePane lang="scss">
+              {`
+                .container {
+                  -webkit-box-shadow: 0 0 10px #e2e2e2;
+                  -moz-box-shadow: 0 0 10px #e2e2e2;
+                  box-shadow: 0 0 10px #e2e2e2;
+                  -webkit-transform: scale(0.5);
+                  -moz-transform: scale(0.5);
+                  -ms-transform: scale(0.5);
+                  transform: scale(0.5);
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Don't use mixins to add prefixes, there're libraries already out there that will do it for you.</Note>
@@ -1052,54 +991,46 @@ export default class extends React.Component {
         <Slide>
           <Heading center size="4"><Link href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</Link> all the things!!</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  .container {
-                    box-shadow: 0 0 10px #e2e2e2;
-                    transform: scale(0.5);
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    box-shadow: 0 0 10px #e2e2e2;
-                    -webkit-transform: scale(0.5);
-                    -ms-transform: scale(0.5);
-                    transform: scale(0.5);
-                  }
-                `}
-              </CodePane>
-            </Fill>
+            <CodePane lang="scss">
+              {`
+                .container {
+                  box-shadow: 0 0 10px #e2e2e2;
+                  transform: scale(0.5);
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .container {
+                  box-shadow: 0 0 10px #e2e2e2;
+                  -webkit-transform: scale(0.5);
+                  -ms-transform: scale(0.5);
+                  transform: scale(0.5);
+                }
+              `}
+            </CodePane>
           </Layout>
         </Slide>
         <Slide>
           <Heading className="o-headline" size="2">Functions</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  $color: #e2e2e2;
-                  .container{
-                    color: darken($color, 60%);
-                    background: rgba($color, .5);
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    color: #494949;
-                    background: rgba(226, 226, 226, 0.5);
-                  }
-                `}
-              </CodePane>
-            </Fill>
+            <CodePane lang="scss">
+              {`
+                $color: #e2e2e2;
+                .container{
+                  color: darken($color, 60%);
+                  background: rgba($color, .5);
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .container {
+                  color: #494949;
+                  background: rgba(226, 226, 226, 0.5);
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>One of the best things about sass is it's built in functions</Note>
@@ -1108,47 +1039,43 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size="2">Functions</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {
-                  // @function em($px, $base: map-get($config, font-size), $round: 4){
-                  //  $px: strip-unit($px);
-                  //  $base: strip-unit(if($base != null, if(unit($base) == "em", px($base), if(unit($base) == "rem", map-get($config, font-size), $base)), map-get($config, font-size)));
-                  //  @return if($px != 0, rd($px / $base, $round) * 1em, 0);
-                  // }
-                  //
-                  // @function round-decimal($num: 100, $decimal: 4){
-                  //  $y: pow(10, $decimal);
-                  //  @return round(($num + 0.00001) * $y) / $y;
-                  // }
-                  //
-                  // @function strip-unit($num){
-                  //  @return $num / ($num * 0 + 1);
-                  // }
+            <CodePane lang="scss">
+              {
+                // @function em($px, $base: map-get($config, font-size), $round: 4){
+                //  $px: strip-unit($px);
+                //  $base: strip-unit(if($base != null, if(unit($base) == "em", px($base), if(unit($base) == "rem", map-get($config, font-size), $base)), map-get($config, font-size)));
+                //  @return if($px != 0, rd($px / $base, $round) * 1em, 0);
+                // }
+                //
+                // @function round-decimal($num: 100, $decimal: 4){
+                //  $y: pow(10, $decimal);
+                //  @return round(($num + 0.00001) * $y) / $y;
+                // }
+                //
+                // @function strip-unit($num){
+                //  @return $num / ($num * 0 + 1);
+                // }
+              }
+              {`
+                // column base is 12 unless it's overwritten
+                $total-columns: 12 !default;
+
+                @function col-width($columns){
+                 @return 100% / ($total-columns / $columns);
                 }
-                {`
-                  // column base is 12 unless it's overwritten
-                  $total-columns: 12 !default;
 
-                  @function col-width($columns){
-                   @return 100% / ($total-columns / $columns);
-                  }
-
-                  .container{
-                    width: col-width(2);
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    width: 16.66667%;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .container{
+                  width: col-width(2);
+                }
+              `}
+            </CodePane>
+            <CodePane style={{flex: .7}} lang="css">
+              {`
+                .container {
+                  width: 16.66667%;
+                }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>Functions are similar to mixins but instead of returning markup, they return values via the <Code>@return</Code></Note>
@@ -1158,28 +1085,24 @@ export default class extends React.Component {
         <Slide>
           <Heading size="6">Don't overwrite CSS functions!</Heading>
           <Layout>
-            <Fill>
-              <CodePane lang="scss">
-                {`
-                  @function scale($arg){
-                    @return 50;
-                  }
+            <CodePane lang="scss">
+              {`
+                @function scale($arg){
+                  @return 50;
+                }
 
-                  .container{
-                    transform: scale(1);
-                  }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .container {
-                    transform: 50;
-                  }
-                `}
-              </CodePane>
-            </Fill>
+                .container{
+                  transform: scale(1);
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .container {
+                  transform: 50;
+                }
+              `}
+            </CodePane>
           </Layout>
         </Slide>
         <Slide>
