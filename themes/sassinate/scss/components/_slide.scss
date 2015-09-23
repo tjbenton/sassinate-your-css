@@ -43,5 +43,11 @@
     text-align: center;
     top: 50%;
     width: $width;
+    @media (min-height: map-get($slide, height)){
+      padding: {
+        top: 0;
+        bottom: 0;
+      }
+    }
   }
 }
