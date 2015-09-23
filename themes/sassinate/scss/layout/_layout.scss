@@ -1,6 +1,11 @@
 .l-layout{
   display: flex;
   position: relative;
+  max-height: map-get($slide, height);
+  margin: {
+    left: -(map-get($config, spacing));
+    right: -(map-get($config, spacing));
+  }
   &--vertical{
     flex-flow: column nowrap;
     height: 100%;
