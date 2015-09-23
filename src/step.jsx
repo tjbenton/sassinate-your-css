@@ -63,7 +63,8 @@ const Step = React.createClass({
           isInvisible,
           order,
           animateIn,
-          animateOut
+          animateOut,
+          ...rest
         } = this.props;
 
     // adds any passed classes
@@ -93,7 +94,7 @@ const Step = React.createClass({
     }
 
     return (
-      <div className={classes.filter(Boolean).join(" ")} data-order={order} ref="fragment">
+      <div className={classes.filter(Boolean).join(" ")} {...rest} data-order={order} ref="fragment">
         {this.props.children}
       </div>
     );
