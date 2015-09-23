@@ -22,21 +22,26 @@ class CodePane extends Base {
   };
   render() {
 
-    let children;
+    let {
+          children,
+          lang,
+          filename,
+          style
+        } = this.props;
 
-    if(typeof this.props.children === "string"){
-      children = (<Highlight lang={this.props.lang} source={this.props.children} />);
+    if(typeof children === "string"){
+      children = (<Highlight lang={lang} source={children} />);
     }
     else{
-      children = React.Children.map(this.props.children, (child) => {
+      children = React.Children.map(children, (child) => {
         return React.addons.cloneWithProps(child, {
-          lang: this.props.lang
+          lang: lang
         })
       });
     }
 
     return (
-      <pre className={this.classNames("c-code-pane")} style={[this.getStyles(), this.props.style]}>
+      <pre data-header={!!filename ? filename : lang} className={this.classNames("c-code-pane", "u-fill")} style={[this.getStyles(), style]}>
         <div className="c-code-pane__wrapper">
           {children}
         </div>
@@ -91,7 +96,7 @@ export class Highlight extends Base {
 ///
 /// @arg {string} content - The content you want to be normalized
 /// @arg {number} adjust [0] - The amount of indention to add on the beginning as an override
-/// 
+///
 /// @returns {string} - The normalized string
 function normalize(content, adjust = 0){
   adjust = ~~adjust;

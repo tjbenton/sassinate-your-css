@@ -1,16 +1,73 @@
 .c-code-pane{
-  font: {
-    family: map-get($fonts, tertiary);
-    size: 1em;
-    weight: 400;
+  $this: (
+    background: #192b33,
+    border-radius: 6px,
+    header-background: #e2e2e2,
+    header-height: 24px
+  );
+  background: map-get($this, background);
+  border-radius: map-get($this, border-radius);
+  display: flex;
+  font-family: map-get($fonts, tertiary);
+  font-size: 1em;
+  font-weight: 400;
+  overflow: hidden;
+  margin: {
+    left: map-get($config, spacing);
+    right: map-get($config, spacing);
+  };
+  max-height: 100%;
+  padding-top: map-get($this, header-height);
+  position: relative;
+  &:before{
+    background: map-get($this, header-background);
+    border-top: {
+      left-radius: map-get($this, border-radius);
+      right-radius: map-get($this, border-radius);
+    };
+    content: attr(data-header);
+    height: map-get($this, header-height);
+    left: 0;
+    line-height: 1.3em;
+    text-align: center;
+    top: 0;
+    width: 100%;
   }
+  &:after{
+    border-radius: 50%;
+    $font-size: map-get($this, header-height) / 2;
+    $box-shadow: ();
+    $colors: (#ff5c57, #ffbe2f, #2ac943);
+    $spacing: 10px;
+    @for $i from 1 through length($colors){
+      $box-shadow: $box-shadow, ($i * ($font-size + $spacing)) 0 0 nth($colors, $i);
+    }
+    box-shadow: $box-shadow;
+    content: "";
+    font-size: $font-size;
+    height: 1em;
+    left: -$spacing;
+    margin-top: .5em;
+    top: 0;
+    width: 1em;
+  }
+
   &__wrapper{
+    flex: 1;
     font-weight: 400;
-    padding: 10px;
+    overflow: auto;
+    padding: map-get($config, spacing);
     text-align: left;
   }
+
   &__code, &__step{
     margin: 0;
     padding: 0;
+  }
+
+  &__code{
+    background: none;
+    color: #fff;
+    overflow: visible;
   }
 }
