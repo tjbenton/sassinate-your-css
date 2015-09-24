@@ -41,11 +41,13 @@ class CodePane extends Base {
     }
 
     return (
-      <pre data-header={!!filename ? filename : lang} className={this.classNames("c-code-pane", "u-fill")} style={[this.getStyles(), style]}>
-        <div className="c-code-pane__wrapper">
-          {children}
-        </div>
-      </pre>
+      <div data-header={!!filename ? filename : lang} className={this.classNames("c-code-pane", "u-fill")} style={[this.getStyles(), style]}>
+        <pre className="c-code-pane__pre">
+          <code className="c-code-pane__code">
+            {children}
+          </code>
+        </pre>
+      </div>
     );
   }
 }
@@ -73,13 +75,13 @@ export class Highlight extends Base {
     if(this.props.order){
       return (
         <Step order={~~this.props.order} className={`c-code-pane__step ${this.props.className}`}>
-          <code className={`c-code-pane__code hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
+          <code className={`c-code-pane__highlight hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
         </Step>
       );
     }
     else{
       return (
-        <code className={`c-code-pane__code hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
+        <code className={`c-code-pane__highlight hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
       );
     }
   }

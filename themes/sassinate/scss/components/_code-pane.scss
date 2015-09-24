@@ -11,7 +11,6 @@
   font-family: map-get($fonts, tertiary);
   font-size: 1em;
   font-weight: 400;
-  overflow: hidden;
   margin: {
     left: map-get($config, spacing);
     right: map-get($config, spacing);
@@ -34,7 +33,6 @@
     width: 100%;
   }
   &:after{
-    border-radius: 50%;
     $font-size: map-get($this, header-height) / 2;
     $box-shadow: ();
     $colors: (#ff5c57, #ffbe2f, #2ac943);
@@ -42,6 +40,7 @@
     @for $i from 1 through length($colors){
       $box-shadow: $box-shadow, ($i * ($font-size + $spacing)) 0 0 nth($colors, $i);
     }
+    border-radius: 50%;
     box-shadow: $box-shadow;
     content: "";
     font-size: $font-size;
@@ -52,22 +51,40 @@
     width: 1em;
   }
 
-  &__wrapper{
-    flex: 1;
-    font-weight: 400;
-    overflow: auto;
+  &__pre{
     padding: map-get($config, spacing);
-    text-align: left;
+    flex: 1;
   }
 
-  &__code, &__step{
-    margin: 0;
-    padding: 0;
+  &__pre, &__code{
+    direction: ltr;
+    position: relative;
+    overflow: scroll;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
+    tab-size: 4;
+    text-align: left;
   }
 
   &__code{
     background: none;
-    color: #fff;
-    overflow: visible;
+    font-weight: 400;
   }
+
+  &__highlight, &__step{
+    margin: 0;
+    padding: 0;
+  }
+
+  &__highlight{
+    background: none;
+    color: #fff;
+  }
+
+  &__step{
+    //margin: 0  (-(map-get($config, spacing))) 0 0;
+    //padding: 0 0 0 map-get($config, spacing);
+  }
+
 }
