@@ -78,8 +78,7 @@ export default class extends React.Component {
         <Slide transition={["zoom"]}>
           <Layout>
             <CodePane filename=".sass" lang="sass">
-              <Highlight order="1">
-
+              <Hightlight order="1">
                 {`
                 nav
                   ul
@@ -89,28 +88,13 @@ export default class extends React.Component {
 
                   li
                     display: inline-block
-                    display: shitasdfasdfasdflkajshdflaksjdhflkajshdflkjasdhflkajsdhflakjsdhflaksjdfhlaskjdhfalksjdhfalksjdhflaksjdhflaskjdfhlaskdjfhalskdjfhasdlfkjhasldkfjhasldkjfh
 
                   a
                     display: block
                     padding: 6px 12px
                     text-decoration: none
-
-
-                  asdfasdfasdf
-
-
-
-                  asdfasdfasdfasdf
-
-
-                  sadfasdfasdfasdfasdfasdfadsf
-
-
-
-                  asdfasdfasdf
                 `}
-              </Highlight>
+              </Hightlight>
             </CodePane>
             <CodePane filename=".scss" lang="scss">
               <Highlight order="2">
