@@ -72,32 +72,32 @@ export default class extends React.Component {
         <Slide>
           <Heading size="2"><Link href="http://sassmiester.com/">Sassmiester.com</Link></Heading>
         </Slide>
-        <Slide>
+        <Slide className="t-secondary" transition={["zoom"]}>
           <Heading size="1">Filetypes</Heading>
         </Slide>
-        <Slide transition={["zoom"]}>
+        <Slide className="t-secondary" transition={["spin", "zoom"]}>
           <Layout>
-            <CodePane filename=".sass" lang="sass">
-              <Hightlight order="1">
+            <Step className="u-fill" animateIn="bounce-in-left" animateOut="bounce-out">
+              <CodePane filename=".sass" lang="sass">
                 {`
-                nav
-                  ul
-                    margin: 0
-                    padding: 0
-                    list-style: none
+                  nav
+                    ul
+                      margin: 0
+                      padding: 0
+                      list-style: none
 
-                  li
-                    display: inline-block
+                    li
+                      display: inline-block
 
-                  a
-                    display: block
-                    padding: 6px 12px
-                    text-decoration: none
+                    a
+                      display: block
+                      padding: 6px 12px
+                      text-decoration: none
                 `}
-              </Hightlight>
-            </CodePane>
-            <CodePane filename=".scss" lang="scss">
-              <Highlight order="2">
+              </CodePane>
+            </Step>
+            <Step className="u-fill" animateIn="bounce-in-right" animateOut="bounce-out">
+              <CodePane filename=".scss" lang="scss">
                 {`
                   nav{
                     ul{
@@ -117,8 +117,8 @@ export default class extends React.Component {
                     }
                   }
                 `}
-              </Highlight>
-            </CodePane>
+              </CodePane>
+            </Step>
           </Layout>
           <Notes>
             <Note order="1"><Code>.sass</Code> which is indention based</Note>
@@ -139,8 +139,8 @@ export default class extends React.Component {
             <Step order="8"><ListItem>Loops</ListItem></Step>
           </List>
         </Slide>
-        <Slide>
-          <Heading className="o-headline" size="1">Partials</Heading>
+        <Slide className="t-secondary" transition={["zoom"]}>
+          <Heading fit size="1">Partials</Heading>
         </Slide>
         <Slide>
           <Layout>
@@ -308,7 +308,7 @@ export default class extends React.Component {
         <Slide>
           <Heading className="o-headline" size={3}><Code>&amp;</Code> to the rescue!</Heading>
           <Layout>
-            <Step order="1">
+            <Step className="u-fill" order="1">
               <CodePane lang="scss">
                 {`
                   .breadcrumbs {
@@ -321,7 +321,7 @@ export default class extends React.Component {
                       margin-top: 0;
                       position: relative;
                       &:not(:first-child):after {
-                        content: "\e6e2a";
+                        content: "\\e6e2a";
                         margin-top: 50%;
                         position: absolute;
                         right: 10px;
@@ -332,7 +332,7 @@ export default class extends React.Component {
                 `}
               </CodePane>
             </Step>
-            <Step order="2">
+            <Step className="u-fill" order="2">
               <CodePane lang="css">
                 {`
                   .breadcrumbs {
@@ -348,7 +348,7 @@ export default class extends React.Component {
                   }
 
                   .breadcrumbs__crumb:not(:first-child):after {
-                    content: "\e6e2a";
+                    content: "\\e6e2a";
                     margin-top: 50%;
                     position: absolute;
                     right: 10px;
@@ -469,11 +469,11 @@ export default class extends React.Component {
                     animation-name: fade-in-down;
 
                     @keyframes fade-in-down {
-                      0%{
+                      0% {
                         opacity: 0;
                         transform: translate3d(0, -100%, 0);
                       }
-                      100%{
+                      100% {
                         opacity: 1;
                         transform: none;
                       }
@@ -549,6 +549,19 @@ export default class extends React.Component {
 
                   body {
                     font-size: $font-size;
+                    @media (min-width: 1024px), (max-width: 2000px) {
+                      font-size: $font-size;
+                    }
+                    @media only screen and (min-width: 1024px), (max-width: 2000px) {
+                      font-size: $font-size;
+                    }
+                    @media print{
+                      font-size: $font-size;
+                    }
+
+                    %foo {
+
+                    }
                 `}
               </Highlight>
               <Highlight order="2" className="c-step--grow" adjust="2">
@@ -581,7 +594,7 @@ export default class extends React.Component {
                 `}
               </Highlight>
             </CodePane>
-            <CodePane lang="css">
+            <CodePane style={{display: "none"}} lang="css">
               <Highlight>
                 {`
                   body {
