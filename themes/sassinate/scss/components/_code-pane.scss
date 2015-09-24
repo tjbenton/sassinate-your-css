@@ -90,5 +90,157 @@
     //margin: 0  (-(map-get($config, spacing))) 0 0;
     //padding: 0 0 0 map-get($config, spacing);
   }
+}
 
+.hljs{
+  $foo: bar;
+  @at-root{
+    %purple{ color: #bb7db6; }
+    %turqiose{ color: #58b2b2; }
+    %orange{ color: #fc9050; }
+    %blue{ color: #6498d0; }
+    %yellow{ color: #fcc85b; }
+    %green{ color: #99c997; }
+    %gray{ color: #cdd3e0; }
+    %dark-gray{ color: #667480; }
+    %red{ color: #ed5d64; }
+  }
+
+  // tag in selectors
+  &-tag{
+    @extend %purple;
+  }
+  // #some_name in selectors
+  &-id{
+    @extend %purple;
+  }
+
+  //@media all screen and (min-width: 250px){
+  //  foo: bar;
+  //}
+
+  // .some_name in selectors
+  &-class{
+    @extend %purple;
+  }
+
+  // @-rule till first “{” or ”;”
+  &-at_rule{
+    @extend %purple;
+  }
+
+  // attribute selector (square brackets in a[href^=http://])
+  &-attr_selector{
+    @extend %gray;
+  }
+
+  // pseudo classes and elements (:after, ::after etc.)
+  &-pseudo{
+    @extend %purple;
+  }
+
+  // comment
+  &-comment{
+    @extend %dark-gray;
+    *{
+      color: inherit;
+    }
+  }
+
+  // everything from “{” till “}”
+  &-rules{
+    @extend %yellow;
+  }
+
+  &.css &-rules{
+    @extend %gray;
+  }
+
+  // property name inside a rule
+  &-attribute{
+    @extend %yellow;
+  }
+
+  // property value inside a rule, from ”:” till ”;” or till the end of rule block
+  &-value{
+    @extend %orange;
+  }
+
+  // number within a value
+  &-number{
+    @extend %orange;
+    * {
+      color: inherit;
+    }
+  }
+
+  // string within a value
+  &-string{
+    @extend %green;
+  }
+
+  //@keyframes foo{
+  //  from {
+  //
+  //  }
+  //}
+
+  // hex color (#FFFFFF) within a value
+  &-hexcolor{
+    @extend %turqiose;
+  }
+
+  // CSS function within a value
+  &-function{
+    @extend %blue;
+  }
+
+  // ”!important” symbol
+  &-important{
+    @extend %purple;
+  }
+
+  // variable starting with “$”
+  &-variable{
+    @extend %gray;
+  }
+
+  // keywords after @
+  &-preprocessor{
+    @extend %purple;
+  }
+
+  // custom
+  // ----------------------------------------------------------------------------------------
+
+  // []{}()
+  &-bracket{
+    @extend %gray;
+  }
+
+  // @
+  &-at{
+    @extend %red;
+  }
+
+  // :;
+  &-colen{
+    @extend %gray;
+  }
+
+
+  // &
+  &-amp{
+    @extend %red;
+  }
+
+  // `and` only in @media
+  &-and{
+    @extend %turqiose;
+  }
+
+  // ,
+  &-comma{
+    @extend %turqiose;
+  }
 }
