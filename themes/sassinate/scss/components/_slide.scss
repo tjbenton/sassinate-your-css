@@ -1,4 +1,5 @@
 .c-slide{
+  background: color(tertiary);
   display: flex;
   height: 100%;
   left: 0px;
@@ -18,6 +19,7 @@
 
   &.t-secondary{
     color: white;
+    background: linear-gradient(135deg, color(secondary), #31b8b3);
   }
 
   &--stretch{

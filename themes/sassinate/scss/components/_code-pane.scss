@@ -1,12 +1,16 @@
 .c-code-pane{
   $this: (
-    background: #192b33,
+    //background: #192b33,
+    background: color(secondary, 6.7),
     border-radius: 6px,
-    header-background: #e2e2e2,
+    //header-background: #e2e2e2,
+    header-background: color(tertiary),
     header-height: 24px
   );
+
   background: map-get($this, background);
   border-radius: map-get($this, border-radius);
+  color: color(primary);
   display: flex;
   font-family: map-get($fonts, tertiary);
   font-size: 1em;
