@@ -61,9 +61,36 @@ export class Highlight extends Base {
         code = source ? source : children;
     lang = lang === "sass" ? "stylus" : lang === "js" ? "javascript" : lang;
 
+    let result = highlight.highlight(lang, normalize(code, adjust)).value;
+
+    result = result
+              .replace("&amp;", "&")
+              // fixes `100% {}` for keyframes
+              .replace(/([0-9]*%)(?:\s*{)/g, `<span class='hljs-number'>$1</span> {`)
+              // fixes media queries
+              .replace(/(@(?:.*)media<\/span>[^{]*)/g, (m) => {
+                return m
+                        .replace(/:\<span[^>]+(preprocessor|number)"\>\s*([0-9a-z]+)\<\/span\>/gi, ": $2")
+                        .replace(/\(([a-z-]+):\s*([0-9a-z]+)\)/gi, `(<span class="hljs-attribute">$1</span>: <span class="hljs-number">$2</span>)`)
+                        .replace("and", "<span class='hljs-and'>and</span>")
+              })
+              .replace(/([\[\](){}])/g, "<span class='hljs-bracket'>$1</span>")
+              .replace(/[,@:;]/g, (m) => {
+                return {
+                  ":": "<span class='hljs-colen'>:</span>",
+                  ";": "<span class='hljs-colen'>;</span>",
+                  ",": "<span class='hljs-comma'>,</span>",
+                  "@": "<span class='hljs-at'>@</span>"
+                }[m];
+              })
+              // changes the following to classes
+              // %foo{}
+              // &--foo{}
+              .replace(/([^\d])(&|%)([a-zA-Z_-]*)/g, `$1<span class="hljs-class">$2$3</span>`)
+              .replace(/([&])/g, `<span class="hljs-amp">&</span>`)
     return {
       code: {
-        __html: highlight.highlight(lang, normalize(code, adjust)).value
+        __html: result
       },
       lang: ["less", "sass", "scss", "stylus"].indexOf(lang) >= 0 ? `${lang} css` : lang
     };
