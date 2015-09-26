@@ -53,15 +53,14 @@ export default class extends React.Component {
         </Slide>
         <Slide transition={["fade"]} className="t-secondary">
           <Heading size="5">I'm Tyler</Heading>
-          <Heading size="5">I'm 24</Heading>
           <Heading size="5">I'm a Lead UI Designer & Developer</Heading>
           <Heading size="5">at marketamerica, in Greensboro</Heading>
           <Heading size="5">I like SASS and Sportsball</Heading>
         </Slide>
         <Slide transition={["spin"]}>
-          <Heading size="4"><b>GitHub:</b> github.com/tjbenton</Heading>
-          <Heading size="4"><b>CodePen:</b> codepen.io/tjbenton21</Heading>
-          <Heading size="4"><b>Twitter:</b> @tjbenton21</Heading>
+          <Heading size="4">github.com/tjbenton</Heading>
+          <Heading size="4">codepen.io/tjbenton21</Heading>
+          <Heading size="4">@tjbenton21</Heading>
         </Slide>
         <Slide className="t-secondary" transition={["slide"]}>
          <Heading fit size="1">What is SASS?</Heading>
@@ -602,7 +601,7 @@ export default class extends React.Component {
         <Slide>
           <Heading size="2">Be smart about it</Heading>
           <List>
-            <ListItem>Never go more then 3 levels deep.</ListItem>
+            <ListItem>Never nest more then 3 levels deep.</ListItem>
             <ListItem>Ensure the CSS output is clean and reusable.</ListItem>
             <ListItem>Use nesting when it makes sense to, not as a default option.</ListItem>
           </List>
@@ -646,7 +645,7 @@ export default class extends React.Component {
               <Highlight className="c-step--grow"  style={{marginTop: "1em"}} animateIn="fade-in" animateOut="fade-out" order="4">
                 {`
                   // Sass list, also known as arrays in other languages
-                  $authors: ("Tyler", "Aaron", "Jessica", "Mike");
+                  $speakers: ("Aaron", "Tyler", "Jessica");
                 `}
               </Highlight>
               <Highlight className="c-step--grow"  style={{marginTop: "1em"}} animateIn="fade-in" animateOut="fade-out" order="5">
@@ -810,7 +809,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight style={{marginBottom: "1em"}} className="c-step--grow" order="1">
+              <Highlight order="1" isVisible="c-step--space" animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow">
                 {`
                   .clear{
                     @extend %clear;
@@ -818,12 +817,12 @@ export default class extends React.Component {
                 `}
 
               </Highlight>
-              <Highlight>
+              <Highlight style={{marginTop: "1em"}}>
                 {`
                   .container {
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" style={{marginTop: 0}} order="2" adjust="2">
+              <Highlight order="2" adjust="2" animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow">
                 {`
                   @extend %clear;
                 `}
@@ -836,10 +835,10 @@ export default class extends React.Component {
               </Highlight>
             </CodePane>
             <CodePane lang="css">
-              <Highlight className="c-step--inline c-step--grow" order="1">{`.clear:after`}</Highlight>
-              <Highlight className="c-step--inline c-step--grow" order="2">{`, .container:after`}</Highlight>
-              <Highlight className="c-step--inline c-step--grow" order="1" adjust="1">{` {`}</Highlight>
-              <Highlight className="c-step--grow" style={{margin: "0 0 1em"}} order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--inline c-step--grow" order="1">{`.clear:after`}</Highlight>
+              <Highlight animateIn="bounce-in" animateOut="bounce-out" className="c-step--inline c-step--grow" order="2">{`, .container:after`}</Highlight>
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--inline c-step--grow" order="1" adjust="1">{` {`}</Highlight>
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow" order="1">
                 {`
                     content: "";
                     display: table;
@@ -847,7 +846,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight style={{marginTop: "1em"}}>
+              <Highlight isVisible="c-step--space" animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow">
                 {`
                   .container {
                     padding: 1.4em;
@@ -883,7 +882,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight style={{marginBottom: "1em"}} className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1">
                 {`
                   .clear{
                     @include clear;
@@ -891,12 +890,12 @@ export default class extends React.Component {
                 `}
 
               </Highlight>
-              <Highlight>
+              <Highlight style={{marginTop: "1em"}}>
                 {`
                   .container {
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" style={{marginTop: 0}} order="2" adjust="2">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow" order="2" adjust="2">
                 {`
                   @include clear;
                 `}
@@ -909,7 +908,7 @@ export default class extends React.Component {
               </Highlight>
             </CodePane>
             <CodePane lang="css">
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1">
                 {`
                   .clear:after {
                     content: "";
@@ -918,14 +917,14 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight>
+              <Highlight style={{marginTop: "1em"}}>
                 {`
                   .container {
                     padding: 1.4em;
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="2">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="2">
                 {`
                   .container:after {
                     content: "";
@@ -979,7 +978,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1">
                 {`
                   .two {
                     // extends to silent selector
@@ -988,7 +987,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="2">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="2">
                 {`
                   .three {
                     // adds the code to the selector
@@ -1001,8 +1000,8 @@ export default class extends React.Component {
             </CodePane>
             <CodePane lang="css">
               <Highlight className="c-step--inline">{`.one:after`}</Highlight>
-              <Highlight className="c-step--inline c-step--grow" order="1">{`, .two:after`}</Highlight>
-              <Highlight className="c-step--inline" adjust="2">{`{`}</Highlight>
+              <Highlight animateIn="bounce-in" animateOut="bounce-out" className="c-step--inline c-step--grow" order="1">{`, .two:after`}</Highlight>
+              <Highlight className="c-step--inline" adjust="1">{`{`}</Highlight>
               <Highlight>
                 {`
                     content: "";
@@ -1015,14 +1014,15 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space c-step--block" className="c-step--grow" order="1">
                 {`
                   .two {
                     background: red;
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="2">
+              {/*@TODO FIX THIS SHIT*/}
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="2">
                 {`
                   .three {
                     background: yellow;
@@ -1047,8 +1047,8 @@ export default class extends React.Component {
             <CodePane lang="scss">
               <Highlight>
                 {`
-                  @mixin media($width) {
-                    @media only screen and (min-width: $width) {
+                  @mixin media($size, $type: "min-width") {
+                    @media only screen and (#{$type}: $size) {
                       // any code passed to the mixin
                       // will be placed here
                       @content;
@@ -1056,7 +1056,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1">
                 {`
                   .container{
                     padding: 10px;
@@ -1069,7 +1069,7 @@ export default class extends React.Component {
               </Highlight>
             </CodePane>
             <CodePane lang="css">
-              <Highlight order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" order="1">
                 {`
                   .container {
                     padding: 10px;
@@ -1095,7 +1095,7 @@ export default class extends React.Component {
           </Step>
         </Slide>
         <Slide>
-          <Heading className="o-headline" size="3">Misusing Mixins</Heading>
+          <Heading size="3">Misusing Mixins</Heading>
           <Layout>
             <CodePane lang="scss">
               {`
@@ -1162,7 +1162,7 @@ export default class extends React.Component {
             </CodePane>
           </Layout>
         </Slide>
-        <Slide className="t-secondary" transition={["slide"]}>
+        <Slide className="t-secondary" transition={["spin"]}>
           <Heading size="2">Functions</Heading>
         </Slide>
         <Slide>
@@ -1193,7 +1193,7 @@ export default class extends React.Component {
           <Heading className="o-headline" size="2">Functions</Heading>
           <Layout>
             <CodePane lang="scss">
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" className="c-step--grow" order="1">
                 {`
                   // column base is 16 unless it's overwritten
                   $total-columns: 16 !default;
@@ -1206,7 +1206,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="2">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="2">
                 {`
                   .container {
                     width: col-width(2);
@@ -1215,7 +1215,7 @@ export default class extends React.Component {
               </Highlight>
             </CodePane>
             <CodePane style={{flex: .7}} lang="css">
-              <Highlight order="2">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" order="2">
                 {`
                   .container {
                     width: 16.66667%;
@@ -1240,7 +1240,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow"  order="1">
                 {`
                   .container{
                     transform: scale(1);
@@ -1249,7 +1249,7 @@ export default class extends React.Component {
               </Highlight>
             </CodePane>
             <CodePane lang="css">
-              <Highlight order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left"  className="c-step--grow" order="1">
                 {`
                   .container {
                     transform: 50;
@@ -1264,23 +1264,35 @@ export default class extends React.Component {
         </Slide>
         <Slide>
           <CodePane lang="scss">
-            {`
-              $breakpoints: (
-                sm: 600px,
-                md: 900px,
-                lg: 1200px
-              ) !default;
-
-              @mixin media($size, $type: "min-width") {
+            <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left"  className="c-step--grow" order="1">
+              {`
+                $breakpoints: (
+                  sm: 600px,
+                  md: 900px,
+                  lg: 1200px
+                ) !default;
+              `}
+            </Highlight>
+            <Highlight style={{marginTop: "1em"}}>
+              {`
+                @mixin media($size, $type: "min-width") {
+              `}
+            </Highlight>
+            <Highlight adjust="2" animateIn="bounce-in-left" animateOut="bounce-out-left"  className="c-step--grow" order="1">
+              {`
                 @if type-of($size) == "string" {
                   $size: map-get($breakpoints, $size);
                 }
-
-                @media only screen and (#{$type}: $size) {
-                  @content;
+              `}
+            </Highlight>
+            <Highlight>
+              {`
+                  @media only screen and (#{$type}: $size) {
+                    @content;
+                  }
                 }
-              }
-            `}
+              `}
+            </Highlight>
           </CodePane>
           <Notes>
             <Note>You can use functions inside of mixins, but you can't use mixins inside of functions</Note>
@@ -1298,7 +1310,7 @@ export default class extends React.Component {
                       padding: 30px;
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="1" adjust="4">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1" adjust="4">
                 {`
                   @include media(lg, "max-width") {
                     background: red;
@@ -1330,7 +1342,7 @@ export default class extends React.Component {
                   }
                 `}
               </Highlight>
-              <Highlight className="c-step--grow" order="1">
+              <Highlight animateIn="bounce-in-left" animateOut="bounce-out-left" isVisible="c-step--space" className="c-step--grow" order="1">
                 {`
                   @media only screen and (min-width: 600px) and (max-width: 1200px) {
                     .container {
@@ -1475,16 +1487,15 @@ export default class extends React.Component {
           <Layout>
             <CodePane style={{flex: 1.24}} lang="scss">
               {`
-                $authors: ("Tyler", "Aaron", "Jessica", "Mike");
+                $speakers: ("Aaron", "Tyler", "Jessica");
 
-                .avatar{
+                .nc-devcon-speaker{
                   background: url(avatars/default.png) no-repeat;
 
-                  @each $author in $authors{
-                    $author: to-lower-case($author);
-
-                    &--#{$author}{
-                      background-image: url(avatars/#{$author}.png);
+                  @each $speaker in $speakers{
+                    $speaker: to-lower-case($speaker);
+                    &--#{$speaker}{
+                      background-image: url(avatars/#{$speaker}.png);
                     }
                   }
                 }
@@ -1492,20 +1503,20 @@ export default class extends React.Component {
             </CodePane>
             <CodePane lang="css">
               {`
-                .avatar {
+                .nc-devcon-speaker {
                   background: url(avatars/default.png) no-repeat;
                 }
-                .avatar--tyler {
-                  background-image: url(avatars/tyler.png);
-                }
-                .avatar--aaron {
+
+                .nc-devcon-speaker--aaron {
                   background-image: url(avatars/aaron.png);
                 }
-                .avatar--jessica {
-                  background-image: url(avatars/jessica.png);
+
+                .nc-devcon-speaker--tyler {
+                  background-image: url(avatars/tyler.png);
                 }
-                .avatar--mike {
-                  background-image: url(avatars/mike.png);
+
+                .nc-devcon-speaker--jessica {
+                  background-image: url(avatars/jessica.png);
                 }
               `}
             </CodePane>
@@ -1519,40 +1530,41 @@ export default class extends React.Component {
         <Slide>
           <Heading size="3"><Code>@each</Code> with maps</Heading>
           <Layout>
-            <Fill style={{flex: 1.2}}>
-              <CodePane lang="scss">
-                {`
-                  $social-media: (
-                    facebook: #365397,
-                    twitter: #00a9f1,
-                    google-plus: #e0452c,
-                    pinterest: #ce1a19,
-                    instagram: #396d9a,
-                    youtube: #ff3333
-                  );
+            <CodePane lang="scss" style={{flex: 1.2}}>
+              {`
+                $social-media: (
+                  facebook: #365397,
+                  twitter: #00a9f1,
+                  google-plus: #e0452c,
+                  pinterest: #ce1a19,
+                  instagram: #396d9a,
+                  youtube: #ff3333
+                );
 
-                  .social{
-                    @each $social-platform, $color in $social-media{
-                      &--#{$social-platform}{
-                        color: $color;
-                      }
+                .social{
+                  @each $social-platform, $color in $social-media{
+                    &--#{$social-platform}{
+                      color: $color;
                     }
                   }
-                `}
-              </CodePane>
-            </Fill>
-            <Fill>
-              <CodePane lang="css">
-                {`
-                  .social--facebook { color: #365397; }
-                  .social--twitter { color: #00a9f1; }
-                  .social--google-plus { color: #e0452c; }
-                  .social--pinterest { color: #ce1a19; }
-                  .social--instagram { color: #396d9a; }
-                  .social--youtube { color: #ff3333; }
-                `}
-              </CodePane>
-            </Fill>
+                }
+              `}
+            </CodePane>
+            <CodePane lang="css">
+              {`
+                .social--facebook { color: #365397; }
+
+                .social--twitter { color: #00a9f1; }
+
+                .social--google-plus { color: #e0452c; }
+
+                .social--pinterest { color: #ce1a19; }
+
+                .social--instagram { color: #396d9a; }
+
+                .social--youtube { color: #ff3333; }
+              `}
+            </CodePane>
           </Layout>
           <Notes>
             <Note>
@@ -1560,11 +1572,11 @@ export default class extends React.Component {
             </Note>
           </Notes>
         </Slide>
-        <Slide className="long-shadow-example">
+        <Slide transition={["spin"]} className="long-shadow-example">
           <Heading fit size="1">Long Shadows</Heading>
           <Heading fit size="3">Sass function for Long Shadows</Heading>
         </Slide>
-        <Slide>
+        <Slide transition={["fade"]}>
           <Heading className="o-headline" size="2">The function</Heading>
           <CodePane lang="scss">
             {`
@@ -1589,7 +1601,7 @@ export default class extends React.Component {
             `}
           </CodePane>
         </Slide>
-        <Slide>
+        <Slide transition={["slide"]}>
           <Layout>
             <CodePane lang="scss">
               {`
@@ -1646,7 +1658,7 @@ export default class extends React.Component {
           </Layout>
         </Slide>
 
-        <Slide className="t-secondary c-slide--stretch">
+        <Slide transition={["spin"]} className="t-secondary c-slide--stretch">
           <Layout className="l-layout--vertical">
             <Fill className="u-fill--center">
               <Heading className="o-headline" size="2"><Link href="http://bit.ly/1iIx91k">Single element loader</Link></Heading>
@@ -1656,7 +1668,7 @@ export default class extends React.Component {
             </Fill>
           </Layout>
         </Slide>
-        <Slide>
+        <Slide transition={["slide"]}>
           <Heading className="o-headline" size="2">The magic</Heading>
           <Layout>
             <CodePane style={{flex: .7}} lang="scss">
@@ -1699,29 +1711,28 @@ export default class extends React.Component {
             </CodePane>
           </Layout>
         </Slide>
-        <Slide>
-          <Layout>
-            <Fill>
+        <Slide transtion={["fade"]}>
+          <Layout style={{textAlign: "left"}}>
+            <Fill style={{padding: "1.4em"}}>
               <Heading size="4">Try it out</Heading>
-              <List>
-                <ListItem><Link href="http://codepen.io/">codepen.io</Link></ListItem>
-                <ListItem><Link href="http://sassmiester.com/">sassmiester.com</Link></ListItem>
-              </List>
+              <Heading size="6"><Link href="http://codepen.io/">codepen.io</Link></Heading>
+              <Heading size="6"><Link href="http://sassmiester.com/">sassmiester.com</Link></Heading>
             </Fill>
-            <Fill>
+            <Fill style={{padding: "1.4em"}}>
               <Heading size="4">Resources</Heading>
-              <List>
-                <ListItem><Link href="http://sassbreak.com/">sassbreak.com</Link></ListItem>
-                <ListItem><Link href="http://www.sassnews.com/">sassnews.com</Link></ListItem>
-                <ListItem><Link href="http://thesassway.com/">thesassway.com</Link></ListItem>
-                <ListItem><Link href="http://sass-guidelin.es/">sass-guidelin.es</Link></ListItem>
-                <ListItem><Link href="http://bit.ly/1Gpsq86/">http://bit.ly/1Gpsq86</Link></ListItem>
-              </List>
+              <Heading size="6"><Link href="http://sassbreak.com/">sassbreak.com</Link></Heading>
+              <Heading size="6"><Link href="http://www.sassnews.com/">sassnews.com</Link></Heading>
+              <Heading size="6"><Link href="http://thesassway.com/">thesassway.com</Link></Heading>
+              <Heading size="6"><Link href="http://sass-guidelin.es/">sass-guidelin.es</Link></Heading>
+              <Heading size="6"><Link href="http://bit.ly/1Gpsq86/">http://bit.ly/1Gpsq86</Link></Heading>
             </Fill>
           </Layout>
         </Slide>
         <Slide>
           <Heading size="1">Questions?</Heading>
+          <Heading size="4">github.com/tjbenton</Heading>
+          <Heading size="4">codepen.io/tjbenton21</Heading>
+          <Heading size="4">@tjbenton21</Heading>
         </Slide>
 
       {/*
