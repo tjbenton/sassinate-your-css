@@ -20,7 +20,7 @@
   box-sizing: border-box; // 2
   margin: 0; // 3
   outline: none; // 4
-  line-height: map-get($config, line-height); // 5
+  //line-height: inherit; // 5
   &:after, &:before{
     box-sizing: inherit; // 6
     position: absolute; // 7
@@ -50,7 +50,7 @@
 //  4. Default iOS settings
 //  5. Enable WP8 fastclick
 html, body{
-  background: color(tertiary);
+  background: color(primary);
   color: map-get($config, color); // 1
   font: #{map-get($config, font-size)}/#{map-get($config, line-height)} get($config, font-family); // 2
   overflow: hidden; // 3

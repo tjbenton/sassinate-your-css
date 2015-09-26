@@ -65,6 +65,8 @@ export class Highlight extends Base {
 
     result = result
               .replace("&amp;", "&")
+              .replace("&gt;", ">")
+              .replace("&lt;", "<")
               // fixes `100% {}` for keyframes
               .replace(/([0-9]*%)(?:\s*{)/g, `<span class='hljs-number'>$1</span> {`)
               // fixes media queries
@@ -74,7 +76,9 @@ export class Highlight extends Base {
                         .replace(/\(([a-z-]+):\s*([0-9a-z]+)\)/gi, `(<span class="hljs-attribute">$1</span>: <span class="hljs-number">$2</span>)`)
                         .replace("and", "<span class='hljs-and'>and</span>")
               })
+              .replace(/#{([^}]*)}/g, `<span class="hljs-interpolate">#{</span>$1<span class="hljs-interpolate">}</span>`)
               .replace(/([\[\](){}])/g, "<span class='hljs-bracket'>$1</span>")
+              .replace("&amp;", "&")
               .replace(/[,@:;]/g, (m) => {
                 return {
                   ":": "<span class='hljs-colen'>:</span>",
@@ -97,18 +101,23 @@ export class Highlight extends Base {
   }
 
   render(){
-    let markup = this.getMarkup();
+    let markup = this.getMarkup(),
+        {
+          order,
+          children,
+          ...rest
+        } = this.props;
 
-    if(this.props.order){
+    if(order){
       return (
-        <Step order={~~this.props.order} className={`c-code-pane__step ${this.props.className}`}>
+        <Step order={~~this.props.order} className={`c-code-pane__step ${this.props.className}`} {...rest}>
           <code className={`c-code-pane__highlight hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
         </Step>
       );
     }
     else{
       return (
-        <code className={`c-code-pane__highlight hljs ${markup.lang}`} dangerouslySetInnerHTML={markup.code} />
+        <code className={`c-code-pane__highlight hljs ${markup.lang}`} {...rest} dangerouslySetInnerHTML={markup.code} />
       );
     }
   }

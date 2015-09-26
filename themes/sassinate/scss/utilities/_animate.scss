@@ -4,6 +4,35 @@
     fill-mode: both;
   }
 
+  &--delay{
+    animation-delay: 1s;
+  }
+
+  &--fade{
+    &-in{
+      animation-name: fade-in;
+      @keyframes fade-in{
+        0%{
+          opacity: 0;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
+    }
+    &-out{
+      animation-name: fade-out;
+      @keyframes fade-out{
+        0%{
+          opacity: 1;
+        }
+        100%{
+          opacity: 0;
+        }
+      }
+    }
+  }
+
   &--bounce-in{
     animation-name: bounce-in;
     @keyframes bounce-in{
@@ -150,9 +179,100 @@
         transform: scale3d(.3, .3, .3);
       }
     }
-    &-left{}
-    &-right{}
+
+    &-left{
+      animation-name: bounce-out-left;
+      @keyframes bounce-out-left {
+        20% {
+          opacity: 1;
+          transform: translate3d(20px, 0, 0);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate3d(-2000px, 0, 0);
+        }
+      }
+    }
+
+    &-right{
+      animation-name: bounce-out-right;
+      @keyframes bounce-out-right {
+        20% {
+          opacity: 1;
+          transform: translate3d(-20px, 0, 0);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate3d(2000px, 0, 0);
+        }
+      }
+    }
+
     &-up{}
+
     &-down{}
+  }
+
+  &-flip{
+    &-in-x{
+      backface-visibility: visible !important;
+      animation-name: flip-in-x;
+      @keyframes flip-in-x {
+        0% {
+          transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+          animation-timing-function: ease-in;
+          opacity: 0;
+        }
+
+        40% {
+          transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+          animation-timing-function: ease-in;
+        }
+
+        60% {
+          transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+          opacity: 1;
+        }
+
+        80% {
+          transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+        }
+
+        100% {
+          transform: perspective(400px);
+        }
+      }
+    }
+    &-in-y{
+      backface-visibility: visible !important;
+      animation-name: flip-in-y;
+      @keyframes flip-in-y {
+        0% {
+          transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+          animation-timing-function: ease-in;
+          opacity: 0;
+        }
+
+        40% {
+          transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+          animation-timing-function: ease-in;
+        }
+
+        60% {
+          transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+          opacity: 1;
+        }
+
+        80% {
+          transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+        }
+
+        100% {
+          transform: perspective(400px);
+        }
+      }
+    }
   }
 }

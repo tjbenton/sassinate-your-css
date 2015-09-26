@@ -72,7 +72,6 @@ const classNames = function(...rest){
       { className } = this.props;
   classNames.push(...rest);
   if(className){
-    console.log(className);
     if(typeof className === "string"){
       className = className.split(" ");
     }

@@ -89,6 +89,7 @@ const Step = React.createClass({
     }
 
     // this will set `is-prev`, `is-current`, `is-next`
+    // console.log("type:", this.state.type);
     if(!!this.state.type){
       classes.push(`is-${this.state.type}`);
     }

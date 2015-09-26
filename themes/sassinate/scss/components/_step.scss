@@ -14,9 +14,12 @@
 
   &--grow{
     height: 0;
+    width: 0;
     overflow: hidden;
+    margin: 0;
     &.is-visible{
       height: auto;
+      width: auto;
       overflow: visible;
     }
   }
@@ -32,5 +35,13 @@
       height: auto;
       overflow: visible;
     }
+  }
+
+  &--space{
+    margin-top: 1em;
+  }
+
+  &--inline{
+    display: inline-block;
   }
 }

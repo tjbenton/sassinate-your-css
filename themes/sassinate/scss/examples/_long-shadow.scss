@@ -1,7 +1,7 @@
-@function longshadow($color, $length: 200, $x: right, $y: bottom, $iterator: 6) {
+@function longshadow($color, $length: 200, $x: right, $y: bottom, $iterator: 2) {
  $val: 0px 0px $color;
  $i: $iterator;
- @while $length > $i{
+ @while $length >= $i{
   $val: #{$val}, if($x == right, #{$i}px, #{$i * -1}px) if($y == bottom, #{$i}px, #{$i * -1}px) #{$color};
   $i: $i + $iterator;
  }
@@ -20,11 +20,11 @@
 
  .c-h1{
   @extend %text-shadow-heading;
-  text-shadow: longshadow(darken(color(secondary), 5%), 1000, $iterator: 2);
+  text-shadow: longshadow(darken(color(secondary), 5%), 1000);
  }
 
  .c-h3{
   @extend %text-shadow-heading;
-  text-shadow: longshadow(darken(color(secondary), 10%), 1000, $iterator: 2);
+  text-shadow: longshadow(darken(color(secondary), 10%), 1000);
  }
 }
