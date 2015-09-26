@@ -61,8 +61,15 @@ class Deck extends React.Component {
     if (event.keyCode === 79 && !event.ctrlKey && !event.metaKey) { // o
       this._toggleOverviewMode();
     }
-    if (event.keyCode === 80 && !event.ctrlKey && !event.metaKey) { // o
+    if (event.keyCode === 80 && !event.ctrlKey && !event.metaKey) { // p
       this._togglePresenterMode();
+    }
+    if (event.keyCode === 70 && !event.ctrlKey && !event.metaKey){ // f
+      this._openFullScreen();
+    }
+
+    if (event.keyCode === 27 && !event.ctrlKey && !event.metaKey){ // esc
+      this._closeFullScreen();
     }
   }
   _toggleOverviewMode() {
@@ -74,6 +81,15 @@ class Deck extends React.Component {
 
     this.context.router.replaceWith("/" + (this.context.slide) + suffix);
   }
+
+  _openFullScreen(){
+    launchIntoFullscreen(document.documentElement);
+  }
+
+  _closeFullScreen(){
+    exitFullscreen(document.documentElement);
+  }
+
   _getSuffix() {
     if (this.context.presenter) {
       return "?presenter";
@@ -358,3 +374,25 @@ Deck.contextTypes = {
 };
 
 export default Deck;
+
+
+function launchIntoFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
